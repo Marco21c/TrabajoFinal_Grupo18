@@ -1,0 +1,35 @@
+@charset "ISO-8859-1";
+
+.imagen{
+	text-align: center;
+    margin-top: 20px;
+}
+a{
+	font-size: 18px;
+	font-family: cursive;
+}
+p{
+	font-family: cursive;
+	font-size: 17px;
+	text-align: center;
+	
+}
+button{
+	font-family: cursive;
+}
+section{
+	margin: 40px;
+}
+h1{
+	font-size: 50px;
+	font-family: cursive;
+	margin-top: 80px;
+	text-align: center;
+	
+}
+body{
+	background-color: #e0e0e0;
+}
+footer{
+	margin: 30px;
+}
