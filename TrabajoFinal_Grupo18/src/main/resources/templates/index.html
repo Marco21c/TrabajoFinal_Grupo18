@@ -10,7 +10,7 @@
    <header th:replace="/layouts/header::header"></header> 
 
  <h1> EMPLEOS Y OFERTAS LABORALES </h1>
-<div class= "imagen">
+<div class= "centraar">
 <img th:src="@{/images/imagen.webp}" alt="imagen" height="250px">
 </div> 
  <section>
@@ -21,8 +21,8 @@
   </section>
   <section>
     <div class="d-grid gap-2 col-6 mx-auto">
-     <a th:ref="@{/ciudadano/nuevo}" class="btn btn-primary" type="button">Registrarse</a>
-     <button class="btn btn-dark" type="button">Iniciar Sesion</button>
+     <a th:ref="#" class="btn btn-primary" type="button">Iniciar como Ciudadano</a>
+     <button class="btn btn-dark" type="button">Iniciar como Empleador</button>
     </div>
 </section>
   <footer>

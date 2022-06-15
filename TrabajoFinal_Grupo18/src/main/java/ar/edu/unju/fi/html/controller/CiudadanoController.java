@@ -12,4 +12,9 @@ public class CiudadanoController {
 	public String getNuevoCiudadano(Model model) {	
 		return("registro_ciudadano");
 	}	
+	
+	@GetMapping("/inicio")
+	public String getSesionCiudadano(Model model) {	
+		return("inicio_ciudadano");
+	}		
 }
