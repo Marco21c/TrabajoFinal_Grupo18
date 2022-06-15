@@ -7,60 +7,69 @@
 <title>Nuevo Ciudadano</title>
 </head>
 <body>
- <form class="row g-3 needs-validation" novalidate>
-  <div class="col-md-4 position-relative">
-    <label for="validationTooltip01" class="form-label">First name</label>
-    <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
-    <div class="valid-tooltip">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-md-4 position-relative">
-    <label for="validationTooltip02" class="form-label">Last name</label>
-    <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
-    <div class="valid-tooltip">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-md-4 position-relative">
-    <label for="validationTooltipUsername" class="form-label">Username</label>
-    <div class="input-group has-validation">
-      <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-      <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
-      <div class="invalid-tooltip">
-        Please choose a unique and valid username.
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip03" class="form-label">City</label>
-    <input type="text" class="form-control" id="validationTooltip03" required>
-    <div class="invalid-tooltip">
-      Please provide a valid city.
-    </div>
-  </div>
-  <div class="col-md-3 position-relative">
-    <label for="validationTooltip04" class="form-label">State</label>
-    <select class="form-select" id="validationTooltip04" required>
-      <option selected disabled value="">Choose...</option>
-      <option>...</option>
-    </select>
-    <div class="invalid-tooltip">
-      Please select a valid state.
-    </div>
-  </div>
-  <div class="col-md-3 position-relative">
-    <label for="validationTooltip05" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="validationTooltip05" required>
-    <div class="invalid-tooltip">
-      Please provide a valid zip.
-    </div>
-  </div>
-  <div class="col-12">
-    <button class="btn btn-primary" type="submit">Submit form</button>
-  </div>
-</form>
+ <header th:replace="/layouts/header::header"></header> 
  
+<div class="container">
+<div class="row justify-content-center mt-5 pt-5">
+<div class="col-md-10 ">
+ <h2> Registro de Nuevo Ciudadano</h2>
+ <form class="row g-3 needs-validation" >
+  <div class="col-md-4 position-relative">
+    <label for="idDNI" class="form-label">Dni</label>
+    <input type="number" class="form-control" id="idDNI" placeholder="Ingrese DNI">
+     
+  </div>
+  <div class="col-md-4 position-relative">
+    <label for="NroTramite" class="form-label">Nº de Tramite</label>
+    <input type="number" class="form-control" id="NroTramite" placeholder="Ingrese numero de tramite">  
+  </div>
   
+  <div class="col-md-4 position-relative">
+    <label for="emailId" class="form-label">Email</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="email">@</span>
+      <input type="email" class="form-control" id="emailId" aria-describedby="email" placeholder="Ingrese email">
+    </div>
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="ProvinciaId" class="form-label">Provincia</label>
+    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese provincia">
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="EstadoCivilId" class="form-label">Estado Civil</label>
+    <select class="form-select" id="EstadoCivilId" >
+      <option value="Soltero/a">Soltero/a </option>
+      <option value="Casado/a"> Casado/a </option>
+      <option value="Viudo/a"> Viudo/a</ootion>
+       <option value="Divorciado/a"> Divorciado/a</ootion>
+      <option value="No especificar"> No especificar </ootion>
+    </select>
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="TelefonoId" class="form-label">Telefono</label>
+    <input type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
+  </div>
+  
+  <div class="col-md-5 position-relative">
+    <label for="ContraseñaId" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
+  </div>
+  
+  <div class="col-md-5 position-relative">
+    <label for="FechaNacId" class="form-label">Fecha de nacimiento</label>
+    <input type="date" class="form-control" id="FechaNacId" placeholder="Ingrese fecha de nacimiento">
+  </div>
+  
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <button class="btn btn-secondary" type="button">Cancelar</button>
+  </div>
+ </form>
+</div>
+</div> 
+</div>  
 </body>
 </html>
