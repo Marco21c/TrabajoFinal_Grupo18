@@ -65,11 +65,13 @@
   
   <div class="col-12 centraar">
     <button class="btn btn-primary" type="submit">Guardar</button>
-    <button class="btn btn-secondary" type="button">Cancelar</button>
+     <a th:href="@{/ciudadano/inicio}" class="btn btn-secondary" role="button">Cancelar</a>
   </div>
  </form>
 </div>
 </div> 
-</div>  
+</div>
+
+  <footer th:replace="/layouts/footer::footer"></footer>  
 </body>
 </html>

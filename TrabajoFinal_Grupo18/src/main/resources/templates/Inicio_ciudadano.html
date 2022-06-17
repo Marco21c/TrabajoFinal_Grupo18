@@ -14,7 +14,7 @@
     <div class="col-md-6">
      
      <h2> Iniciar Sesion </h2>
-     <h3 class="centraar"> Las mejores ofertas te esperan!!</h3>
+     <h3 class="centraar"> Las mejores ofertas laborales te esperan!!</h3>
      <form>
      <div class="mb-4">
       <label for="DniId" class="form-label">DNI</label>
@@ -26,11 +26,17 @@
      </div>
      <div class="col-12 centraar">
       <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
-      <button type="button" class="btn btn-dark">Cancelar</button>
+      <a th:href="@{/inicio/menu}" class="btn btn-dark" role="button">Cancelar</a>
      </div> 
      </form>
+     <div class=centraar>
+     <p> No tenes una cuenta? Registrate aqui abajo:</p>
+     <a th:href="@{/ciudadano/nuevo}" class="btn btn-secondary" role="button">Registrarse</a>
+     </div>
     </div>
    </div> 
-  </div>  
+  </div>
+ 
+    <footer th:replace="/layouts/footer::footer"></footer>
 </body>
 </html>
