@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 <meta charset="utf-8">
-<title>Nuevo Ciudadano</title>
+<title>Nuevo Empleador</title>
 </head>
 <body>
  <header th:replace="/layouts/header::header"></header> 
@@ -12,11 +12,11 @@
 <div class="container">
 <div class="row justify-content-center mt-5 pt-5">
 <div class="col-md-10 ">
- <h2> Registro de Nuevo Ciudadano</h2>
- <form class="row g-3 needs-validation" th:action="@{/ciudadano/postCiudadano}" th:object="${ciudadano}" method="POST">
+ <h2> Registro de Nuevo Empleador</h2>
+ <form class="row g-3 needs-validation" >
   <div class="col-md-4 position-relative">
-    <label for="idDNI" class="form-label">Dni</label>
-    <input type="number" class="form-control" id="idDNI" placeholder="Ingrese DNI">
+    <label for="idCuit" class="form-label">Cuit</label>
+    <input type="number" class="form-control" id="idCuit" placeholder="Ingrese Cuit">
      
   </div>
   <div class="col-md-4 position-relative">
@@ -64,7 +64,7 @@
   </div>
   
   <div class="col-12 centraar">
-    <button class="btn btn-primary" type="submit" >Guardar</button>
+    <button class="btn btn-primary" type="submit">Guardar</button>
      <a th:href="@{/ciudadano/inicio}" class="btn btn-secondary" role="button">Cancelar</a>
   </div>
  </form>

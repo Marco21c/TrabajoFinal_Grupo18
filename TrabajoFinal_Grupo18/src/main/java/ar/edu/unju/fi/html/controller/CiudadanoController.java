@@ -23,6 +23,7 @@ public class CiudadanoController {
 	@Autowired
     @Qualifier("CiudadanoServiceImp")
 	private ICiudadanoService iCiudadanoService;
+	
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
 		model.addAttribute("ciudadano", iCiudadanoService.getCiudadano());
