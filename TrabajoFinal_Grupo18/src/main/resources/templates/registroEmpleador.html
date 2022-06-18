@@ -13,7 +13,7 @@
 <div class="row justify-content-center mt-5 pt-5">
 <div class="col-md-10 ">
  <h2> Registro de Nuevo Empleador</h2>
- <form class="row g-3 needs-validation" >
+ <form class="row g-3 needs-validation" th:action="@{/empleador/postEmpleador}" th:object="${empleador}" method="POST">
   <div class="col-md-4 position-relative">
     <label for="idCuit" class="form-label">Cuit</label>
     <input type="number" class="form-control" id="idCuit" placeholder="Ingrese Cuit">
