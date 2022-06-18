@@ -17,7 +17,7 @@ import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 
 @Controller
-@RequestMapping("empleador")
+@RequestMapping("/empleador")
 public class EmpleadorController {
 	@Autowired
     @Qualifier("EmpleadorServiceImp")
