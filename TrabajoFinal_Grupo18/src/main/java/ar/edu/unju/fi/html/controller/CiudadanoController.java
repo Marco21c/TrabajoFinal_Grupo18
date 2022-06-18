@@ -27,7 +27,7 @@ public class CiudadanoController {
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
 		model.addAttribute("ciudadano", iCiudadanoService.getCiudadano());
-		return("registro_ciudadano");
+		return("registroCiudadano");
 	}	
 	
 	@GetMapping("/inicio")

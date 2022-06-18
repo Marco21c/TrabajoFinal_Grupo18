@@ -20,8 +20,18 @@
      
   </div>
   <div class="col-md-4 position-relative">
-    <label for="NroTramite" class="form-label">Nº de Tramite</label>
-    <input type="number" class="form-control" id="NroTramite" placeholder="Ingrese numero de tramite">  
+    <label for="idRazonSocial" class="form-label">Razon Social</label>
+    <input type="text" class="form-control" id="idRazonSocial" placeholder="Ingrese razon Social">  
+  </div>
+  
+  <div class="col-md-5 position-relative">
+    <label for="idNombreComercial" class="form-label">Nombre Comercial</label>
+    <input type="text" class="form-control" id="idNombreComercial" placeholder="Ingrese Nombre Comercial">
+  </div>
+  
+  <div class="col-md-5 position-relative">
+    <label for="idInicioAct" class="form-label">Inicio de actividad</label>
+    <input type="text" class="form-control" id="idInicioAct" placeholder="Ingrese fecha de inicio de actividad">
   </div>
   
   <div class="col-md-4 position-relative">
@@ -37,17 +47,11 @@
     <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese provincia">
   </div>
   
-  <div class="col-md-4 position-relative">
-    <label for="EstadoCivilId" class="form-label">Estado Civil</label>
-    <select class="form-select" id="EstadoCivilId" >
-      <option value="Soltero/a">Soltero/a </option>
-      <option value="Casado/a"> Casado/a </option>
-      <option value="Viudo/a"> Viudo/a</ootion>
-       <option value="Divorciado/a"> Divorciado/a</ootion>
-      <option value="No especificar"> No especificar </ootion>
-    </select>
+   <div class="col-md-4 position-relative">
+    <label for="domicilioId" class="form-label">Domicilio</label>
+    <input type="text" class="form-control" id="domicilioId" placeholder="Ingrese domicilio">
   </div>
-  
+ 
   <div class="col-md-4 position-relative">
     <label for="TelefonoId" class="form-label">Telefono</label>
     <input type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
@@ -58,14 +62,19 @@
     <input type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
   </div>
   
-  <div class="col-md-5 position-relative">
-    <label for="FechaNacId" class="form-label">Fecha de nacimiento</label>
-    <input type="date" class="form-control" id="FechaNacId" placeholder="Ingrese fecha de nacimiento">
+   <div class="col-md-4 position-relative">
+    <label for="ProvinciaId" class="form-label">Pagina Web</label>
+    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Pagina Web(opcional)">
+  </div>
+  
+   <div class="col-md-4 position-relative">
+    <label for="DescripcionId" class="form-label">Descripcion</label>
+    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Descripcion">
   </div>
   
   <div class="col-12 centraar">
     <button class="btn btn-primary" type="submit">Guardar</button>
-     <a th:href="@{/ciudadano/inicio}" class="btn btn-secondary" role="button">Cancelar</a>
+     <a th:href="@{/empleador/inicio}" class="btn btn-secondary" role="button">Cancelar</a>
   </div>
  </form>
 </div>
