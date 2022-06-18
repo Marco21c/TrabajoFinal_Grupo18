@@ -41,7 +41,7 @@ public class CiudadanoController {
 	}
 	
 	@PostMapping("/postCiudadano")
-	public ModelAndView saveAlumno(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
+	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
 			/*LOGGER.error("No se cumplen las reglas de validación");
 			ModelAndView modelAndview = new ModelAndView("nueva_beca");
