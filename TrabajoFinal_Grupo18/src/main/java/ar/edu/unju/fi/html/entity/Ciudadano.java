@@ -2,6 +2,8 @@ package ar.edu.unju.fi.html.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Ciudadano {
 private long dni;
 private long nroTramite;
