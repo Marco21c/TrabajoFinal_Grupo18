@@ -32,7 +32,7 @@ public class CiudadanoController {
 	
 	@GetMapping("/inicio")
 	public String getSesionCiudadano(Model model) {	
-		return("inicio_ciudadano");
+		return("inicioCiudadano");
 	}
 	
 	@GetMapping("/inicioCiudadano")
