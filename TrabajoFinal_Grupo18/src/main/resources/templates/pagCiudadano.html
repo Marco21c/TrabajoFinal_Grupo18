@@ -4,18 +4,57 @@
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
 		<meta charset="utf-8">
-         <title>INICIO</title>
+         <title>Ofertas Laborales</title>
 </head>
 <body>
-   <header th:replace="/layouts/header::header"></header> 
+   <header th:replace="/layouts/headerCiu::headerCiu"></header> 
 
- <h1> LAS MEJORES OFERTAS LABORALES TE ESPERAN!! </h1>
-<div class= "centraar">
-<img th:src="@{/images/imagen.webp}" alt="imagen" height="250px">
-</div> 
  
+    <h1 class="card-title">BIENVENIDOS</h1>
+    <h2> Las mejores ofertas estas aqui.</h2>
+    <p class="card-text">SFSDGGDSJNDSKNDDSFKVDVDSKVNDSLVND</p>
   <section>
-    
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+   <div class="col">
+    <div class="card">
+     <h3> TITULO</h3>
+      <div class="card-body">
+        <h5 class="card-title">Cantidad de vacantes:</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">Postularse</button>
+     </div>
+      </div>
+    </div>
+   </div>
+   
+   <div class="col">
+    <div class="card">
+     <h3> TITULO</h3>
+      <div class="card-body">
+        <h5 class="card-title">Cantidad de vacantes:</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">Postularse</button>
+     </div>
+      </div>
+    </div>
+   </div>
+   
+   <div class="col">
+    <div class="card">
+      <h3> TITULO</h3>
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">Postularse</button>
+     </div>
+      </div>
+    </div>
+   </div>
+   
+  </div>
   </section>
 
   <footer th:replace="/layouts/footer::footer"></footer>
