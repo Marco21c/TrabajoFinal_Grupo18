@@ -53,10 +53,7 @@ public class CiudadanoController {
 			return modelAndview;
 		}
 		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
-		/*if(becaService.agregarBeca(bec)) {
-			LOGGER.info("Se guardó un objeto beca en la lista de becas");
-		}*/
-		/*modelAndView.addObject("becas",becaService.getListaBecas());*/
+		
 		return modelAndView ;
 		}
 	
