@@ -31,8 +31,8 @@
     <div class="input-group has-validation">
       <span class="input-group-text" id="email">@</span>
       <input th:field=*{email} type="email" class="form-control" id="emailId" aria-describedby="email" placeholder="Ingrese email">
-      <div class=text-danger th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> 
     </div>
+     <div class=text-danger th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> 
   </div>
   
   <div class="col-md-4 position-relative">
@@ -46,9 +46,9 @@
     <select th:field=*{estadoCivil} class="form-select" id="EstadoCivilId" >
       <option value="Soltero/a">Soltero/a </option>
       <option value="Casado/a"> Casado/a </option>
-      <option value="Viudo/a"> Viudo/a</ootion>
-       <option value="Divorciado/a"> Divorciado/a</ootion>
-      <option value="No especificar"> No especificar </ootion>
+      <option value="Viudo/a"> Viudo/a</option>
+       <option value="Divorciado/a"> Divorciado/a</option>
+      <option value="No especificar"> No especificar </option>
     </select>
   </div>
   
