@@ -1,13 +1,38 @@
 package ar.edu.unju.fi.html.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="curriculums")
 public class CurriculumVitae {
+@Id
+@GeneratedValue( strategy = GenerationType.IDENTITY)
+@Column(name="ID_CV")
 private long id;
+@Column(name="CONTACTO_CV")
 private String contacto;
+@Column(name="EXP_LABO_CV")
 private String expLaboral;
+@Column(name="EDUCACION_CV")
 private String educacion;
+@Column(name="IDIOMAS_CV")
 private String idiomas;
+@Column(name="CONOCIM_INFO_CV")
 private String conocimientoInfo;
+@Column(name="INFO_COMPLE_CV")
 private String infoComplementaria;
+
+@OneToOne(fetch= FetchType.LAZY)
+@JoinColumn(name="DNI_CIU")
 private Ciudadano ciudadanoId;
 
 public CurriculumVitae() {
@@ -15,7 +40,7 @@ public CurriculumVitae() {
 }
 
 public CurriculumVitae(String contacto, String expLaboral, String educacion, String idiomas, String conocimientoInfo,
-		String infoComplementaria) {
+		String infoComplementaria, Ciudadano ciudadanoId) {
 	super();
 	this.contacto = contacto;
 	this.expLaboral = expLaboral;
@@ -23,6 +48,7 @@ public CurriculumVitae(String contacto, String expLaboral, String educacion, Str
 	this.idiomas = idiomas;
 	this.conocimientoInfo = conocimientoInfo;
 	this.infoComplementaria = infoComplementaria;
+	this.ciudadanoId = ciudadanoId;
 }
 public long getId() {
 	return id;
