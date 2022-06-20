@@ -55,6 +55,17 @@ public class CiudadanoController {
 		/*modelAndView.addObject("becas",becaService.getListaBecas());*/
 		return modelAndView ;
 		}
-		
+	
+	//LLamada a pagina para ver un currilum vitae
+	@GetMapping("/verCurriculum")
+	public String getVerCV(Model model) {
+		return("verCV");
+	}
+	//LLamada a pagina para crear un currilum vitae
+	@GetMapping("/crearCurriculum")
+	public String getCrearCV(Model model) {
+		return("crearCv");
+	}
+	
 	
 }
