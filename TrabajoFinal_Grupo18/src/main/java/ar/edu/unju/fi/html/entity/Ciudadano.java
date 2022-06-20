@@ -2,16 +2,34 @@ package ar.edu.unju.fi.html.entity;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 import org.springframework.stereotype.Component;
+
 @Component
 public class Ciudadano {
+@Min(value=1000000, message="EL DNI debe ser mayor o igual a 1.000.000")
 private long dni;
+@Positive
 private long nroTramite;
+@NotEmpty @Email
 private String email;
+@NotBlank(message="el estado civil no debe estar en blanco")
 private String estadoCivil;
+@NotBlank(message="no debe estar vacio la opcion provincia")
 private String provincia;
+@Positive
 private long telefono;
+@Past
 private LocalDate fechaNac;
+@Size(min=8, message="la contraseña debe tener minimo de 8 caracteres")
 private String contraseña;
 
 

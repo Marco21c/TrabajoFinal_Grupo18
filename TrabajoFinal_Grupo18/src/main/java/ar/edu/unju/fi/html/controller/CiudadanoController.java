@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.html.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.aplicacion.controller.AlumnosController;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 
@@ -23,6 +26,8 @@ public class CiudadanoController {
 	@Autowired
     @Qualifier("CiudadanoServiceImp")
 	private ICiudadanoService iCiudadanoService;
+	
+	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
@@ -43,10 +48,10 @@ public class CiudadanoController {
 	@PostMapping("/postCiudadano")
 	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
-			/*LOGGER.error("No se cumplen las reglas de validación");
-			ModelAndView modelAndview = new ModelAndView("nueva_beca");
-			modelAndview.addObject("beca", bec);
-			return modelAndview;*/
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView modelAndview = new ModelAndView("registroCiudadano");
+			modelAndview.addObject("ciudadano", ciu);
+			return modelAndview;
 		}
 		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
 		/*if(becaService.agregarBeca(bec)) {
