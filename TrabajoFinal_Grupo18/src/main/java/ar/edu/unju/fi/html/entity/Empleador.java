@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="empleadores")
 public class Empleador {
@@ -30,6 +32,7 @@ private String razonSocial;
 @Column(name = "NOMBRE_COMERCIAL", nullable = true)
 private String nombreComercial;
 @Column(name = "INICIO_ACTIVIDAD", nullable = true)
+@DateTimeFormat(pattern = "dd/MM/yyyy")
 private LocalDate inicioAct;
 @Column(name = "EMAIL", nullable = true)
 private String email;
