@@ -53,7 +53,13 @@ public class CiudadanoController {
 			return modelAndview;
 		}
 		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
+<<<<<<< HEAD
 		
+=======
+		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
+			LOGGER.info("Se guardó un nuevo ciudadano.");
+		}
+>>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
 		return modelAndView ;
 		}
 	
@@ -67,6 +73,9 @@ public class CiudadanoController {
 	public String getCrearCV(Model model) {
 		return("crearCv");
 	}
-	
-	
+	//LLamada a pagina que muestra las ofertas laborales
+	@GetMapping("/verOfertasLaborales")
+	public String getverOfertas(Model model) {
+		return("verOfertas");
+    }
 }

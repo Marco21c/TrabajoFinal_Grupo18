@@ -1,22 +1,51 @@
 package ar.edu.unju.fi.html.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ofertasLaborales")
 public class OfertaLaboral {
 
-private int id;	
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name="ID", nullable=false)
+private int id;
+@Column(name ="CANTIDAD_VACANTES", nullable=false)
 private int cantVacantes;
+@Column(name ="PUESTO_REQUERIDO", nullable=false)
 private String puestoReq;
+@Column(name ="RESUMEN_PUESTO", length = 200, nullable=false)
 private String resumenPuesto;
+@Column(name ="DISPONIBILIDAD_HORARIA", nullable=false)
 private String dispHoraria;
+@Column(name ="PRINCIPALES_TAREAS", length = 200, nullable=false)
 private String princTareas;
+@Column(name ="JORNADA", nullable=false)
 private String jornada;
+@Column(name ="REQUISITOS", nullable=false)
 private String requisitos;
+@Column(name ="SALARIO", nullable=false)
 private long salario;
+@Column(name ="BENEFICIOS", length = 150, nullable=false)
 private String beneficios;
+@Column(name ="DISPONIBLE", nullable=false)
 private boolean disponible;
-private Empleador DatosEmp;
 
- 
+@ManyToOne(fetch =FetchType.LAZY)
+@JoinColumn(name ="DATOSEMP_ID")
+private Empleador datosEmp;
 
+public OfertaLaboral() {
+	
+}
  
 public OfertaLaboral(int cantVacantes, String puestoReq, String resumenPuesto, String dispHoraria, String princTareas,
 		String jornada, String requisitos, long salario, String beneficios, boolean disponible, Empleador datosEmp) {
@@ -31,7 +60,7 @@ public OfertaLaboral(int cantVacantes, String puestoReq, String resumenPuesto, S
 	this.salario = salario;
 	this.beneficios = beneficios;
 	this.disponible = disponible;
-	DatosEmp = datosEmp;
+	this.datosEmp = datosEmp;
 }
 public int getId() {
 	return id;
@@ -100,11 +129,12 @@ public void setDisponible(boolean disponible) {
 	this.disponible = disponible;
 }
 public Empleador getDatosEmp() {
-	return DatosEmp;
+	return datosEmp;
 }
 public void setDatosEmp(Empleador datosEmp) {
-	DatosEmp = datosEmp;
+	this.datosEmp = datosEmp;
 }
+
 
 
 
