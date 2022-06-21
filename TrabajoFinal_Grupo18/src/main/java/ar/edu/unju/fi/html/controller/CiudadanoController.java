@@ -69,6 +69,9 @@ public class CiudadanoController {
 	public String getCrearCV(Model model) {
 		return("crearCv");
 	}
-	
-	
+	//LLamada a pagina que muestra las ofertas laborales
+	@GetMapping("/verOfertasLaborales")
+	public String getverOfertas(Model model) {
+		return("verOfertas");
+    }
 }

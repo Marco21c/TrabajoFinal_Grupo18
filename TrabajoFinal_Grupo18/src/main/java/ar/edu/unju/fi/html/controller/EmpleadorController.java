@@ -48,4 +48,13 @@ public class EmpleadorController {
 		
 		return modelAndView ;
 		}
+	
+	@GetMapping("/perfiles")
+	public String getverPerfiles(Model model) {
+		return("verPerfiles");
+	}
+	@GetMapping("/misEmpleos")
+	public String getmisEmpleos(Model model) {
+		return("misEmpleos");
+	}
 }
