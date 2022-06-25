@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.html.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +34,9 @@ private String infoComplementaria;
 @OneToOne(fetch= FetchType.LAZY)
 @JoinColumn(name="DNI_CIU")
 private Ciudadano ciudadanoId;
+
+@OneToOne(mappedBy = "cv" , fetch = FetchType.LAZY)
+private Ciudadano ciudadano;
 
 public CurriculumVitae() {
 	

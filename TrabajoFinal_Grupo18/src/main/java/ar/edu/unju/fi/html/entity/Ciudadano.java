@@ -1,32 +1,34 @@
 package ar.edu.unju.fi.html.entity;
 
 import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Entity
 @Table(name="ciudadanos")
 public class Ciudadano {
 
 @Id
-@Column(name="DNI_CIU")
-@Min(value=1000000, message="EL DNI debe ser mayor o igual a 1.000.000")
-private long dni;
+@GeneratedValue( strategy = GenerationType.IDENTITY)  
+@Column(name="ID_CIU")
+private long id;
 @Column(name="N_TRAMITE_CIU")
 @Positive(message="Debe ser un numero mayor a 0.")
 private long nroTramite;
@@ -46,36 +48,43 @@ private long telefono;
 @DateTimeFormat(pattern= "yyyy-MM-dd")
 @Column(name="FECHAN_CIU") @NotNull(message="Debe ingresar una fecha.")
 private LocalDate fechaNac;
-@Column(name="CONTRASEÑA_CIU")
-@Size(min=8, message="la contraseña debe tener minimo de 8 caracteres")
-private String contraseña;
 
-@OneToOne(mappedBy="ciudadanoId", cascade= CascadeType.ALL)
+//relacion con un cv
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="ID_CV")
 private CurriculumVitae cv;
+
+//relacion con un usuario 
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="ID_USER")
+private Usuario usuario;
+
 
 
 public Ciudadano() {
 	
 }
 
-public Ciudadano(long dni, long nroTramite, String email, String estadoCivil, String provincia, long telefono,
-		LocalDate fechaNac, String contraseña) {
+
+
+public Ciudadano(long nroTramite,String email,
+		String estadoCivil,
+		String provincia,long telefono,
+		LocalDate fechaNac,
+		CurriculumVitae cv, Usuario usuario) {
 	super();
-	this.dni = dni;
 	this.nroTramite = nroTramite;
 	this.email = email;
 	this.estadoCivil = estadoCivil;
 	this.provincia = provincia;
 	this.telefono = telefono;
 	this.fechaNac = fechaNac;
-	this.contraseña = contraseña;
+	this.cv = cv;
+	this.usuario = usuario;
 }
-public long getDni() {
-	return dni;
-}
-public void setDni(long dni) {
-	this.dni = dni;
-}
+
+
+
 public long getNroTramite() {
 	return nroTramite;
 }
@@ -112,12 +121,6 @@ public LocalDate getFechaNac() {
 public void setFechaNac(LocalDate fechaNac) {
 	this.fechaNac = fechaNac;
 }
-public String getContraseña() {
-	return contraseña;
-}
-public void setContraseña(String contraseña) {
-	this.contraseña = contraseña;
-}
 
 public CurriculumVitae getCv() {
 	return cv;
@@ -125,6 +128,22 @@ public CurriculumVitae getCv() {
 
 public void setCv(CurriculumVitae cv) {
 	this.cv = cv;
+}
+
+public long getId() {
+	return id;
+}
+
+public void setId(long id) {
+	this.id = id;
+}
+
+public Usuario getUsuario() {
+	return usuario;
+}
+
+public void setUsuario(Usuario usuario) {
+	this.usuario = usuario;
 }
 
 

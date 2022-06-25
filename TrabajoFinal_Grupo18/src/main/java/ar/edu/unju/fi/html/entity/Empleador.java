@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,16 +25,12 @@ public class Empleador {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "ID")
 private Long id;
-@Column(name = "CUIT", nullable = true)
-private String cuit;
-@Column(name = "CONTRASEÑA", length = 8, nullable = true)
-private String contraseña;
 @Column(name = "RAZON_SOCIAL", nullable = true)
 private String razonSocial;
 @Column(name = "NOMBRE_COMERCIAL", nullable = true)
 private String nombreComercial;
 @Column(name = "INICIO_ACTIVIDAD", nullable = true)
-@DateTimeFormat(pattern = "dd/MM/yyyy")
+@DateTimeFormat(pattern= "yyyy-MM-dd")
 private LocalDate inicioAct;
 @Column(name = "EMAIL", nullable = true)
 private String email;
@@ -50,14 +48,20 @@ private String descripcion;
 @OneToMany(mappedBy ="datosEmp", cascade = CascadeType.ALL)
 private List<OfertaLaboral> ofertaLaboral = new ArrayList<OfertaLaboral>();
 
+
+//relacion con un usuario 
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="ID_USER")
+private Usuario usuario;
+
+
 public Empleador() {
 
 }
-public Empleador(String cuit, String contraseña, String razonSocial, String nombreComercial, LocalDate inicioAct,
-		String email, long telefono, String domicilio, String provincia, String pagWeb, String descripcion) {
+public Empleador(String razonSocial, String nombreComercial, LocalDate inicioAct,
+		String email, long telefono, String domicilio, String provincia, String pagWeb, String descripcion,Usuario usuario) {
 	super();
-	this.cuit = cuit;
-	this.contraseña = contraseña;
+	
 	this.razonSocial = razonSocial;
 	this.nombreComercial = nombreComercial;
 	this.inicioAct = inicioAct;
@@ -67,22 +71,7 @@ public Empleador(String cuit, String contraseña, String razonSocial, String nom
 	this.provincia = provincia;
 	this.pagWeb = pagWeb;
 	this.descripcion = descripcion;
-}
-
-public String getCuit() {
-	return cuit;
-}
-
-public void setCuit(String cuit) {
-	this.cuit = cuit;
-}
-
-public String getContraseña() {
-	return contraseña;
-}
-
-public void setContraseña(String contraseña) {
-	this.contraseña = contraseña;
+	this.usuario = usuario;
 }
 
 public String getRazonSocial() {
@@ -168,7 +157,12 @@ public List<OfertaLaboral> getOfertaLaboral() {
 public void setOfertaLaboral(List<OfertaLaboral> ofertaLaboral) {
 	this.ofertaLaboral = ofertaLaboral;
 }
-
+public Usuario getUsuario() {
+	return usuario;
+}
+public void setUsuario(Usuario usuario) {
+	this.usuario = usuario;
+}
 
 
 }

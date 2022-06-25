@@ -34,16 +34,6 @@ public class CiudadanoController {
 		return("registroCiudadano");
 	}	
 	
-	@GetMapping("/inicio")
-	public String getSesionCiudadano(Model model) {	
-		return("inicioCiudadano");
-	}
-	
-	@GetMapping("/inicioCiudadano")
-	public String getIniCiudadano(Model model) {
-		return("pagCiudadano");
-	}
-	
 	@PostMapping("/postCiudadano")
 	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -52,17 +42,18 @@ public class CiudadanoController {
 			modelAndview.addObject("ciudadano", ciu);
 			return modelAndview;
 		}
-		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
-<<<<<<< HEAD
-		
-=======
+		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
+
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
 		}
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
 		return modelAndView ;
 		}
 	
+	@GetMapping("/inicioCiudadano")
+	public String getIniCiudadano(Model model) {
+		return("pagCiudadano");
+	}
 	//LLamada a pagina para ver un currilum vitae
 	@GetMapping("/verCurriculum")
 	public String getVerCV(Model model) {

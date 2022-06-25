@@ -12,12 +12,14 @@
 <div class="container">
 <div class="row justify-content-center mt-5 pt-5">
 <div class="col-md-10 ">
+
  <h2> Registro de Nuevo Ciudadano</h2>
+
  <form class="row g-3 needs-validation" th:action="@{/ciudadano/postCiudadano}" th:object="${ciudadano}" method="POST">
   <div class="col-md-4 position-relative">
     <label for="idDNI" class="form-label">Dni</label>
-    <input th:field=*{dni} type="number" class="form-control" id="idDNI" placeholder="Ingrese DNI">
-    <div class=text-danger th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div> 
+    <input th:field=*{usuario.username} type="number" class="form-control" id="idDNI" placeholder="Ingrese DNI">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}"></div> 
      
   </div>
   <div class="col-md-4 position-relative">
@@ -58,16 +60,20 @@
     <div class=text-danger th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> 
   </div>
   
-  <div class="col-md-5 position-relative">
+  <div class="col-md-4 position-relative">
     <label for="ContraseñaId" class="form-label">Contraseña</label>
-    <input th:field=*{contraseña} type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
-    <div class=text-danger th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></div> 
+    <input th:field=*{usuario.contraseña} type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.contraseña')}" th:errors="*{usuario.contraseña}"></div> 
   </div>
   
-  <div class="col-md-5 position-relative">
+  <div class="col-md-4 position-relative">
     <label for="FechaNacId" class="form-label">Fecha de nacimiento</label>
     <input th:field=*{fechaNac} type="date" class="form-control" id="FechaNacId" placeholder="Ingrese fecha de nacimiento">
     <div class=text-danger th:if="${#fields.hasErrors('fechaNac')}" th:errors="*{fechaNac}"></div> 
+  </div>
+  <div class="col-md-4 position-relative">
+    <label for="ProvinciaId" class="form-label">Tipo</label>
+    <input th:field=*{usuario.tipo} type="text" class="form-control" id="ProvinciaId" placeholder="Ciudadano" disabled="disabled" value="Ciudadano">
   </div>
   
   <div class="col-12 centraar">

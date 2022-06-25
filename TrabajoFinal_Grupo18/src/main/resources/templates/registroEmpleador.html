@@ -16,60 +16,75 @@
  <form class="row g-3 needs-validation" th:action="@{/empleador/postEmpleador}" th:object="${empleador}" method="POST">
   <div class="col-md-4 position-relative">
     <label for="idCuit" class="form-label">Cuit</label>
-    <input type="number" class="form-control" id="idCuit" placeholder="Ingrese Cuit">
-     
+    <input th:field=*{usuario.username} type="number" class="form-control" id="idCuit" placeholder="Ingrese Cuit">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}"></div>  
   </div>
   <div class="col-md-4 position-relative">
     <label for="idRazonSocial" class="form-label">Razon Social</label>
-    <input type="text" class="form-control" id="idRazonSocial" placeholder="Ingrese razon Social">  
+    <input th:field=*{razonSocial} type="text" class="form-control" id="idRazonSocial" placeholder="Ingrese razon Social"> 
+    <div class=text-danger th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div>  
   </div>
   
   <div class="col-md-4 position-relative">
     <label for="idNombreComercial" class="form-label">Nombre Comercial</label>
-    <input type="text" class="form-control" id="idNombreComercial" placeholder="Ingrese Nombre Comercial">
+    <input th:field=*{nombreComercial} type="text" class="form-control" id="idNombreComercial" placeholder="Ingrese Nombre Comercial">
+    <div class=text-danger th:if="${#fields.hasErrors('nombreComercial')}" th:errors="*{nombreComercial}"></div> 
   </div>
   
   <div class="col-md-4 position-relative">
     <label for="idInicioAct" class="form-label">Inicio de actividad</label>
-    <input type="text" class="form-control" id="idInicioAct" placeholder="Ingrese fecha de inicio de actividad">
+    <input th:field=*{inicioAct} type="date" class="form-control" id="idInicioAct" placeholder="Ingrese fecha de inicio de actividad">
+    <div class=text-danger th:if="${#fields.hasErrors('inicioAct')}" th:errors="*{inicioAct}"></div> 
   </div>
   
   <div class="col-md-4 position-relative">
     <label for="emailId" class="form-label">Email</label>
     <div class="input-group has-validation">
       <span class="input-group-text" id="email">@</span>
-      <input type="email" class="form-control" id="emailId" aria-describedby="email" placeholder="Ingrese email">
+      <input th:field=*{email} type="email" class="form-control" id="emailId" aria-describedby="email" placeholder="Ingrese email">
+      <div class=text-danger th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> 
     </div>
   </div>
   
   <div class="col-md-4 position-relative">
     <label for="ProvinciaId" class="form-label">Provincia</label>
-    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese provincia">
+    <input  th:field=*{provincia} type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese provincia">
+         <div class=text-danger th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>  
   </div>
   
    <div class="col-md-4 position-relative">
     <label for="domicilioId" class="form-label">Domicilio</label>
-    <input type="text" class="form-control" id="domicilioId" placeholder="Ingrese domicilio">
+    <input th:field=*{domicilio} type="text" class="form-control" id="domicilioId" placeholder="Ingrese domicilio">
+             <div class=text-danger th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></div>  
   </div>
  
   <div class="col-md-4 position-relative">
     <label for="TelefonoId" class="form-label">Telefono</label>
-    <input type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
+    <input th:field=*{telefono} type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
+         <div class=text-danger th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>  
   </div>
   
   <div class="col-md-4 position-relative">
     <label for="ContraseñaId" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
+    <input th:field=*{usuario.contraseña} type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.contraseña')}" th:errors="*{usuario.contraseña}"></div> 
   </div>
   
-   <div class="col-md-5 position-relative">
+   <div class="col-md-4 position-relative">
     <label for="ProvinciaId" class="form-label">Pagina Web</label>
-    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Pagina Web(opcional)">
+    <input th:field=*{pagWeb} type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Pagina Web(opcional)">
+         <div class=text-danger th:if="${#fields.hasErrors('pagWeb')}" th:errors="*{pagWeb}"></div>
   </div>
   
-   <div class="col-md-6 position-relative">
+   <div class="col-md-4 position-relative">
     <label for="DescripcionId" class="form-label">Descripcion</label>
-    <input type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Descripcion">
+    <input th:field=*{descripcion} type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese Descripcion">
+       <div class=text-danger th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+  </div>
+   
+  <div class="col-md-4 position-relative">
+    <label for="TipoId" class="form-label">Tipo</label>
+    <input th:field=*{usuario.tipo} type="text" class="form-control" id="TipoId" placeholder="Empleador" disabled="disabled" value="Empleador">
   </div>
   
   <div class="col-12 centraar">

@@ -21,10 +21,17 @@
   </section>
   <section>
     <div class="d-grid gap-2 col-4 mx-auto">
-     <a th:href="@{/ciudadano/inicio}" class="btn btn-primary" type="button" > 
-     Soy Ciudadano</a>
-      <a th:href="@{/empleador/inicio}" class="btn btn-dark" type="button"> 
-     Soy Empleador</a>
+     <a th:href="@{/inicio/login}" class="btn btn-primary" type="button" > 
+     Iniciar Sesion</a>
+      <div class="dropdown centraar">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+    Registrarse
+    </button>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+        <li><a class="dropdown-item" th:href="@{/ciudadano/nuevo}">Ciudadano</a></li>
+        <li><a class="dropdown-item" th:href="@{/empleador/nuevo}">Empleador</a></li>
+      </ul>
+     </div>
     </div>
   </section>
 
