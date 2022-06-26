@@ -8,7 +8,10 @@
 </head>
 <body>
  <header th:replace="/layouts/header::header"></header> 
- 
+  <h1> </h1>
+   <div th:if="${param.error}" class="alert alert-danger" role="alert"> Combinacion de Usuario y Contraseña invalida.</div>
+   <div  th:if="${param.logout}" class="alert alert-success" role="alert"> Gracias por usar nuestros servicios. Hasta Pronto..!!</div>
+   
   <div class="container">
    <div class="row justify-content-center mt-5 pt-5">
     <div class="col-md-6">
@@ -46,7 +49,7 @@
     </div>
    </div> 
   </div>
- 
-    <footer th:replace="/layouts/footer::footer"></footer>
+   
+   <footer th:replace="/layouts/footer::footer"></footer>
 </body>
 </html>
