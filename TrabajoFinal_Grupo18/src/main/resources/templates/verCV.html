@@ -8,10 +8,31 @@
 </head>
 <body>
    <header th:replace="/layouts/headerCiu::headerCiu"></header> 
-
-   
-   
-   
+   <h2> MI CURRICULUM VITAE</h2>
+      <div class=container> 
+         <a th:ref="@{/ciudadano/crearCurriculum}"type="button" class="btn btn-info">Editar</a>
+          <div class="card">
+           <div th:text= "${ciudadano.email}" class="card-header"> </div>
+          <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                 <h3>Provincia: </h3><h3 th:text= "${ciudadano.provincia}" class=""> </h3>
+                <h2 th:text= "${ciudadano.cv.nombre}">A well-known quote, contained in a blockquote element.</h2>
+                 <section> Telefono: <a  th:text= "${ciudadano.telefono}"> </a> </section> 
+                 <section> Fecha de nacimiento: <a  th:text= "${ciudadano.fechaNac}"> </a> </section>
+                 <section> Dni: <a  th:text= "${ciudadano.usuario.username}"> </a> </section>
+                 <section> Estado Civil: <a  th:text= "${ciudadano.estadoCivil}"> </a> </section>
+                 <section> Experiencia Laboral: </section>
+                 <p th:text= "${ciudadano.cv.expLaboral}"> </p>
+                 <section> Educacion: <a  th:text= "${ciudadano.cv.educacion}"> </a> </section> 
+                 <section> Idiomas: <a  th:text= "${ciudadano.cv.idiomas}"> </a> </section> 
+                 <section> Informacion Complementaria: <a  th:text= "${ciudadano.cv.infoComplementaria}"> </a> </section> 
+                 <footer class="blockquote-footer">- Contacto: <cite title="Source Title" th:text= "${ciudadano.cv.contacto}"></cite></footer>
+             </blockquote>
+          </div>
+         </div>
+         
+   </div>
+       
    <footer th:replace="/layouts/footer::footer"></footer>
 </body>
 </html>

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.repository.ICiudadanoDAO;
-import ar.edu.unju.fi.html.repository.IUsuarioDAO;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 
 @Service("CiudadanoServiceImp")
@@ -34,5 +33,17 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public Ciudadano getBuscarCiudadano(String username) {
+		// TODO Auto-generated method stub
+		return  ciudadanoDAOImp.findByUsuarioUsername(Long.parseLong(username));
+	}
+
+	@Override
+	public void modificarCV(Ciudadano cv) {
+		// TODO Auto-generated method stub
+		ciudadanoDAOImp.save(cv);
+	}
+
 }

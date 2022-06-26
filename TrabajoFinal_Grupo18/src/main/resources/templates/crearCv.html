@@ -8,9 +8,125 @@
 </head>
 <body>
    <header th:replace="/layouts/headerCiu::headerCiu"></header> 
-
+<div class="container">
+<div class="row justify-content-center mt-5 pt-5">
+  <h2>Crear Curriculum</h2>
+   <form th:action="@{/ciudadano/modificar}" method="post" th:object="${ciudadano}" class="row g-3">
+  
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Contacto </label>
+    <input th:field="*{cv.contacto}" type="text" class="form-control" id="inputEmail4">
+  </div>
+  <div class="col-md-6">
+    <label for="inputExp4" class="form-label">Experiencia Laboral</label>
+    <input th:field="*{cv.expLaboral}" type="text" class="form-control" id="inputExp4">
+  </div>
+  <div class="col-6">
+    <label for="inputEdu" class="form-label">Educacion</label>
+    <input th:field="*{cv.educacion}" type="text" class="form-control" id="inputW¡Edu" placeholder="Ingrese educacion">
+  </div>
+  <div class="col-6">
+    <label for="inputIdiomas2" class="form-label">idiomas</label>
+    <input th:field="*{cv.idiomas}" type="text" class="form-control" id="inputIdiomas2" placeholder="Ingrese idiomas">
+  </div>
+  <div class="col-md-6">
+    <label for="inputZip" class="form-label">Informacion complementaria</label>
+    <input th:field="*{cv.infoComplementaria}" type="text" class="form-control" id="inputZip">
+  </div>
+  <div class="col-md-6">
+    <label for="inputZip" class="form-label">Nombre y Apellido</label>
+    <input th:field="*{cv.nombre}" type="text" class="form-control" id="inputZip">
+  </div>
+  <div class="col-md-6">
+   <label for="inputIdiomas2" class="form-label">Conocimientos informaticos:</label>
+    <div class="form-check form-check">
+  <input th:field="*{cv.conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <label class="form-check-label" for="inlineRadio1">Basico</label>
+  
+</div>
+<div class="form-check form-check">
+  <input  th:field="*{cv.conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <label class="form-check-label" for="inlineRadio2">Intermedio</label>
+</div>
+<div class="form-check form-check">
+  <input  th:field="*{cv.conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+  <label class="form-check-label" for="inlineRadio3">Avanzado </label>
+</div>
+</div>
+  <h3> Informacion personal</h3>
+  <div class="col-md-4">
+			<input type="hidden" th:field="*{id}"/>
+				<label for=dniId>ID</label>
+				<input th:value="*{id}" type="number" class="form-control" id="dniId" disabled="disabled">
+			</div>
+  
+   <div class="col-md-4 position-relative">
+    <label for="idDNI" class="form-label">Dni</label>
+    <input th:field=*{usuario.username} type="number" class="form-control" id="idDNI" placeholder="Ingrese DNI">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}"></div> 
+     
+  </div>
+  <div class="col-md-4 position-relative">
+    <label for="NroTramite" class="form-label">Nº de Tramite</label>
+    <input th:field=*{nroTramite} type="number" class="form-control" id="NroTramite" placeholder="Ingrese numero de tramite"> 
+    <div class=text-danger th:if="${#fields.hasErrors('nroTramite')}" th:errors="*{nroTramite}"></div> 
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="emailId" class="form-label">Email</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="email">@</span>
+      <input th:field=*{email} type="email" class="form-control" id="emailId" aria-describedby="email" placeholder="Ingrese email">
+    </div>
+     <div class=text-danger th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> 
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="ProvinciaId" class="form-label">Provincia</label>
+    <input th:field=*{provincia} type="text" class="form-control" id="ProvinciaId" placeholder="Ingrese provincia">
+    <div class=text-danger th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div> 
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="EstadoCivilId" class="form-label">Estado Civil</label>
+    <select th:field=*{estadoCivil} class="form-select" id="EstadoCivilId" >
+      <option value="Soltero/a">Soltero/a </option>
+      <option value="Casado/a"> Casado/a </option>
+      <option value="Viudo/a"> Viudo/a</option>
+       <option value="Divorciado/a"> Divorciado/a</option>
+      <option value="No especificar"> No especificar </option>
+    </select>
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="TelefonoId" class="form-label">Telefono</label>
+    <input th:field=*{telefono} type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
+    <div class=text-danger th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> 
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="FechaNacId" class="form-label">Fecha de nacimiento</label>
+    <input th:field=*{fechaNac} type="date" class="form-control" id="FechaNacId" placeholder="Ingrese fecha de nacimiento">
+    <div class=text-danger th:if="${#fields.hasErrors('fechaNac')}" th:errors="*{fechaNac}"></div> 
+  </div>
+  <div class="col-md-4 position-relative">
+    <label for="ProvinciaId" class="form-label">Tipo</label>
+    <input th:field=*{usuario.tipo} type="text" class="form-control" id="ProvinciaId" placeholder="Ciudadano"  value="Ciudadano">
+  </div>
+  <h4> Para realizar los cambios debe ingresar su contraseña: </h4> 
+  <div class="col-md-4 position-relative">
+    <label for="ContraseñaId" class="form-label">Contraseña</label>
+    <input th:field=*{usuario.contraseña} type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
+    <div class=text-danger th:if="${#fields.hasErrors('usuario.contraseña')}" th:errors="*{usuario.contraseña}"></div> 
+  </div>
+  
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  </div>
+</form>
    
-   
+</div>
+</div>
    
    <footer th:replace="/layouts/footer::footer"></footer>
 </body>

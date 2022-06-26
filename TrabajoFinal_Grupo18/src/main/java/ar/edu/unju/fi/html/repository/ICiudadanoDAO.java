@@ -6,5 +6,5 @@ import ar.edu.unju.fi.html.entity.Ciudadano;
 
 public interface ICiudadanoDAO extends JpaRepository<Ciudadano,Long> {
    
-	
+	   public Ciudadano findByUsuarioUsername(long username);
 }

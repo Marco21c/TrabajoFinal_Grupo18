@@ -23,7 +23,6 @@ public class WebSegConfiguration{
 
 		http
 		.authorizeHttpRequests()
-		      .antMatchers("/inicio/login").permitAll()
 		      .antMatchers(resources).permitAll()
 		      .antMatchers("/inicio/menu").permitAll()
 		      .antMatchers("/ciudadano/nuevo").permitAll()
@@ -40,7 +39,7 @@ public class WebSegConfiguration{
 		      .and()
 		.logout()
 		    .permitAll();
-		   // .logoutSuccessUrl("/inicio/login?logout");
+		 
 
 		http.headers().frameOptions().sameOrigin();
 
