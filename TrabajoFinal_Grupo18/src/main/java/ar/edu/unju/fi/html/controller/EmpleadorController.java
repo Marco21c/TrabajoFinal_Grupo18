@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.html.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class EmpleadorController {
     @Qualifier("EmpleadorServiceImp")
 	private IEmpleadorService iEmpleadorService;
 	
+	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
+	
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
 		model.addAttribute("empleador", iEmpleadorService.getEmpleador());
@@ -42,8 +46,13 @@ public class EmpleadorController {
 	@PostMapping("/postEmpleador")
 	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
-			
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
+			modelAndview.addObject("empleador", emp);
+			return modelAndview;	
 		}
+		
+		iEmpleadorService.guardarEmpleador(emp);
 		ModelAndView modelAndView = new ModelAndView("redirect:/empleador/inicioEmpleador");
 		
 		return modelAndView ;

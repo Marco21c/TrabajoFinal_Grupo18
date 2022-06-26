@@ -53,13 +53,11 @@ public class CiudadanoController {
 			return modelAndview;
 		}
 		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
-<<<<<<< HEAD
-		
-=======
+
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
 		}
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
+
 		return modelAndView ;
 		}
 	
