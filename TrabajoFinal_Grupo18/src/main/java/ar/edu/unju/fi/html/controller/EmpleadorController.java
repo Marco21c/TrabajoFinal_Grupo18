@@ -56,24 +56,7 @@ public class EmpleadorController {
 		return("pagEmpleador");
 	}
 	
-<<<<<<< HEAD
-	@PostMapping("/postEmpleador")
-	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
-		if(bindingResult.hasErrors()) {
-			LOGGER.error("No se cumplen las reglas de validación");
-			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
-			modelAndview.addObject("empleador", emp);
-			return modelAndview;	
-		}
-		
-		iEmpleadorService.guardarEmpleador(emp);
-		ModelAndView modelAndView = new ModelAndView("redirect:/empleador/inicioEmpleador");
-		
-		return modelAndView ;
-		}
 	
-=======
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
 		return("verPerfiles");

@@ -1,10 +1,7 @@
 package ar.edu.unju.fi.html.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Empleador;
@@ -26,13 +23,13 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public void guardarEmpleador(Empleador empleador) {
 		empleadorDaoImp.save(empleador);
 		
 	}
 
-=======
+
 	public boolean agregarEmpleador(Empleador empleador) {
 		// TODO Auto-generated method stub
 		String contra = empleador.getUsuario().getContraseña();
@@ -46,5 +43,5 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		return false;
 	}
     
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
+
 }
