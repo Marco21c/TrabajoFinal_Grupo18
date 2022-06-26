@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.html.serviceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
@@ -12,7 +13,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 
 	@Autowired
 	ICiudadanoDAO ciudadanoDAOImp;
-	
+
 	@Override
 	public Ciudadano getCiudadano(){
 		// TODO Auto-generated method stub
@@ -22,10 +23,27 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	@Override
 	public boolean getGuardarCiudadano(Ciudadano ciudadano) {
 		// TODO Auto-generated method stub
+		String contra = ciudadano.getUsuario().getContraseña();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		ciudadano.getUsuario().setContraseña(bCryptPasswordEncoder.encode(contra));
+		
+		ciudadano.getUsuario().setTipo("Ciudadano");
 		if(ciudadanoDAOImp.save(ciudadano)!=null) {
 			return true;
 		}
 		return false;
 	}
-	
+
+	@Override
+	public Ciudadano getBuscarCiudadano(String username) {
+		// TODO Auto-generated method stub
+		return  ciudadanoDAOImp.findByUsuarioUsername(Long.parseLong(username));
+	}
+
+	@Override
+	public void modificarCV(Ciudadano cv) {
+		// TODO Auto-generated method stub
+		ciudadanoDAOImp.save(cv);
+	}
+
 }

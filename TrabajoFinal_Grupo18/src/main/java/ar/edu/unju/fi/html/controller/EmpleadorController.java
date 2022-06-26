@@ -19,7 +19,7 @@ import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 
 @Controller
-@RequestMapping("/empleador")
+@RequestMapping("/empleador") 
 public class EmpleadorController {
 	@Autowired
     @Qualifier("EmpleadorServiceImp")
@@ -33,16 +33,30 @@ public class EmpleadorController {
 		return("registroEmpleador");
 	}	
 	
-	@GetMapping("/inicio")
-	public String getSesionEmpleador(Model model) {	
-		return("inicioEmpleador");
-	}
+	@PostMapping("/postEmpleador")
+	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
+		LOGGER.info("postempleador");
+		if(bindingResult.hasErrors()) {
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
+			modelAndview.addObject("empleador", emp);
+			return modelAndview;
+		}
+		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
+		if(iEmpleadorService.agregarEmpleador(emp)){
+		 LOGGER.info("Se guardó un nuevo empleador.");
+		}
+		
+		return modelAndView ;
+		}
 	
+
 	@GetMapping("/inicioEmpleador")
 	public String getIniEmpleador(Model model) {
 		return("pagEmpleador");
 	}
 	
+<<<<<<< HEAD
 	@PostMapping("/postEmpleador")
 	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -58,6 +72,8 @@ public class EmpleadorController {
 		return modelAndView ;
 		}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
 		return("verPerfiles");

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.html.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,17 +30,18 @@ private String idiomas;
 private String conocimientoInfo;
 @Column(name="INFO_COMPLE_CV")
 private String infoComplementaria;
+@Column(name="NOMBRE_CV")
+private String nombre;
 
-@OneToOne(fetch= FetchType.LAZY)
-@JoinColumn(name="DNI_CIU")
-private Ciudadano ciudadanoId;
+@OneToOne(mappedBy = "cv" , fetch = FetchType.LAZY)
+private Ciudadano ciudadano;
 
 public CurriculumVitae() {
 	
 }
 
 public CurriculumVitae(String contacto, String expLaboral, String educacion, String idiomas, String conocimientoInfo,
-		String infoComplementaria, Ciudadano ciudadanoId) {
+		String infoComplementaria, Ciudadano ciudadanoId,String nombre) {
 	super();
 	this.contacto = contacto;
 	this.expLaboral = expLaboral;
@@ -47,7 +49,7 @@ public CurriculumVitae(String contacto, String expLaboral, String educacion, Str
 	this.idiomas = idiomas;
 	this.conocimientoInfo = conocimientoInfo;
 	this.infoComplementaria = infoComplementaria;
-	this.ciudadanoId = ciudadanoId;
+	this.nombre = nombre;
 }
 public long getId() {
 	return id;
@@ -91,12 +93,13 @@ public String getInfoComplementaria() {
 public void setInfoComplementaria(String infoComplementaria) {
 	this.infoComplementaria = infoComplementaria;
 }
-public Ciudadano getCiudadanoId() {
-	return ciudadanoId;
-}
-public void setCiudadanoId(Ciudadano ciudadanoId) {
-	this.ciudadanoId = ciudadanoId;
+
+public String getNombre() {
+	return nombre;
 }
 
+public void setNombre(String nombre) {
+	this.nombre = nombre;
+}
 
 }
