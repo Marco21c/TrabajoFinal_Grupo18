@@ -44,21 +44,16 @@ public class CiudadanoController {
 			modelAndview.addObject("ciudadano", ciu);
 			return modelAndview;
 		}
-<<<<<<< HEAD
-		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/inicioCiudadano");
-=======
+
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
+
 
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
-<<<<<<< HEAD
+
 		}
 
-=======
-		}
->>>>>>> branch 'master' of https://github.com/Marco21c/TrabajoFinal_Grupo18.git
-		return modelAndView ;
+		return modelAndView;
 		}
 	
 	@GetMapping("/inicioCiudadano")
