@@ -9,6 +9,50 @@
 <body>
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
 
+       <div class="card bg-dark text-white">
+  <img th:src="@{/images/img.jpg}" class="card-img" alt="fondo" height="300px">
+  <div class="card-img-overlay">
+    <h2 class="card-title">OFERTAS LABORALES</h2>
+    <h4 class="centraar">Bienvenido/a!!</h4> 
+    <p class="card-text"> Gracias por su registro. Este es el mejor sitio para tu empresa.<br>
+     Podras publicar tus empleos y capacitaciones en alguna de las opciones.</p>
+  </div>
+</div>
+  <section>
+   <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+   <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/empleo.jpg}" class="card-img-top" alt="empleo" height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Publicar empleo</h5>
+         <p class="card-text">Aqui podras publicar tus empleos para que las personas puedan verlos.</p>
+        <a href="#" class="btn btn-dark">Publicar Empleo</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/imagen.webp}" class="card-img-top" alt="dd" height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Crear Capacitacion</h5>
+         <p class="card-text"> En esta seccion puedes crear tus capacitaciones.</p>
+        <a href="#" class="btn btn-secondary">Crear Curso</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+     <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/imagen3.webp}" class="card-img-top" alt="..." height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Ver perfiles laborales</h5>
+         <p class="card-text"> Puedes ver los perfiles laborales que estan buscando empleo.</p>
+        <a href="#" class="btn btn-primary">Ver Perfiles</a>
+      </div>
+    </div>  
+    </div>
+    </div> 
+  </section>
+     
   
    <footer th:replace="/layouts/footer::footer"></footer>
 </body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<meta charset="utf-8">
+<title>Nuevo Curso</title>
+</head>
+<body>
+ <header th:replace="/layouts/headerEmp::headerEmp"></header> 
+ 
+<div class="container">
+<div class="row justify-content-center mt-5 pt-5">
+<div class="col-md-10 ">
+
+ <h2> Curso de Capacitacion </h2>
+
+ <form class="row g-3 needs-validation" th:action="@{/curso/guardarCurso}" th:object="${curso}" method="POST">
+  <div class="col-md-4 position-relative">
+    <label for="idNombre" class="form-label">Nombre: </label>
+    <input th:field=*{nombre} type="text" class="form-control" id="idNombre" placeholder="Ingrese nombre">
+    <div class=text-danger th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div> 
+     
+  </div>
+  <div class="col-md-4 position-relative">
+    <label for="CategoriaId" class="form-label">Categoria: </label>
+    <input th:field=*{categoria} type="text" class="form-control" id="CategoriaId" placeholder="Ingrese categoria"> 
+    <div class=text-danger th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div> 
+  </div>
+  
+  <div class="col-md-4 position-relative">
+    <label for="fechaIncId" class="form-label">Fecha de Inicio: </label>
+    <input th:field=*{fechaInic} type="date" class="form-control" id="fechaIncId" placeholder="Ingrese fecha de inicio ">
+    <div class=text-danger th:if="${#fields.hasErrors('fechaInic')}" th:errors="*{fechaInic}"></div> 
+  </div>
+  
+  <div class="col-12 centraar">
+    <button class="btn btn-primary" type="submit" >Guardar</button>
+    
+  </div>
+ </form>
+</div>
+</div> 
+</div>
+
+  <footer th:replace="/layouts/footer::footer"></footer>  
+</body>
+</html>

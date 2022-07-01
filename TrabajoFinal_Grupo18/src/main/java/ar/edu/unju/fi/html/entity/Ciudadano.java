@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.html.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -59,7 +61,8 @@ private CurriculumVitae cv;
 @JoinColumn(name="ID_USER")
 private Usuario usuario;
 
-
+@ManyToMany(mappedBy= "ciudadanos")
+private List<Curso> cursos;
 
 public Ciudadano() {
 	
@@ -71,7 +74,7 @@ public Ciudadano(long nroTramite,String email,
 		String estadoCivil,
 		String provincia,long telefono,
 		LocalDate fechaNac,
-		CurriculumVitae cv, Usuario usuario) {
+		CurriculumVitae cv, Usuario usuario,List<Curso> cursos) {
 	super();
 	this.nroTramite = nroTramite;
 	this.email = email;
@@ -81,6 +84,7 @@ public Ciudadano(long nroTramite,String email,
 	this.fechaNac = fechaNac;
 	this.cv = cv;
 	this.usuario = usuario;
+	this.cursos = cursos;
 }
 
 
@@ -144,6 +148,16 @@ public Usuario getUsuario() {
 
 public void setUsuario(Usuario usuario) {
 	this.usuario = usuario;
+}
+
+
+public List<Curso> getCursos() {
+	return cursos;
+}
+
+
+public void setCursos(List<Curso> cursos) {
+	this.cursos = cursos;
 }
 
 

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Empleador {
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "ID")
+@Column(name = "ID_EMP")
 private Long id;
 @Column(name = "RAZON_SOCIAL", nullable = true)
 private String razonSocial;
@@ -54,6 +55,8 @@ private List<OfertaLaboral> ofertaLaboral = new ArrayList<OfertaLaboral>();
 @JoinColumn(name="ID_USER")
 private Usuario usuario;
 
+@OneToMany(mappedBy ="empleador", cascade = CascadeType.ALL)
+private List<Curso> cursos;
 
 public Empleador() {
 
@@ -162,6 +165,12 @@ public Usuario getUsuario() {
 }
 public void setUsuario(Usuario usuario) {
 	this.usuario = usuario;
+}
+public List<Curso> getCursos() {
+	return cursos;
+}
+public void setCursos(List<Curso> cursos) {
+	this.cursos = cursos;
 }
 
 
