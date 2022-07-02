@@ -1,7 +1,5 @@
 package ar.edu.unju.fi.html.controller;
 
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +43,22 @@ public class CiudadanoController {
 			modelAndview.addObject("ciudadano", ciu);
 			return modelAndview;
 		}
+		//control para validar que solo se registren usuarios mayores de edad
+		if(ciu.calcularEdad(ciu.getFechaNac()) < 18) {
+			ModelAndView modelAndView = new ModelAndView("registroCiudadano");
+			modelAndView.addObject("ciudadano", ciu);
+			LOGGER.info("Se guardó un nuevo ciudadano.");
+			return modelAndView ;
+		}
+		//falta el control para que los usuarios no se repitan.
+		else {
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
 
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
 		}
 		return modelAndView ;
+		}
 		}
 	
 	@GetMapping("/inicioCiudadano")

@@ -8,21 +8,27 @@
 </head>
 <body>
    <header th:replace="/layouts/headerCiu::headerCiu"></header> 
-   <h2> MI CURRICULUM VITAE</h2>
+   
       <div class=container> 
-         
           
+     
           <div class="card">
             <div class="card-body">
               <blockquote class="blockquote mb-1">
                 
-                <h1 th:text= "${cv.nombre}"></h1>
-                 <img th:ref="@{/images/empleo1.png}" title="empleo" alt="empleo" />
+            
+               <div class="card bg-dark text-dark">
+                 <img height="350px" th:src="@{/images/empleo1.png}" title="empleo" alt="empleo" />
+                  <div class="card-img-overlay">
+                    <h1 th:text= "${cv.nombre}"></h1>
+                  </div>
+               </div> 
+                
                  <section> <h4>Experiencia Laboral:</h4> <a  th:text= "${cv.expLaboral}"> </a> </section> 
                  <section> <h4>Educacion: </h4> <a  th:text= "${cv.educacion}"> </a> </section> 
                  <section> <h4>Idiomas:</h4> <a  th:text= "${cv.idiomas}"> </a> </section> 
                  <section> <h4>Informacion Complementaria: </h4><a  th:text= "${cv.infoComplementaria}"> </a> </section> 
-                 <section> <h4>Contacto: </h4> <a  th:text= "${cv.contacto}"> </a> </section> 
+                 <section> <h4>Contacto: </h4> <a  th:text= "${cv.contacto}"> </a>  </section> 
                  
                 
              </blockquote>
