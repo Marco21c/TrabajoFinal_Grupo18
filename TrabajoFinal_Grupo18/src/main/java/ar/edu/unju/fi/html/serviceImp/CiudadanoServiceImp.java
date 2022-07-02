@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
+import ar.edu.unju.fi.html.entity.CurriculumVitae;
 import ar.edu.unju.fi.html.repository.ICiudadanoDAO;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 
@@ -41,9 +42,9 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	}
 
 	@Override
-	public void modificarCV(Ciudadano cv) {
+	public void modificarCV(Ciudadano ciu,CurriculumVitae cv) {
 		// TODO Auto-generated method stub
-		ciudadanoDAOImp.save(cv);
+		 ciu.setCv(cv);
 	}
 
 }

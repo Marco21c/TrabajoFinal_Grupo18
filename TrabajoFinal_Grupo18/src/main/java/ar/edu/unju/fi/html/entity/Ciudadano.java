@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -22,6 +23,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
 @Table(name="ciudadanos")
@@ -59,6 +61,7 @@ private CurriculumVitae cv;
 //relacion con un usuario 
 @OneToOne(cascade = {CascadeType.ALL})
 @JoinColumn(name="ID_USER")
+@Valid
 private Usuario usuario;
 
 @ManyToMany(mappedBy= "ciudadanos")

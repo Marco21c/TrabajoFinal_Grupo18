@@ -8,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,9 +19,12 @@ public class Usuario {
 
 @Id
 @Column(name="ID_USER")
+@NotNull(message="No debe estar vacio.")
+@Min(value=7,message="Debe ingresar un username con 7 digitos o mas.")
 private long username;
 
 @Column(name="CONTRA_USER")
+@NotBlank(message="debe ingresar una contraseña.")
 private String contraseña;
 
 @Column(name="TIPO_USER")
