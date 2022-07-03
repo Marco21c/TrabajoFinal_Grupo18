@@ -31,7 +31,7 @@ public class OfertaLaboralController {
 	@GetMapping("/nuevaOferta")
 	public String crear(Model model) {
 		model.addAttribute("ofertaLaboral", ofertalaboral);
-		return "formulario";
+		return "crearOferta";
 	}
 	
 	@PostMapping("/save")

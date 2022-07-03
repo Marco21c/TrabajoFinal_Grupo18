@@ -33,6 +33,42 @@
   </div>
   </form>
   
+  <div class=table-responsive>
+  		<table class="table table-striped">
+  			<thead>
+  				<tr>
+  					<th scope="col">ID</th>
+  					<th scope="col">CANTIDAD VACANTES</th>
+  					<th scope="col">PUESTO REQUERIDOS</th>
+  					<th scope="col">RESUMEN PUESTO</th>
+  					<th scope="col">DISPONIBILIDAD HORARIA</th>
+  					<th scope="col">PRINCIPALES TAREAS</th>
+  					<th scope="col">JORNADA</th>
+  					<th scope="col">REQUISITOS</th>
+  					<th scope="col">SALARIO</th>
+  					<th scope="col">BENEFICIOS</th>
+  					<th scope="col">DISPONIBLE</th>
+  					<th scope="col">EMPRESA</th>
+  				</tr>
+  			</thead>
+  			<tbody>
+				<tr th:each="o:${ofertaLaboral}">
+					 <td th:text="${o.puestoReq}"></td>
+					 <td th:text="${o.resumenPuesto}"></td>
+					 <td th:text="${o.dispHoraria}"></td>
+					 <td th:text="${o.princTarea}"></td>
+					 <td th:text="${o.jornada}"></td>
+					 <td th:text="${o.requisitos}"></td>
+					 <td th:text="${o.salario}"></td>
+					 <td th:text="${o.beneficio}"></td>
+					 <td th:text="${o.disponible}"></td>
+					 <td th:text="${o.datosEmp.nombreComercial}"></td>
+ 				</tr>
+  			</tbody>
+  		</table>
+  
+  </div>
+  
    </div>
   </div>
   
