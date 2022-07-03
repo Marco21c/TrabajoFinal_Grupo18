@@ -23,7 +23,7 @@
 		  </div>
 		  <div class="col-6">
 		    <label for="inputEdu" class="form-label">RESUMEN DE PUESTO</label>
-		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="inputW¡Edu" placeholder="Ingrese educacion">
+		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="inputW¡Edu" placeholder="describa puesto de trabajo">
 		  </div>
 		  <div class="col-md-4 position-relative">
 		    <label for="DispHoraria" class="form-label">DISPONIBILIDAD HORARIA</label>
@@ -34,7 +34,7 @@
 		  </div>
 		  <div class="col-6">
 		    <label for="inputIdiomas2" class="form-label">PRINCIPALES TAREAS</label>
-		    <input th:field="*{princTareas}" type="text" class="form-control" id="inputIdiomas2" placeholder="Ingrese idiomas">
+		    <input th:field="*{princTareas}" type="text" class="form-control" id="inputIdiomas2" placeholder="describa las tarea a realizar">
 		  </div>
 		  <div class="col-md-6">
 		    <label for="inputZip" class="form-label">JORNADA</label>
@@ -47,6 +47,13 @@
 		   <div class="col-md-6">
 		    <label for="inputZip" class="form-label">BENEFICIO</label>
 		    <input th:field="*{beneficio}" type="text" class="form-control" id="inputZip">
+		  </div>
+		  <div class="col-md-4 position-relative">
+		    <label for="DispHoraria" class="form-label">DISPONIBLE</label>
+		    <select th:field=*{dispHoraria} class="form-select" id="DispHoraria" >
+		      <option value=true >SI</option>
+		      <option value=false >NO</option>
+		    </select>
 		  </div>
 		  
 		  <h4> Para realizar los cambios debe ingresar su contraseña: </h4> 
