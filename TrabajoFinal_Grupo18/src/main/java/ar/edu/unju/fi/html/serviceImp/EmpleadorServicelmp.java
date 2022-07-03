@@ -11,8 +11,7 @@ import ar.edu.unju.fi.html.service.IEmpleadorService;
 @Service("EmpleadorServiceImp")
 public class EmpleadorServicelmp implements IEmpleadorService {
 	
-	@Autowired
-	IEmpleadorDAO empleadorDaoImp;
+	
 
 	@Autowired
 	IEmpleadorDAO iEmpleadorDAO;
@@ -22,13 +21,7 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		return new Empleador();
 	}
 
-	@Override
-
-	public void guardarEmpleador(Empleador empleador) {
-		empleadorDaoImp.save(empleador);
-		
-	}
-
+	
 
 	public boolean agregarEmpleador(Empleador empleador) {
 		// TODO Auto-generated method stub
@@ -42,6 +35,24 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		}
 		return false;
 	}
+
+
+
+	@Override
+	public Empleador getBuscarEmpleador(String username) {
+		// TODO Auto-generated method stub
+		return iEmpleadorDAO.findByUsuarioUserName(Long.parseLong(username));
+	}
+
+
+
+	@Override
+	public void modificarOferta(Empleador oferta) {
+		// TODO Auto-generated method stub
+		iEmpleadorDAO.save(oferta);
+	}
+
+
     
 
 }

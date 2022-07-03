@@ -17,7 +17,7 @@ public class OfertaLaboral {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="ID", nullable=false)
-private int id;
+private long id;
 @Column(name ="CANTIDAD_VACANTES", nullable=false)
 private int cantVacantes;
 @Column(name ="PUESTO_REQUERIDO", nullable=false)
@@ -62,10 +62,10 @@ public OfertaLaboral(int cantVacantes, String puestoReq, String resumenPuesto, S
 	this.disponible = disponible;
 	this.datosEmp = datosEmp;
 }
-public int getId() {
+public long getId() {
 	return id;
 }
-public void setId(int id) {
+public void setId(long id) {
 	this.id = id;
 }
 public int getCantVacantes() {

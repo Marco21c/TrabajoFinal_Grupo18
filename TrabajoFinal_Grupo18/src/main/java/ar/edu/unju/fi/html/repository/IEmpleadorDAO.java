@@ -7,7 +7,7 @@ import ar.edu.unju.fi.html.entity.Empleador;
 
 public interface IEmpleadorDAO extends JpaRepository<Empleador, Long>{
 
-	
+	public Empleador findByUsuarioUserName(Long username);
 
 
 }

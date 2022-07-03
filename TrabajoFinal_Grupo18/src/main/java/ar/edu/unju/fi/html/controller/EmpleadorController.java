@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,6 +57,13 @@ public class EmpleadorController {
 		return("pagEmpleador");
 	}
 	
+	@GetMapping("/crearEmpleo")
+	public String getCrearOferta(Model model, Authentication at) {
+		
+		Empleador emp = iEmpleadorService.getBuscarEmpleador(at.getName());
+		model.addAttribute("empleador", emp);
+		return ("crearOferta");
+	}
 	
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
