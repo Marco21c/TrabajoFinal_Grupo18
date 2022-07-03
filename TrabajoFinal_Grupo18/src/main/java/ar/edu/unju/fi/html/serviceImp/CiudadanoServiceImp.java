@@ -1,12 +1,15 @@
 package ar.edu.unju.fi.html.serviceImp;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import ar.edu.unju.fi.html.entity.Ciudadano;
-import ar.edu.unju.fi.html.entity.CurriculumVitae;
+import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.repository.ICiudadanoDAO;
+import ar.edu.unju.fi.html.repository.ICursoDAO;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 
 @Service("CiudadanoServiceImp")
@@ -15,6 +18,9 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	@Autowired
 	ICiudadanoDAO ciudadanoDAOImp;
 
+    
+	private List<Curso> cursosAuxiliares = new ArrayList<>();
+	
 	@Override
 	public Ciudadano getCiudadano(){
 		// TODO Auto-generated method stub
@@ -42,9 +48,14 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	}
 
 	@Override
-	public void modificarCV(Ciudadano ciu,CurriculumVitae cv) {
-		// TODO Auto-generated method stub
-		 ciu.setCv(cv);
+	public void getAgregarCurso(Ciudadano ciudadano, Curso curso) {
+		//
+		cursosAuxiliares.addAll(ciudadano.getCursos());
+		cursosAuxiliares.add(curso);
+		//
+		ciudadano.setCursos(cursosAuxiliares);
+		//
+		ciudadanoDAOImp.save(ciudadano);
 	}
 
 }

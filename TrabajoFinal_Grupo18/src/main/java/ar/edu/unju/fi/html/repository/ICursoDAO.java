@@ -14,4 +14,5 @@ public interface ICursoDAO extends JpaRepository<Curso,Long>{
 	
 	public List<Curso> findByEmpleadorId(long empleador);
 	
+	
 }

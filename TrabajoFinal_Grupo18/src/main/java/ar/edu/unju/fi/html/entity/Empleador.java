@@ -81,6 +81,8 @@ private String pagWeb;
 @NotEmpty(message="no debe estar vacio el campo descripcion.")
 private String descripcion;
 
+         //--- Mapeo ---      
+
        //relacion uno a muchos con ofertas laborales
 @OneToMany(mappedBy ="datosEmp", cascade = CascadeType.ALL)
 private List<OfertaLaboral> ofertaLaboral = new ArrayList<OfertaLaboral>();
@@ -93,6 +95,7 @@ private Usuario usuario;
 
 @OneToMany(mappedBy ="empleador", cascade = CascadeType.ALL)
 private List<Curso> cursos;
+       
         // --- constructores ---
 public Empleador() {
 

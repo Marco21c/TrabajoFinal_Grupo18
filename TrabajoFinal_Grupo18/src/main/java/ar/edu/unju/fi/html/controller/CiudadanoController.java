@@ -79,30 +79,26 @@ public class CiudadanoController {
 	}
 	//LLamada a pagina para crear un currilum vitae
 	@GetMapping("/crearCurriculum")
-	public String getCrearCV(Model model,Authentication at) {
-		
-		Ciudadano ciu = iCiudadanoService.getBuscarCiudadano(at.getName());
-		
-	    model.addAttribute("curriculum", ciu.getCv());
-	    
+	public String getCrearCV(Model model,Authentication at) {		
+	    model.addAttribute("curriculum", new CurriculumVitae());
 		return("crearCv");
 	}
 	@PostMapping("/modificar")
 	public ModelAndView modificarCV(@Validated @ModelAttribute("curriculum") CurriculumVitae cv,  BindingResult bindingResult, Authentication at) {
-		/*if(bindingResult.hasErrors()) {
-			LOGGER.info("Ocurrio un error en la validacion de "+ ciu);
+		if(bindingResult.hasErrors()) {
+			LOGGER.info("Ocurrio un error en la validacion de "+ cv);
 			ModelAndView mav = new ModelAndView("crearCV");
-			mav.addObject("ciudadano", ciu);
-		}*/
+			mav.addObject("curriculum", cv);
+			return mav;
+		}
 		 LOGGER.info("Se modifico el cv"); 
-		 
 		 Ciudadano ciu = iCiudadanoService.getBuscarCiudadano(at.getName());
 		 ciu.setCv(cv);
 		 iCiudadanoService.getGuardarCiudadano(ciu);
-		 ModelAndView mav = new ModelAndView("redirect:/ciudadano/verCurriculum");
-		 
+		 ModelAndView mav = new ModelAndView("redirect:/ciudadano/verCurriculum"); 
 		return mav;
 	}
+	
 	//LLamada a pagina que muestra las ofertas laborales
 	@GetMapping("/verOfertasLaborales")
 	public String getverOfertas(Model model) {

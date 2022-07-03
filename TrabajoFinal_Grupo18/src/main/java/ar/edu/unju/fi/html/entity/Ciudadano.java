@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -79,7 +81,8 @@ private CurriculumVitae cv;
 @Valid //Notacion para permitir las validaciones de Usuario
 private Usuario usuario;
     //relacion muchos a muchos con ciudadanos
-@ManyToMany(mappedBy= "ciudadanos")
+@ManyToMany(fetch= FetchType.EAGER)
+@JoinTable(name="ciudadanos_cursos", joinColumns = @JoinColumn(name="ciudadano_id"),inverseJoinColumns = @JoinColumn(name="cursos_id"))
 private List<Curso> cursos;
        
      // --- constructores ---

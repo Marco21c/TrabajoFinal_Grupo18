@@ -24,7 +24,7 @@
       <td th:text="${c.categoria}"></td>
       <td th:text="${#temporals.format(c.fechaInic,'dd/MM/yyyy')}"></td>
       <td>
-          <a id="editarCurso" type="button" class="btn btn-info">Inscribirse</a>
+          <a th:href="@{/curso/inscripCurso/}+${c.id}" id="inscripCurso" type="button" class="btn btn-info">Inscribirse</a>
       </td>
      </tr>
      </table>

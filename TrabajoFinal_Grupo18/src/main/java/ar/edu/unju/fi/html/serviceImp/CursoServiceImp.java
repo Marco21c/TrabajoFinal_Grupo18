@@ -1,14 +1,15 @@
 package ar.edu.unju.fi.html.serviceImp;
 
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
-import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.repository.ICursoDAO;
-import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
 import ar.edu.unju.fi.html.service.ICursoService;
 
 @Service("CursoServiceImp")
@@ -43,5 +44,30 @@ ICursoDAO icursoDAO;
 		return icursoDAO.findAll();
 	}
 
-	
+
+	@Override
+	public List<Curso> getMisCursos(Ciudadano ciudadano) {
+		// TODO Auto-generated method stub
+		return ciudadano.getCursos();
+	}
+
+
+	@Override
+	public Curso buscarCurso(long id) {
+		// TODO Auto-generated method stub
+		Optional<Curso> curso =  icursoDAO.findById(id); 
+		return curso.get();
+	}
+
+	@Override
+	public boolean verificarCursos(long id,Ciudadano ciudadano) throws Exception{
+		 
+		Optional<Curso> cursoEncontrado =Optional.ofNullable(ciudadano.getCursos().stream().filter(c -> c.getId() == id).findFirst().orElseThrow(()-> new Exception("Se agrego.")));
+		
+		if(cursoEncontrado.get()!=null) {
+			return true;
+		}
+		
+		return false;
+	}
 }

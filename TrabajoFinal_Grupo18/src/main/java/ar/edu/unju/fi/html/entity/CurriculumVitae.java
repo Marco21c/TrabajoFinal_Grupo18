@@ -9,31 +9,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+       //Tabla curriculums
 
 @Entity
 @Table(name="curriculums")
 public class CurriculumVitae {
+	   // El id del cv se genera automaticamente 
 @Id
 @GeneratedValue( strategy = GenerationType.IDENTITY)
 @Column(name="ID_CV")
 private long id;
+       //validaciones para contacto
+@NotEmpty(message="el campo contacto no debe estar vacio.")
+@Size(min=8,message="Debe ingresar un correo o telefono.")
 @Column(name="CONTACTO_CV")
 private String contacto;
+       //validaciones para experiencia laboral.
+@NotEmpty(message="el campo experiencia laboral no debe estar vacio.")
+@Size(min=4,message="Debe ingresar un minimo de 4 caracteres.")
 @Column(name="EXP_LABO_CV")
 private String expLaboral;
+       //validaciones para educacion.
+@NotEmpty(message="el campo educacion no debe estar vacio.")
 @Column(name="EDUCACION_CV")
 private String educacion;
+       //validaciones para idiomas.
+@NotEmpty(message="el campo idiomas no debe estar vacio.")
+@Size(min=6,message="Debe ingresar un minimo de 6 caracteres.")
 @Column(name="IDIOMAS_CV")
 private String idiomas;
+       //validacion para conocimientos informaticos
+@NotNull(message="Debe elegir una de las opciones.")
 @Column(name="CONOCIM_INFO_CV")
 private String conocimientoInfo;
+       //validaciones para info complementaria
+@Size(min=10, message="Debe ingresar un minimo de 10 caracteres.")
+@NotEmpty(message="Este campo no debe estar vacio.")
 @Column(name="INFO_COMPLE_CV")
 private String infoComplementaria;
+       //validaciones para el nombre y apellido
+@NotNull(message="Debe ingresar su nombre y apellido.")
+@Size(min=7, message="Debe ingresar su nombre y apellido completo.")
 @Column(name="NOMBRE_CV")
 private String nombre;
-
+       
+        //relacion uno a uno con ciudadano. 
 @OneToOne(mappedBy = "cv" , fetch = FetchType.LAZY)
 private Ciudadano ciudadano;
+       
+        // --- constructores --- 
 
 public CurriculumVitae() {
 	
@@ -50,6 +78,9 @@ public CurriculumVitae(String contacto, String expLaboral, String educacion, Str
 	this.infoComplementaria = infoComplementaria;
 	this.nombre = nombre;
 }
+
+        //--- getters and setters ---
+ 
 public long getId() {
 	return id;
 }
