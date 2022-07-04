@@ -33,8 +33,11 @@
   
   <div class="col-md-4 position-relative">
     <label for="idInicioAct" class="form-label">Inicio de actividad</label>
-    <input th:field=*{inicioAct} type="date" class="form-control" id="idInicioAct" placeholder="Ingrese fecha de inicio de actividad">
-    <div class=text-danger th:if="${#fields.hasErrors('inicioAct')}" th:errors="*{inicioAct}"></div> 
+    <div class="col-sm-10">
+    	<input th:field=*{inicioAct} type="date" class="form-control" id="idInicioAct" placeholder="Ingrese fecha de inicio de actividad">
+    	<div class=text-danger th:if="${#fields.hasErrors('inicioAct')}" th:errors="*{inicioAct}"></div> 
+    </div>
+    
   </div>
   
   <div class="col-md-4 position-relative">

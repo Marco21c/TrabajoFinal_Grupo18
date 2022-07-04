@@ -43,6 +43,7 @@ public class CiudadanoController {
 			modelAndview.addObject("ciudadano", ciu);
 			return modelAndview;
 		}
+
 		//control para validar que solo se registren usuarios mayores de edad
 		if(ciu.calcularEdad(ciu.getFechaNac()) < 18) {
 			ModelAndView modelAndView = new ModelAndView("registroCiudadano");
@@ -52,12 +53,16 @@ public class CiudadanoController {
 		}
 		//falta el control para que los usuarios no se repitan.
 		else {
+
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
+
 
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
+
 		}
-		return modelAndView ;
+
+		return modelAndView;
 		}
 		}
 	

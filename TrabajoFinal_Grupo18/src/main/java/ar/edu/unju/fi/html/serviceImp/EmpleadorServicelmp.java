@@ -1,9 +1,14 @@
 package ar.edu.unju.fi.html.serviceImp;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Curso;
@@ -14,6 +19,9 @@ import ar.edu.unju.fi.html.service.IEmpleadorService;
 
 @Service("EmpleadorServiceImp")
 public class EmpleadorServicelmp implements IEmpleadorService {
+	
+	@Autowired
+	IEmpleadorDAO empleadorDaoImp;
 
 	@Autowired
 	IEmpleadorDAO iEmpleadorDAO;
@@ -27,6 +35,13 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 	}
 
 	@Override
+
+	public void guardarEmpleador(Empleador empleador) {
+		empleadorDaoImp.save(empleador);
+		
+	}
+
+
 	public boolean agregarEmpleador(Empleador empleador) {
 		// TODO Auto-generated method stub
 		String contra = empleador.getUsuario().getContraseña();
@@ -54,4 +69,5 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		return iEmpleadorDAO.findByUsuarioUsername(Long.parseLong(username));
 	}
     
+
 }
