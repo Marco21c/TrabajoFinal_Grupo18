@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.html.entity.Ciudadano;
+import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
 
 import ar.edu.unju.fi.html.service.IEmpleadorService;
@@ -36,7 +40,6 @@ public class EmpleadorController {
 	
 	@PostMapping("/postEmpleador")
 	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
-		LOGGER.info("postempleador");
 		if(bindingResult.hasErrors()) {
 			LOGGER.error("No se cumplen las reglas de validación");
 			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
@@ -67,6 +70,20 @@ public class EmpleadorController {
 	
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
+		model.addAttribute("listaCvs", iEmpleadorService.getListarCvs());
+		return("verPerfiles");
+	}
+	
+	
+	@GetMapping("/filtrarxProvincia")
+	public String getverPerfilesProvincia(@Param("provincia")String provincia, Model model) {
+		model.addAttribute("listaCvs", iEmpleadorService.getCvsxProvincia(provincia));
+		return("verPerfiles");
+	}
+	
+	@GetMapping("/filtrarxPalabra")
+	public String getverPerfilesPalabra(@Param("palabra")String palabra, Model model) {
+		model.addAttribute("listaCvs", iEmpleadorService.getCvsxPalabra(palabra));
 		return("verPerfiles");
 	}
 	@GetMapping("/misEmpleos")

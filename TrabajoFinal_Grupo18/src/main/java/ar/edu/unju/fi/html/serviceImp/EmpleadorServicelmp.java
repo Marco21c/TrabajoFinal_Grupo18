@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.html.entity.Ciudadano;
+import ar.edu.unju.fi.html.entity.CurriculumVitae;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
+import ar.edu.unju.fi.html.repository.ICiudadanoDAO;
+import ar.edu.unju.fi.html.repository.ICurriculumDAO;
 import ar.edu.unju.fi.html.repository.ICursoDAO;
 import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
@@ -21,12 +21,13 @@ import ar.edu.unju.fi.html.service.IEmpleadorService;
 public class EmpleadorServicelmp implements IEmpleadorService {
 	
 	@Autowired
-	IEmpleadorDAO empleadorDaoImp;
-
+	ICurriculumDAO iCvDAO;
 	@Autowired
 	IEmpleadorDAO iEmpleadorDAO;
 	@Autowired
 	ICursoDAO iCursoDAO;
+	@Autowired
+	ICiudadanoDAO iCiudadanoDAO;
 	
 	@Override
 	public Empleador getEmpleador() {
@@ -37,7 +38,7 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 	@Override
 
 	public void guardarEmpleador(Empleador empleador) {
-		empleadorDaoImp.save(empleador);
+		iEmpleadorDAO.save(empleador);
 		
 	}
 
@@ -68,6 +69,22 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		
 		return iEmpleadorDAO.findByUsuarioUsername(Long.parseLong(username));
 	}
+
+	@Override
+	public List<CurriculumVitae> getListarCvs() {
+		// TODO Auto-generated method stub
+		return iCvDAO.findAll();
+	}
     
+	@Override
+	public List<CurriculumVitae> getCvsxProvincia(String provincia){
+		
+		return iCvDAO.findAllByCiudadanoProvincia(provincia);
+	}
+	@Override
+	public List<CurriculumVitae> getCvsxPalabra(String palabra){
+		
+		return iCvDAO.findAll(palabra);
+	}
 
 }

@@ -8,8 +8,57 @@
 </head>
 <body>
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
-
+   <h2> Perfiles laborales </h2>
+   <div class="container">
+<div class="row justify-content-center mt-5 pt-5">
+<a th:href="@{/empleador/perfiles}" class="btn btn-dark" role="button">Mostrar Todos</a>
   
+  <form class="form-inline col-6" th:action="@{/empleador/filtrarxProvincia}" >
+  <div class="form-group mb-2">
+    <label for="provincia" class="form-label">Filtrar por provincia: </label>
+  </div>  
+    <div class="form-group mx-sm3 mb-2">
+     <input type="text" name="provincia" class="form-control" id="provincia" th:value="${provincia}" placeholder="Ingrese una provincia." required> 
+    </div>
+    <input type="submit" class="btn btn-info mb-2" value="filtrar">
+     &nbsp;&nbsp;
+   </form>
+  
+   <form class="form-inline col-6" th:action="@{/empleador/filtrarxPalabra}" >
+  <div class="form-group mb-2">
+    <label for="palabra" class="form-label">Filtrar por palabra clave: </label>
+  </div>  
+    <div class="form-group mx-sm3 mb-2">
+     <input type="text" name="palabra" class="form-control" id="palabra" th:value="${palabra}" placeholder="Ingrese una palabra clave." required> 
+    </div>
+    <input type="submit" class="btn btn-info mb-2" value="filtrar">
+     &nbsp;&nbsp;
+   </form>
+   
+   </div>
+  </div>
+  
+    <section>
+   <div class="row row-cols-2 row-cols-md-2 g-5">
+  <div th:each="cv:${listaCvs}" class="col">
+   <div class="card" style="width: 38rem;">
+      <img th:src="@{/images/empleo1.png}" class="card-img-top" alt="empleo" height="200px">
+      <div class="card-body">
+        <h5 th:text="${cv.nombre}" class="card-title"></h5>
+        
+         <section> <h5>Experiencia Laboral:</h5> <a  th:text= "${cv.expLaboral}"> </a> </section> 
+                 <section> <h5>Educacion: </h5> <a  th:text= "${cv.educacion}"> </a> </section> 
+                 <section> <h5>Idiomas:</h5> <a  th:text= "${cv.idiomas}"> </a> </section> 
+                 <section> <h5>Informacion Complementaria: </h5><a  th:text= "${cv.infoComplementaria}"> </a> </section> 
+                 <section> <h5>Contacto: </h5> <a  th:text= "${cv.contacto}"> </a>  </section> 
+      </div>
+      
+    </div>
+  </div>
+</div>
+     
+   </section>
+   
    <footer th:replace="/layouts/footer::footer"></footer>
 </body>
 </html>

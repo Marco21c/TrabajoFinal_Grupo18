@@ -56,7 +56,7 @@ private String infoComplementaria;
 @Size(min=7, message="Debe ingresar su nombre y apellido completo.")
 @Column(name="NOMBRE_CV")
 private String nombre;
-       
+      
         //relacion uno a uno con ciudadano. 
 @OneToOne(mappedBy = "cv" , fetch = FetchType.LAZY)
 private Ciudadano ciudadano;
@@ -130,6 +130,15 @@ public String getNombre() {
 
 public void setNombre(String nombre) {
 	this.nombre = nombre;
+}
+
+
+public Ciudadano getCiudadano() {
+	return ciudadano;
+}
+
+public void setCiudadano(Ciudadano ciudadano) {
+	this.ciudadano = ciudadano;
 }
 
 }

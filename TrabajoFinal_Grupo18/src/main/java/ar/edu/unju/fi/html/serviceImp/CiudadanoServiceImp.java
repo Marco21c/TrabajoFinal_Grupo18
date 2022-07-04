@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.repository.ICiudadanoDAO;
-import ar.edu.unju.fi.html.repository.ICursoDAO;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 
 @Service("CiudadanoServiceImp")
