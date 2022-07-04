@@ -56,7 +56,7 @@
   
   <div class="col-md-4 position-relative">
     <label for="TelefonoId" class="form-label">Telefono</label>
-    <input th:field=*{telefono} type="text" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
+    <input th:field=*{telefono} type="number" class="form-control" id="TelefonoId" placeholder="Ingrese telefono">
     <div class=text-danger th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> 
   </div>
   
