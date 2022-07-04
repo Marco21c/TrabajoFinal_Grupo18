@@ -134,7 +134,7 @@ public class CiudadanoController {
 		Ciudadano ciudadano = iCiudadanoService.getBuscarCiudadano(aut.getName());
 		
 		ModelAndView mAv = new ModelAndView("redirect:/ciudadano/estadoOfertas");
-		//
+		//crear una solicitud con el Ciudadano para la oferta
 	    
 		return mAv;
 	}

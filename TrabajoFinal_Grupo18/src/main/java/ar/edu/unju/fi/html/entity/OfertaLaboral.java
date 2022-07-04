@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.html.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,9 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ofertasLaborales")
@@ -20,7 +27,7 @@ public class OfertaLaboral {
 @Column(name="ID", nullable=false)
 private long id;
 @Column(name ="CANTIDAD_VACANTES", nullable=false)
-@NotEmpty(message="El campo cantidad de vacantes no debe estar vacio.")
+@NotNull(message="El campo cantidad de vacantes no debe estar vacio.")
 private int cantVacantes;
 @Column(name ="PUESTO_REQUERIDO", nullable=false)
 @NotEmpty(message="El campo Puesto requerido no debe estar vacio.")
@@ -41,7 +48,7 @@ private String jornada;
 @NotEmpty(message="El campo requesitos no debe estar vacio.")
 private String requisitos;
 @Column(name ="SALARIO", nullable=false)
-@NotEmpty(message="El campo salario no debe estar vacio.")
+@NotNull(message="El campo salario no debe estar vacio.")
 private long salario;
 @Column(name ="BENEFICIOS", length = 150, nullable=false)
 @NotEmpty(message="El campo beneficio no debe estar vacio.")
@@ -53,6 +60,10 @@ private boolean disponible;
 @JoinColumn(name ="DATOSEMP_ID")
 private Empleador empleador;
 
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="ID_SOLI")
+@Valid //Notacion para permitir las validaciones 
+private Solicitud solicitud;
 
 public OfertaLaboral() {
 	

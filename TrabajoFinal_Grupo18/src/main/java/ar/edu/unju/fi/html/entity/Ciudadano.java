@@ -84,7 +84,12 @@ private Usuario usuario;
 @ManyToMany(fetch= FetchType.EAGER)
 @JoinTable(name="ciudadanos_cursos", joinColumns = @JoinColumn(name="ciudadano_id"),inverseJoinColumns = @JoinColumn(name="cursos_id"))
 private List<Curso> cursos;
-       
+   
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="ID_SOLI")
+@Valid //Notacion para permitir las validaciones
+private Solicitud solicitud;
+
      // --- constructores ---
 public Ciudadano() {
 	

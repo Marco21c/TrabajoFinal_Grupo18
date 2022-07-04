@@ -7,11 +7,11 @@
          <title>OFERTAS LABORALES</title>
 </head>
 <body>
-   <header th:replace="/layouts/headerCiu::headerEmp"></header> 
+   <header th:replace="/layouts/headerEmp::headerEmp"></header> 
 <div class="container">
 	<div class="row justify-content-center mt-5 pt-5">
 	  <h2>CREAR OFERTA</h2>
-	   <form th:action="@{/guardar}" method="post" th:object="${ofertaLaboral}" class="row g-3">
+	   <form th:action="@{/empleador/guardarEmpleo}" method="post" th:object="${ofertaLaboral}" class="row g-3">
 		  
 		  <div class="col-md-6">
 		    <label for="inputEmail4" class="form-label">CANTIDAD DE VACANTES</label>
@@ -52,8 +52,8 @@
 		  </div>
 		   <div class="col-md-6">
 		    <label for="inputZip" class="form-label">BENEFICIO</label>
-		    <input th:field="*{beneficio}" type="text" class="form-control" id="inputZip">
-		    <div class=text-danger th:if="${#fields.hasErrors('beneficio')}" th:errors="*{beneficio}"></div>
+		    <input th:field="*{beneficios}" type="text" class="form-control" id="inputZip">
+		    <div class=text-danger th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div>
 		  </div>
 		  <div class="col-md-4 position-relative">
 		    <label for="DispHoraria" class="form-label">DISPONIBLE</label>
@@ -63,12 +63,7 @@
 		    </select>
 		  </div>
 		  
-		  <h4> Para realizar los cambios debe ingresar su contraseña: </h4> 
-		  <div class="col-md-4 position-relative">
-		    <label for="ContraseñaId" class="form-label">Contraseña</label>
-		    <input th:field=*{usuario.contraseña} type="password" class="form-control" id="ContraseñaId" placeholder="Ingrese contraseña">
-		    <div class=text-danger th:if="${#fields.hasErrors('usuario.contraseña')}" th:errors="*{usuario.contraseña}"></div> 
-		  </div>
+		 
 		  
 		  <div class="col-12">
 		    <button type="submit" class="btn btn-primary">Guardar cambios</button>
