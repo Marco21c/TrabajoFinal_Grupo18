@@ -12,11 +12,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.CurriculumVitae;
+import ar.edu.unju.fi.html.entity.Curso;
+import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
@@ -115,10 +118,24 @@ public class CiudadanoController {
 		return("verOfertas");
     }
 	
+	//filtrar por provincia a las ofertas laborales
 	@GetMapping("/filtrarxProvincia")
 	public String getverPerfilesProvincia(@Param("provincia")String provincia, Model model) {
 		model.addAttribute("ofertas", iOfertasService.filtradoxProvincia(provincia));
 		return("verOfertas");
 	}
 	
+	@GetMapping("/postularse/{id}")
+	public ModelAndView getPostularse (@PathVariable(value="id")long id,Authentication aut) throws Exception {
+		
+		//busca una oferta con esa id
+		OfertaLaboral oferta = iOfertasService.getBuscarEmpleo(id);
+		//busca al ciudadano logueado
+		Ciudadano ciudadano = iCiudadanoService.getBuscarCiudadano(aut.getName());
+		
+		ModelAndView mAv = new ModelAndView("redirect:/ciudadano/estadoOfertas");
+		//
+	    
+		return mAv;
+	}
 }

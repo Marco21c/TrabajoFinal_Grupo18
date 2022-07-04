@@ -1,12 +1,11 @@
 package ar.edu.unju.fi.html.serviceImp;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
 import ar.edu.unju.fi.html.repository.IOfertaLaboralDAO;
@@ -55,6 +54,13 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	public List<OfertaLaboral> filtradoxProvincia(String Provincia){
 		
 		return ofertaDaoImp.findAllByEmpleadorProvincia(Provincia);
+	}
+
+	@Override
+	public OfertaLaboral getBuscarEmpleo(long id) {
+		// TODO Auto-generated method stub
+		Optional<OfertaLaboral> ofertaEncontrada= ofertaDaoImp.findById(id);
+		return ofertaEncontrada.get();
 	}
 }
 

@@ -12,4 +12,5 @@ public interface IOfertaLaboralService {
 	public List<OfertaLaboral> listarOfertas();
 	public List<OfertaLaboral> misOfertasLaborales(long id);
 	public List<OfertaLaboral> filtradoxProvincia(String Provincia);
+	public OfertaLaboral getBuscarEmpleo(long id);
 	}

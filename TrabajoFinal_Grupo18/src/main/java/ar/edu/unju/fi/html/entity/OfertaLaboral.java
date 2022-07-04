@@ -43,6 +43,7 @@ private boolean disponible;
 @JoinColumn(name ="DATOSEMP_ID")
 private Empleador empleador;
 
+
 public OfertaLaboral() {
 	
 }

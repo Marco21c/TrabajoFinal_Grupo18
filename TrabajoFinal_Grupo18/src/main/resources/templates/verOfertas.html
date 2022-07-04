@@ -68,7 +68,7 @@
 					 <td><span th:if="${o.disponible == true }" th:text="'Si'"> </span>
 					  <span th:if="${o.disponible == false }" th:text="'No'"></span></td>
 					 <td> 
-					   <a th:href="@{#}" id="edit" type="button" class="btn btn-info">Postularse</a>
+					   <a  th:href="@{/ciudadano/postularse/}+${o.id}" id="Postularse" type="button" class="btn btn-info">Postularse</a>
 					  </td>
  				</tr>
      </table>
