@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "ofertasLaborales")
@@ -19,22 +20,31 @@ public class OfertaLaboral {
 @Column(name="ID", nullable=false)
 private long id;
 @Column(name ="CANTIDAD_VACANTES", nullable=false)
+@NotEmpty(message="El campo cantidad de vacantes no debe estar vacio.")
 private int cantVacantes;
 @Column(name ="PUESTO_REQUERIDO", nullable=false)
+@NotEmpty(message="El campo Puesto requerido no debe estar vacio.")
 private String puestoReq;
 @Column(name ="RESUMEN_PUESTO", length = 200, nullable=false)
+@NotEmpty(message="El campo resumen de puesto no debe estar vacio.")
 private String resumenPuesto;
 @Column(name ="DISPONIBILIDAD_HORARIA", nullable=false)
+@NotEmpty(message="El campo disponibilidad horaria no debe estar vacio.")
 private String dispHoraria;
+@NotEmpty(message="El campo email no debe estar vacio.")
 @Column(name ="PRINCIPALES_TAREAS", length = 200, nullable=false)
 private String princTareas;
 @Column(name ="JORNADA", nullable=false)
+@NotEmpty(message="El campo jornada no debe estar vacio.")
 private String jornada;
 @Column(name ="REQUISITOS", nullable=false)
+@NotEmpty(message="El campo requesitos no debe estar vacio.")
 private String requisitos;
 @Column(name ="SALARIO", nullable=false)
+@NotEmpty(message="El campo salario no debe estar vacio.")
 private long salario;
 @Column(name ="BENEFICIOS", length = 150, nullable=false)
+@NotEmpty(message="El campo beneficio no debe estar vacio.")
 private String beneficios;
 @Column(name ="DISPONIBLE", nullable=false)
 private boolean disponible;
