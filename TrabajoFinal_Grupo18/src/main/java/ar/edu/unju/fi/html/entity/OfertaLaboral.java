@@ -31,8 +31,8 @@ private String resumenPuesto;
 @Column(name ="DISPONIBILIDAD_HORARIA", nullable=false)
 @NotEmpty(message="El campo disponibilidad horaria no debe estar vacio.")
 private String dispHoraria;
-@NotEmpty(message="El campo email no debe estar vacio.")
 @Column(name ="PRINCIPALES_TAREAS", length = 200, nullable=false)
+@NotEmpty(message="El campo principales tarea no debe estar vacio.")
 private String princTareas;
 @Column(name ="JORNADA", nullable=false)
 @NotEmpty(message="El campo jornada no debe estar vacio.")
