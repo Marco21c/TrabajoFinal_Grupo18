@@ -9,11 +9,12 @@ import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.repository.IOfertaLaboralDAO;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
-@Service
+@Service("OfertaLaboralServiceImp")
 public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 
 	@Autowired
 	IOfertaLaboralDAO ofertaDaoImp;
+	
 	
 	@Override
 	public void guardarOferta(OfertaLaboral ofertalaboral) {
@@ -25,6 +26,12 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	public List<OfertaLaboral> listarOfertas() {
 		// TODO Auto-generated method stub
 		return ofertaDaoImp.listarOfertas();
+	}
+
+	@Override
+	public OfertaLaboral getOfertaLaboral() {
+		// TODO Auto-generated method stub
+		return new OfertaLaboral();
 	}
 
 }

@@ -19,15 +19,15 @@ import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 public class OfertaLaboralController {
 
 	@Autowired
-	@Qualifier("OfertaLaboralServiceLmp")
-	IOfertaLaboralService laboralService;
+	@Qualifier("OfertaLaboralServiceImp")
+	private IOfertaLaboralService iLaboralService;
 	
 	@Autowired
 	private OfertaLaboral ofertalaboral;
 	
 	@RequestMapping("/ofertas")
 	public String getOfertasFrom(Model model) {
-		List<OfertaLaboral> ofertas = laboralService.listarOfertas();
+		List<OfertaLaboral> ofertas = iLaboralService.listarOfertas();
 		model.addAttribute("ofertas", ofertas);
 		return "verOfertas";
 	}
@@ -38,10 +38,10 @@ public class OfertaLaboralController {
 		return "crearOferta";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/guardar")
 	public String GuardarOferta(@Valid OfertaLaboral ofertalaboral, Model model) {
 		
-		laboralService.guardarOferta(ofertalaboral);
+		iLaboralService.guardarOferta(ofertalaboral);
 		return "redirect:/pagCiudadano";
 	}
 }

@@ -6,7 +6,7 @@ import ar.edu.unju.fi.html.entity.OfertaLaboral;
 
 public interface IOfertaLaboralService {
 	
-	public void guardarOferta(OfertaLaboral ofertalaboral);
-	
+	public OfertaLaboral getOfertaLaboral();
+	public void guardarOferta(OfertaLaboral ofertalaboral);	
 	public List<OfertaLaboral> listarOfertas();
 }
