@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import ar.edu.unju.fi.html.entity.Empleador;
+
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 
 @Controller
@@ -54,6 +55,13 @@ public class EmpleadorController {
 	@GetMapping("/inicioEmpleador")
 	public String getIniEmpleador(Model model) {
 		return("pagEmpleador");
+	}
+	@GetMapping("/misCursos")
+	public String getMisCursos(Model model, Authentication aut) {
+	  
+		model.addAttribute("cursos", iEmpleadorService.getMisCursos(aut.getName()));
+		
+		return("misCursos");
 	}
 	
 	

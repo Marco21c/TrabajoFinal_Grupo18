@@ -3,7 +3,6 @@ package ar.edu.unju.fi.html.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,47 +13,90 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+//Tabla empleadores
 
 @Entity
 @Table(name="empleadores")
 public class Empleador {
-
+	 // El id del empleador se genera automaticamente   
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "ID")
+     //se utiliza la notacion column en los atributos para poder nombrar a las diferentes columnas
+@Column(name = "ID_EMP")
 private Long id;
+     
 @Column(name = "RAZON_SOCIAL", nullable = true)
+      //validaciones para razon social
+@NotEmpty(message="El campo razon social no debe estar vacio.")
 private String razonSocial;
+      
 @Column(name = "NOMBRE_COMERCIAL", nullable = true)
+      //validaciones para nombre comercial
+@NotNull(message="El campo nombre comercial no debe estar vacio.")
+@Size(min=3, message="El nombre comercial debe tener al menos 3 caracteres.")
 private String nombreComercial;
+
 @Column(name = "INICIO_ACTIVIDAD", nullable = true)
+       //validaciones para fecha de inicio de actividad y formato
 @DateTimeFormat(pattern= "yyyy-MM-dd")
+@NotNull(message="La fecha no debe estar vacia.")
 private LocalDate inicioAct;
+       
 @Column(name = "EMAIL", nullable = true)
+       //validaciones para email
+@NotEmpty(message="El campo email no debe estar vacio.")
+@Email(message="Debe ingresar un email.")
 private String email;
+      
 @Column(name = "TELEFONO", nullable = true)
+       //validaciones para telefono
+@NotNull(message="El campo telefono no debe estar vacio.")
+@Min(value=8, message="El telefono debe tener al menos ocho digitos.")
 private long telefono;
+
 @Column(name = "DOMICILIO", length = 100,nullable = true)
+       //validaciones para domicilio 
+@NotEmpty(message="El campo domicilio no debe estar vacio.")
 private String domicilio;
+       //validaciones para provincia
+@NotBlank(message="no debe estar vacio la opcion provincia")
 @Column(name = "PROVINCIA", nullable = true)
 private String provincia;
+       //validaciones para pagina web
+@NotEmpty(message="no debe estar vacio el campo pagina web.")
 @Column(name = "PAGINA_WEB", nullable = true)
 private String pagWeb;
+       //validaciones para descripcion
 @Column(name = "DESCRIPCION", length = 200, nullable = true)
+@NotEmpty(message="no debe estar vacio el campo descripcion.")
 private String descripcion;
 
+         //--- Mapeo ---      
+
+       //relacion uno a muchos con ofertas laborales
 @OneToMany(mappedBy ="datosEmp", cascade = CascadeType.ALL)
 private List<OfertaLaboral> ofertaLaboral = new ArrayList<OfertaLaboral>();
 
-
-//relacion con un usuario 
+       //relacion uno a uno con usuario 
 @OneToOne(cascade = {CascadeType.ALL})
 @JoinColumn(name="ID_USER")
+@Valid //Notacion para permitir las validaciones de Usuario
 private Usuario usuario;
 
-
+@OneToMany(mappedBy ="empleador", cascade = CascadeType.ALL)
+private List<Curso> cursos;
+       
+        // --- constructores ---
 public Empleador() {
 
 }
@@ -73,6 +115,8 @@ public Empleador(String razonSocial, String nombreComercial, LocalDate inicioAct
 	this.descripcion = descripcion;
 	this.usuario = usuario;
 }
+
+          //--- getters and setters ---
 
 public String getRazonSocial() {
 	return razonSocial;
@@ -162,6 +206,12 @@ public Usuario getUsuario() {
 }
 public void setUsuario(Usuario usuario) {
 	this.usuario = usuario;
+}
+public List<Curso> getCursos() {
+	return cursos;
+}
+public void setCursos(List<Curso> cursos) {
+	this.cursos = cursos;
 }
 
 

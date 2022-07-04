@@ -19,11 +19,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
        <a class="nav-link" th:href="@{/ciudadano/inicioCiudadano}">Inicio</a>
-        <a class="nav-link active" aria-current="page" th:href="@{/ciudadano/crearCurriculum}">Crear CV</a>
+        <a class="nav-link active" aria-current="page" th:href="@{/ciudadano/crearCurriculum}">Mi CV</a>
         <a class="nav-link"  th:href="@{/ciudadano/verCurriculum}">Ver CV</a>
         <a class="nav-link " th:href="@{/ciudadano/verOfertasLaborales}">Ver Empleos</a>
-        <a class="nav-link " th:href="@{/curso/inscripCurso}">Inscribirse a un curso</a>
-        
+        <a class="nav-link " th:href="@{/curso/listaCursos}">Inscribirse a un curso</a>
+        <a class="nav-link " th:href="@{/curso/cursosInscripciones}">Mis cursos</a>
         <form th:action="@{/logout}" method="post" class="nav justify-content-end">
 					<button class="btn btn-outline-dark" type="submit" value="Salir">
 						Cerrar Sesion
