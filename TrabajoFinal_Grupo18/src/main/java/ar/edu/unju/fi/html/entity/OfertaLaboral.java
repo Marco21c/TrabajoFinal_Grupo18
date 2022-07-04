@@ -17,7 +17,7 @@ public class OfertaLaboral {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="ID", nullable=false)
-private int id;
+private long id;
 @Column(name ="CANTIDAD_VACANTES", nullable=false)
 private int cantVacantes;
 @Column(name ="PUESTO_REQUERIDO", nullable=false)
@@ -41,14 +41,14 @@ private boolean disponible;
 
 @ManyToOne(fetch =FetchType.LAZY)
 @JoinColumn(name ="DATOSEMP_ID")
-private Empleador datosEmp;
+private Empleador empleador;
 
 public OfertaLaboral() {
 	
 }
  
 public OfertaLaboral(int cantVacantes, String puestoReq, String resumenPuesto, String dispHoraria, String princTareas,
-		String jornada, String requisitos, long salario, String beneficios, boolean disponible, Empleador datosEmp) {
+		String jornada, String requisitos, long salario, String beneficios, boolean disponible, Empleador empleador) {
 	super();
 	this.cantVacantes = cantVacantes;
 	this.puestoReq = puestoReq;
@@ -60,12 +60,12 @@ public OfertaLaboral(int cantVacantes, String puestoReq, String resumenPuesto, S
 	this.salario = salario;
 	this.beneficios = beneficios;
 	this.disponible = disponible;
-	this.datosEmp = datosEmp;
+	this.empleador = empleador;
 }
-public int getId() {
+public long getId() {
 	return id;
 }
-public void setId(int id) {
+public void setId(long id) {
 	this.id = id;
 }
 public int getCantVacantes() {
@@ -128,16 +128,17 @@ public boolean isDisponible() {
 public void setDisponible(boolean disponible) {
 	this.disponible = disponible;
 }
-public Empleador getDatosEmp() {
-	return datosEmp;
-}
-public void setDatosEmp(Empleador datosEmp) {
-	this.datosEmp = datosEmp;
+
+public Empleador getEmpleador() {
+	return empleador;
 }
 
+public void setEmpleador(Empleador empleador) {
+	this.empleador = empleador;
+}
+
 
 
 
 
 }
-

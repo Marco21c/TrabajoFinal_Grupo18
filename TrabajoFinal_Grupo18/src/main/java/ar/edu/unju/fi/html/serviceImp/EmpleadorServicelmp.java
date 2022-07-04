@@ -86,5 +86,5 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		
 		return iCvDAO.findAll(palabra);
 	}
-
+    
 }

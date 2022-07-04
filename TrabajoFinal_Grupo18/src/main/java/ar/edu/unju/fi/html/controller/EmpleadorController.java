@@ -20,8 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
-
+import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
+import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
 @Controller
 @RequestMapping("/empleador") 
@@ -29,6 +30,9 @@ public class EmpleadorController {
 	@Autowired
     @Qualifier("EmpleadorServiceImp")
 	private IEmpleadorService iEmpleadorService;
+	@Autowired
+    @Qualifier("OfertaLaboralServiceImp")
+	private IOfertaLaboralService iOfertasService;
 	
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
@@ -86,8 +90,37 @@ public class EmpleadorController {
 		model.addAttribute("listaCvs", iEmpleadorService.getCvsxPalabra(palabra));
 		return("verPerfiles");
 	}
+	
+	@GetMapping("/crearEmpleo")
+	public String getCrearOferta(Model model, Authentication at) {
+		
+		model.addAttribute("ofertaLaboral",iOfertasService.getOfertaLaboral());
+		return ("crearOferta");
+	}
+	@PostMapping("/guardarEmpleo")
+	public ModelAndView guardarEmpleo(@Validated @ModelAttribute("ofertaLaboral") OfertaLaboral ol, BindingResult bindingResult,  Authentication at){
+		if(bindingResult.hasErrors()) {
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView modelAndview = new ModelAndView("crearOferta");
+			modelAndview.addObject("ofertaLaboral",ol);
+			return modelAndview;
+		}
+		ModelAndView modelAndView = new ModelAndView("redirect:/empleador/misEmpleos");
+		ol.setEmpleador(iEmpleadorService.buscarEmpleador(at.getName()));
+		
+		if(iOfertasService.guardarOferta(ol)) {
+		 LOGGER.info("Se guardó una oferta laboral.");
+		}
+		return modelAndView ;
+		}
+	
 	@GetMapping("/misEmpleos")
-	public String getmisEmpleos(Model model) {
+	public String getMisEmpleos(Model model, Authentication aut) {
+	    
+		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
+		model.addAttribute("ofertas",iOfertasService.misOfertasLaborales(empleador.getId()));
+		
 		return("misEmpleos");
 	}
+	
 }

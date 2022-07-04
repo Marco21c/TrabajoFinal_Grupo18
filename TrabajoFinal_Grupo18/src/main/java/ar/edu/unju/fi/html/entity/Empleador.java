@@ -84,8 +84,8 @@ private String descripcion;
          //--- Mapeo ---      
 
        //relacion uno a muchos con ofertas laborales
-@OneToMany(mappedBy ="datosEmp", cascade = CascadeType.ALL)
-private List<OfertaLaboral> ofertaLaboral = new ArrayList<OfertaLaboral>();
+@OneToMany(mappedBy ="empleador", cascade = CascadeType.ALL)
+private List<OfertaLaboral> ofertaLaboral;
 
        //relacion uno a uno con usuario 
 @OneToOne(cascade = {CascadeType.ALL})
@@ -201,6 +201,7 @@ public List<OfertaLaboral> getOfertaLaboral() {
 public void setOfertaLaboral(List<OfertaLaboral> ofertaLaboral) {
 	this.ofertaLaboral = ofertaLaboral;
 }
+
 public Usuario getUsuario() {
 	return usuario;
 }

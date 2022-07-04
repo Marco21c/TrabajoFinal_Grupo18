@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.CurriculumVitae;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
+import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
 
 @Controller
@@ -26,7 +28,9 @@ public class CiudadanoController {
 	@Autowired
     @Qualifier("CiudadanoServiceImp")
 	private ICiudadanoService iCiudadanoService;
-	
+	@Autowired
+    @Qualifier("OfertaLaboralServiceImp")
+	private IOfertaLaboralService iOfertasService;
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
 	@GetMapping("/nuevo")
@@ -107,6 +111,14 @@ public class CiudadanoController {
 	//LLamada a pagina que muestra las ofertas laborales
 	@GetMapping("/verOfertasLaborales")
 	public String getverOfertas(Model model) {
+		model.addAttribute("ofertas", iOfertasService.listarOfertas());
 		return("verOfertas");
     }
+	
+	@GetMapping("/filtrarxProvincia")
+	public String getverPerfilesProvincia(@Param("provincia")String provincia, Model model) {
+		model.addAttribute("ofertas", iOfertasService.filtradoxProvincia(provincia));
+		return("verOfertas");
+	}
+	
 }

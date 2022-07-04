@@ -55,6 +55,8 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		ciudadano.setCursos(cursosAuxiliares);
 		//
 		ciudadanoDAOImp.save(ciudadano);
+		
+		
 	}
 
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 <head>
@@ -14,42 +15,65 @@
   <div class="card-img-overlay">
     <h2 class="card-title">OFERTAS LABORALES</h2>
     <h4 class="centraar">Bienvenido/a!!</h4> 
-    <p class="card-text"> Aqui puede encontrar el empleo que esta buscando.</p>
+    <p class="card-text"> ofertas laborales disponibles</p>
   </div>
 </div>
   <div class="container">
 <div class="row justify-content-center mt-5 pt-5">
-<button type="button" class="btn btn-dark">Mostrar Todos</button>
-  <form class="row g-2">
-  <div class="col-md-6">
-    <label for="iIdprovincia" class="form-label">Filtrar por provincia: </label>
-    <input type="text" class="form-control" id="iIdprovincia" placeholder="Ingrese provincia:">
-    <button type="submit" class="btn btn-primary">Filtrar</button>
-  </div>
-  <div class="col-md-6">
-    <label for="inputFecha" class="form-label">Filtrar por fecha:</label>
-    <input type="date" class="form-control" id="inputFecha">
-     <button type="submit" class="btn btn-primary">Filtrar</button>
-  </div>
-  </form>
+<a th:href="@{/ciudadano/verOfertasLaborales}" class="btn btn-dark" role="button">Mostrar Todos</a>
   
+  <form class="form-inline col-6" th:action="@{/ciudadano/filtrarxProvincia}" >
+  <div class="form-group mb-2">
+    <label for="provincia" class="form-label">Filtrar por provincia: </label>
+  </div>  
+    <div class="form-group mx-sm3 mb-2">
+     <input type="text" name="provincia" class="form-control" id="provincia" th:value="${provincia}" placeholder="Ingrese una provincia." required> 
+    </div>
+    <input type="submit" class="btn btn-info mb-2" value="filtrar">
+     &nbsp;&nbsp;
+   </form>
+  
+   
+   
    </div>
   </div>
-  
-    <section>
-   <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-   <div class="card" style="width: 18rem;">
-      <img th:src="@{/images/empleo.jpg}" class="card-img-top" alt="empleo" height="180px">
-      <div class="card-body">
-        <h5 class="card-title">cvzv</h5>
-         <p class="card-text">scavv</p>
-        <a href="#" class="btn btn-dark">ir</a>
-      </div>
+    
+    <div class="row justify-content-center">
+    <div class="col-md-11 ">
+    <h2> Encontradas: </h2>
+    <table class="table table-success table-striped">
+     <tr>
+  					<th >CANTIDAD VACANTES</th>
+  					<th >PUESTO REQUERIDOS</th>
+  					<th >RESUMEN PUESTO</th>
+  					<th >DISPONIBILIDAD HORARIA</th>
+  					<th >PRINCIPALES TAREAS</th>
+  					<th >JORNADA</th>
+  					<th >REQUISITOS</th>
+  					<th >SALARIO</th>
+  					<th >BENEFICIOS</th>
+  					<th >DISPONIBLE</th>
+  					<th> OPCIONES</th>
+     </tr>
+     <tr th:each="o:${ofertas}">
+                     <td th:text="${o.cantVacantes}"></td> 
+					 <td th:text="${o.puestoReq}"></td>
+					 <td th:text="${o.resumenPuesto}"></td>
+					 <td th:text="${o.dispHoraria}"></td>
+					 <td th:text="${o.princTareas}"></td>
+					 <td th:text="${o.jornada}"></td>
+					 <td th:text="${o.requisitos}"></td>
+					 <td th:text="${o.salario}"></td>
+					 <td th:text="${o.beneficios}"></td>
+					 <td><span th:if="${o.disponible == true }" th:text="'Si'"> </span>
+					  <span th:if="${o.disponible == false }" th:text="'No'"></span></td>
+					 <td> 
+					   <a th:href="@{#}" id="edit" type="button" class="btn btn-info">Postularse</a>
+					  </td>
+ 				</tr>
+     </table>
     </div>
     </div>
-   </div>
-   </section>
    <footer th:replace="/layouts/footer::footer"></footer>
 </body>
 </html>
