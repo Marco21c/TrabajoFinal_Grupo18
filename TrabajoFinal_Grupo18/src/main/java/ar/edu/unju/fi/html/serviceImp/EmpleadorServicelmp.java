@@ -11,18 +11,15 @@ import ar.edu.unju.fi.html.service.IEmpleadorService;
 @Service("EmpleadorServiceImp")
 public class EmpleadorServicelmp implements IEmpleadorService {
 	
-	
-
 	@Autowired
-	IEmpleadorDAO iEmpleadorDAO;
+	IEmpleadorDAO empleadorDAOImp;
 	@Override
 	public Empleador getEmpleador() {
 		// TODO Auto-generated method stub
 		return new Empleador();
 	}
 
-	
-
+	@Override
 	public boolean agregarEmpleador(Empleador empleador) {
 		// TODO Auto-generated method stub
 		String contra = empleador.getUsuario().getContraseña();
@@ -30,26 +27,22 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		empleador.getUsuario().setContraseña(bCryptPasswordEncoder.encode(contra));
 		
 		empleador.getUsuario().setTipo("Empleador");
-		if(iEmpleadorDAO.save(empleador)!=null) {
-		 return true;	
+		if(empleadorDAOImp.save(empleador)!=null) {
+			return true;	
 		}
 		return false;
 	}
 
-
-
 	@Override
 	public Empleador getBuscarEmpleador(String username) {
 		// TODO Auto-generated method stub
-		return iEmpleadorDAO.findByUsuarioUserName(Long.parseLong(username));
+		return empleadorDAOImp.findByUsuarioUsername(Long.parseLong(username));
 	}
-
-
 
 	@Override
 	public void modificarOferta(Empleador oferta) {
 		// TODO Auto-generated method stub
-		iEmpleadorDAO.save(oferta);
+		empleadorDAOImp.save(oferta);
 	}
 
 

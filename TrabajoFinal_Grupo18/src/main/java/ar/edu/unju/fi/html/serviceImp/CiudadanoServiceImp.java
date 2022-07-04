@@ -13,7 +13,6 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 
 	@Autowired
 	ICiudadanoDAO ciudadanoDAOImp;
-
 	@Override
 	public Ciudadano getCiudadano(){
 		// TODO Auto-generated method stub

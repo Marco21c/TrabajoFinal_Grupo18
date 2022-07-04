@@ -57,14 +57,14 @@ public class EmpleadorController {
 		return("pagEmpleador");
 	}
 	
-	@GetMapping("/crearEmpleo")
+	/*@GetMapping("/crearEmpleo")
 	public String getCrearOferta(Model model, Authentication at) {
 		
 		Empleador emp = iEmpleadorService.getBuscarEmpleador(at.getName());
 		model.addAttribute("empleador", emp);
 		return ("crearOferta");
 	}
-	
+	*/
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
 		return("verPerfiles");
