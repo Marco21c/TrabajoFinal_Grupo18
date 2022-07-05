@@ -60,9 +60,8 @@ private boolean disponible;
 @JoinColumn(name ="DATOSEMP_ID")
 private Empleador empleador;
 
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID_SOLI")
-@Valid //Notacion para permitir las validaciones 
+
+@OneToOne(mappedBy = "oferta",fetch = FetchType.LAZY)
 private Solicitud solicitud;
 
 public OfertaLaboral() {

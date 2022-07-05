@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
+import ar.edu.unju.fi.html.entity.Solicitud;
 import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
 import ar.edu.unju.fi.html.repository.IOfertaLaboralDAO;
 import ar.edu.unju.fi.html.repository.ISolicitudDAO;
@@ -22,7 +23,7 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	@Autowired
 	IEmpleadorDAO empleadorDAOImp;
 	@Autowired
-    ISolicitudDAO solocitudDAOImp;
+    ISolicitudDAO solicitudDAOImp;
 	
 	@Override
 	public boolean guardarOferta(OfertaLaboral ofertalaboral) {
@@ -65,11 +66,21 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		Optional<OfertaLaboral> ofertaEncontrada= ofertaDaoImp.findById(id);
 		return ofertaEncontrada.get();
 	}
+	@Override
+	public Solicitud getSolicitud() {
+		
+		return new Solicitud();
+	}
 	
 	@Override
 	public void getNuevaSolicitud(Ciudadano ciudadano,OfertaLaboral oferta){
 		
+		Solicitud soli = getSolicitud();
+		soli.setCiudadano(ciudadano);
+		soli.setOferta(oferta);
+		soli.setEstado("Pendiente");
 		
+		solicitudDAOImp.save(soli);
 	}
 }
 

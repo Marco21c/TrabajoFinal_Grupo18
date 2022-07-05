@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
+import ar.edu.unju.fi.html.entity.Solicitud;
 
 public interface IOfertaLaboralService {
 	
@@ -15,4 +16,5 @@ public interface IOfertaLaboralService {
 	public List<OfertaLaboral> filtradoxProvincia(String Provincia);
 	public OfertaLaboral getBuscarEmpleo(long id);
 	public void getNuevaSolicitud(Ciudadano ciudadano, OfertaLaboral oferta);
+	public Solicitud getSolicitud();
 	}

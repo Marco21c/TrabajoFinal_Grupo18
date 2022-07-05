@@ -135,7 +135,7 @@ public class CiudadanoController {
 		
 		ModelAndView mAv = new ModelAndView("redirect:/ciudadano/estadoOfertas");
 		//crear una solicitud con el Ciudadano para la oferta
-	    
+	    iOfertasService.getNuevaSolicitud(ciudadano, oferta);
 		return mAv;
 	}
 }

@@ -85,9 +85,7 @@ private Usuario usuario;
 @JoinTable(name="ciudadanos_cursos", joinColumns = @JoinColumn(name="ciudadano_id"),inverseJoinColumns = @JoinColumn(name="cursos_id"))
 private List<Curso> cursos;
    
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID_SOLI")
-@Valid //Notacion para permitir las validaciones
+@OneToOne(mappedBy = "ciudadano",fetch = FetchType.LAZY)
 private Solicitud solicitud;
 
      // --- constructores ---
