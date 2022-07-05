@@ -61,17 +61,20 @@
 		    <div class=text-danger th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div>
 		  </div>
 		  <div class="col-md-4 position-relative">
+
 		    <label for="DisponibleID" class="form-label">DISPONIBLE</label>
-		    <select th:field=*{dispHoraria} class="form-select" id="Disponible" >
+		    <select th:field=*{disponible} class="form-select" id="DisponibleID" >
 		      <option value=true >SI</option>
 		      <option value=false >NO</option>
 		    </select>
 		  </div>
+
 		  	<div class="col-md-6">
 		    <label for="nombreComercialID" class="form-label">NOMBRE COMERCIAL</label>
 		    <input th:field="*{empleador.nombreComercial}" type="text" class="form-control" id="nombreComercialID" disabled="disabled">
 		  </div>
 		 
+
 		  
 		  <div class="col-12">
 		    <button type="submit" class="btn btn-primary">Guardar cambios</button>
