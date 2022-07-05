@@ -14,18 +14,18 @@
 	   <form th:action="@{/empleador/guardarEmpleo}" method="post" th:object="${ofertaLaboral}" class="row g-3">
 		  
 		  <div class="col-md-6">
-		    <label for="inputEmail4" class="form-label">CANTIDAD DE VACANTES</label>
-		    <input th:field="*{cantVacantes}" type="text" class="form-control" id="inputEmail4">
+		    <label for="cantVacantesID" class="form-label">CANTIDAD DE VACANTES</label>
+		    <input th:field="*{cantVacantes}" type="text" class="form-control" id="cantVacantes">
 		    <div class=text-danger th:if="${#fields.hasErrors('cantVacantes')}" th:errors="*{cantVacantes}"></div>
 		  </div>
 		  <div class="col-md-6">
-		    <label for="inputExp4" class="form-label">PUESTO REQUERIDO</label>
-		    <input th:field="*{puestoReq}" type="text" class="form-control" id="inputExp4">
+		    <label for="puestoID" class="form-label">PUESTO REQUERIDO</label>
+		    <input th:field="*{puestoReq}" type="text" class="form-control" id="puestoID">
 		    <div class=text-danger th:if="${#fields.hasErrors('puestoReq')}" th:errors="*{puestoReq}"></div>
 		  </div>
 		  <div class="col-6">
-		    <label for="inputEdu" class="form-label">RESUMEN DE PUESTO</label>
-		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="inputW¡Edu" placeholder="describa puesto de trabajo">
+		    <label for="resumenID" class="form-label">RESUMEN DE PUESTO</label>
+		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="resumenID" placeholder="describa puesto de trabajo">
 		    <div class=text-danger th:if="${#fields.hasErrors('resumenPuesto')}" th:errors="*{resumenPuesto}"></div>
 		  </div>
 		  <div class="col-md-4 position-relative">
@@ -36,38 +36,45 @@
 		    </select>
 		  </div>
 		  <div class="col-6">
-		    <label for="inputIdiomas2" class="form-label">PRINCIPALES TAREAS</label>
-		    <input th:field="*{princTareas}" type="text" class="form-control" id="inputIdiomas2" placeholder="describa las tarea a realizar">
+		    <label for="tareasID" class="form-label">PRINCIPALES TAREAS</label>
+		    <input th:field="*{princTareas}" type="text" class="form-control" id="tareasID" placeholder="describa las tarea a realizar">
 		    <div class=text-danger th:if="${#fields.hasErrors('princTareas')}" th:errors="*{PrincTareas}"></div>
 		  </div>
 		  <div class="col-md-6">
-		    <label for="inputZip" class="form-label">JORNADA</label>
-		    <input th:field="*{jornada}" type="text" class="form-control" id="inputZip">
+		    <label for="jornadaID" class="form-label">JORNADA</label>
+		    <input th:field="*{jornada}" type="text" class="form-control" id="jornadaID">
 		    <div class=text-danger th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}"></div>
 		  </div>
 		  <div class="col-md-6">
-		    <label for="inputZip" class="form-label">REQUISITOS</label>
-		    <input th:field="*{requisitos}" type="text" class="form-control" id="inputZip">
+		    <label for="requisitosID" class="form-label">REQUISITOS</label>
+		    <input th:field="*{requisitos}" type="text" class="form-control" id="requisitosID">
 		    <div class=text-danger th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}"></div>
 		  </div>
 		  <div class="col-md-6">
-		    <label for="inputZip" class="form-label">SALARIO</label>
-		    <input th:field="*{salario}" type="text" class="form-control" id="inputZip">
+		    <label for="salarioID" class="form-label">SALARIO</label>
+		    <input th:field="*{salario}" type="text" class="form-control" id="salarioID">
 		    <div class=text-danger th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div>
 		  </div>
 		   <div class="col-md-6">
-		    <label for="inputZip" class="form-label">BENEFICIO</label>
-		    <input th:field="*{beneficios}" type="text" class="form-control" id="inputZip">
+		    <label for="beneficioID" class="form-label">BENEFICIO</label>
+		    <input th:field="*{beneficios}" type="text" class="form-control" id="beneficioID">
 		    <div class=text-danger th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div>
 		  </div>
 		  <div class="col-md-4 position-relative">
-		    <label for="DispHoraria" class="form-label">DISPONIBLE</label>
-		    <select th:field=*{disponible} class="form-select" id="DispHoraria" >
+
+		    <label for="DisponibleID" class="form-label">DISPONIBLE</label>
+		    <select th:field=*{disponible} class="form-select" id="DisponibleID" >
 		      <option value=true >SI</option>
 		      <option value=false >NO</option>
 		    </select>
 		  </div>
-		  
+
+		  	<div class="col-md-6">
+		    <label for="nombreComercialID" class="form-label">NOMBRE COMERCIAL</label>
+		    <input th:field="*{empleador.nombreComercial}" type="text" class="form-control" id="nombreComercialID" disabled="disabled">
+		  </div>
+		 
+
 		  
 		  <div class="col-12">
 		    <button type="submit" class="btn btn-primary">Guardar cambios</button>
