@@ -46,6 +46,11 @@
 		    <div class=text-danger th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}"></div>
 		  </div>
 		  <div class="col-md-6">
+		    <label for="inputZip" class="form-label">REQUISITOS</label>
+		    <input th:field="*{requisitos}" type="text" class="form-control" id="inputZip">
+		    <div class=text-danger th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}"></div>
+		  </div>
+		  <div class="col-md-6">
 		    <label for="inputZip" class="form-label">SALARIO</label>
 		    <input th:field="*{salario}" type="text" class="form-control" id="inputZip">
 		    <div class=text-danger th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div>
