@@ -138,12 +138,13 @@ public class EmpleadorController {
 		Solicitud soli = iOfertasService.getBuscarSolicitud(id);
 		//cambiar la solicitud a aceptada y actualizar las vacantes
 		soli.setEstado("Aceptado");
+		if(soli.getOferta().getCantVacantes()>0) {
 		iOfertasService.getActualizarVacantes(soli.getOferta().getId());
 		
 		if(iOfertasService.getActualizarSolicitud(soli)) {
 			LOGGER.info("se acepto la solicitud");
 		}
-		
+		}
 		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
 		
 			return mAv;
@@ -157,7 +158,7 @@ public class EmpleadorController {
 		soli.setEstado("Rechazado");
 		
 		if(iOfertasService.getActualizarSolicitud(soli)) {
-			LOGGER.info("se acepto la solicitud");
+			LOGGER.info("se rechazo la solicitud");
 		}
 		
 		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
