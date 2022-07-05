@@ -23,4 +23,5 @@ public interface IOfertaLaboralService {
 	public Solicitud getBuscarSolicitud(long id);
 	public void getActualizarVacantes(long idOferta);
 	public boolean getActualizarSolicitud(Solicitud soli);
+	public CurriculumVitae getBuscarCv(long id);
 	}

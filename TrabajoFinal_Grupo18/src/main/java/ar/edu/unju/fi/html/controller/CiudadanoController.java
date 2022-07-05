@@ -147,6 +147,7 @@ public class CiudadanoController {
 
 	}
 	
+	
 	@GetMapping("/misPostulaciones")
 	public String getPostulaciones(Model model,Authentication aut) {	
 		

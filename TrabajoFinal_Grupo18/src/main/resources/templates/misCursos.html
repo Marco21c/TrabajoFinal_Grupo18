@@ -11,19 +11,27 @@
     <div th:if="${param.error}" class="alert alert-danger" role="alert"> Aun no tiene ningun curso.</div>
     <div class="row justify-content-center">
     <div class="col-md-10 ">
-    <h2> Mis Cursos </h2>
-     <a th:href="@{/curso/nuevo}" id="curso" type="button" class="btn btn-info">Nuevo curso</a>
-     <table class="table table-success table-striped">
+     <div class="centraar">
+     <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+         <h1> Mis Cursos </h1>
+        </div>
+     </div>
+     <div >
+     <a th:href="@{/curso/nuevo}" id="curso" type="button" class="btn btn-dark"> NUEVO CURSO </a>
+     </div>
+     <table class="table table-success table-striped centraar">
      <tr>
      <th> Titulo</th>
      <th> Categoria</th>
      <th> Fecha inicio</th>
+     <th> Dictado por </th>
      <th> Opciones </th>
      </tr>
      <tr th:each="c:${cursos}">
       <td th:text="${c.nombre}"></td>
       <td th:text="${c.categoria}"></td>
       <td th:text="${#temporals.format(c.fechaInic,'dd/MM/yyyy')}"></td>
+      <td th:text="${c.dictador}"></td>
       <td>
           <a id="editarCurso" type="button" class="btn btn-info">Eliminar</a>
       </td>
