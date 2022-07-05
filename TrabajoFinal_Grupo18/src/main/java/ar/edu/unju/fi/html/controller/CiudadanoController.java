@@ -132,10 +132,35 @@ public class CiudadanoController {
 		OfertaLaboral oferta = iOfertasService.getBuscarEmpleo(id);
 		//busca al ciudadano logueado
 		Ciudadano ciudadano = iCiudadanoService.getBuscarCiudadano(aut.getName());
+		//Control para saber si existe el cv, la oferta debe estar disponible y debe aver vacantes
+		if(ciudadano.getCv()!=null && oferta.isDisponible() && oferta.getCantVacantes()>0) {
+		ModelAndView mAv = new ModelAndView("redirect:/ciudadano/misPostulaciones");
+		//crear una solicitud del Ciudadano para la oferta
+		iOfertasService.getNuevaSolicitud(ciudadano.getCv(), oferta);
+		 return mAv;
+		 }
+		else {
+			ModelAndView mAv = new ModelAndView("redirect:/ciudadano/verOfertasLaborales");
+			return mAv;
+		}
 		
-		ModelAndView mAv = new ModelAndView("redirect:/ciudadano/estadoOfertas");
-		//crear una solicitud con el Ciudadano para la oferta
-	    iOfertasService.getNuevaSolicitud(ciudadano, oferta);
-		return mAv;
+
 	}
+	
+	@GetMapping("/misPostulaciones")
+	public String getPostulaciones(Model model,Authentication aut) {	
+		
+		Ciudadano ciudadano = iCiudadanoService.getBuscarCiudadano(aut.getName());
+		if(ciudadano.getCv()!=null) {
+		model.addAttribute("listaSolicitudes", iOfertasService.getListaSolicitudesCiu(ciudadano.getCv().getId()));
+		return("estadoEmpleos");
+		}
+		else {
+			return ("redirect:/ciudadano/crearCurriculum");
+		}
+	}
+	
+	
 }
+
+

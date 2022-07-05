@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.html.serviceImp;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
+import ar.edu.unju.fi.html.entity.CurriculumVitae;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.entity.Solicitud;
 import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
@@ -72,15 +74,48 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		return new Solicitud();
 	}
 	
+	
+	
 	@Override
-	public void getNuevaSolicitud(Ciudadano ciudadano,OfertaLaboral oferta){
+	public void getNuevaSolicitud(CurriculumVitae cv,OfertaLaboral oferta){
 		
 		Solicitud soli = getSolicitud();
-		soli.setCiudadano(ciudadano);
-		soli.setOferta(oferta);
+		soli.setCv(cv);
+	    soli.setOferta(oferta);
 		soli.setEstado("Pendiente");
-		
+		soli.setFecha(LocalDate.now());
 		solicitudDAOImp.save(soli);
+	}
+	
+	@Override 
+	public List<Solicitud> getListaSolicitudesCiu(long id) {
+		
+		return solicitudDAOImp.findAllByCvId(id);
+	}
+	
+	@Override
+	public List<Solicitud> getSolicitudesEmp(long id){
+	   
+		return solicitudDAOImp.findAllByOfertaEmpleadorIdAndEstado(id,"Pendiente");
+	}
+	@Override
+	public Solicitud getBuscarSolicitud(long id) {
+		Optional<Solicitud> soli = solicitudDAOImp.findById(id);
+		return soli.get();
+	}
+	@Override
+	public void getActualizarVacantes(long idOferta) {
+		Optional<OfertaLaboral> ofertaEncontrada = ofertaDaoImp.findById(idOferta);
+		ofertaEncontrada.get().setCantVacantes(ofertaEncontrada.get().getCantVacantes()-1);
+		ofertaDaoImp.save(ofertaEncontrada.get());
+	}
+	@Override
+	public boolean getActualizarSolicitud(Solicitud soli) {
+		   if(solicitudDAOImp.save(soli)!=null) {
+			   return true;
+		   }
+		
+		return false;
 	}
 }
 

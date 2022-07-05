@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.html.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -25,24 +29,25 @@ private long id;
 @Column(name="ESTADO_SOLI")
 private String estado;
 //relacion uno a uno con ciudadano
+@Column(name="FECHA_SOLI")
+private LocalDate fecha;
 
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID_CIU")
-@Valid
-private Ciudadano ciudadano;
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name="ID_CV")
+private CurriculumVitae cv;
 
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID")
-@Valid //Notacion para permitir las validaciones 
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name="ID_OFERTA")
 private OfertaLaboral oferta;
 
-public Solicitud(String estado, @Valid Ciudadano ciudadano, @Valid OfertaLaboral oferta) {
-	super();
-	this.estado = estado;
-	this.ciudadano = ciudadano;
-	this.oferta = oferta;
-}
 
+
+public LocalDate getFecha() {
+	return fecha;
+}
+public void setFecha(LocalDate fecha) {
+	this.fecha = fecha;
+}
 public Solicitud(){
 	
 }
@@ -62,17 +67,16 @@ public void setEstado(String estado) {
 	this.estado = estado;
 }
 
-public Ciudadano getCiudadano() {
-	return ciudadano;
+public CurriculumVitae getCv() {
+	return cv;
 }
-
-public void setCiudadano(Ciudadano ciudadano) {
-	this.ciudadano = ciudadano;
+public void setCv(CurriculumVitae cv) {
+	this.cv = cv;
 }
-
 public OfertaLaboral getOferta() {
 	return oferta;
 }
+
 
 public void setOferta(OfertaLaboral oferta) {
 	this.oferta = oferta;

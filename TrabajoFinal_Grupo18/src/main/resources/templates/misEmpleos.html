@@ -8,8 +8,9 @@
 </head>
 <body>
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
-            
    <div class="row justify-content-center">
+      <a th:href="@{/empleador/solicitudes}" id="eeempleo" type="button" class="btn btn-dark">VER SOLICITUDES</a>         
+   
     <div class="col-md-10 ">
     <h2> Mis ofertas </h2>
      <a th:href="@{/empleador/crearEmpleo}" id="empleo" type="button" class="btn btn-info">Nuevo empleo</a>

@@ -21,6 +21,7 @@ import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
+import ar.edu.unju.fi.html.entity.Solicitud;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
@@ -123,4 +124,46 @@ public class EmpleadorController {
 		return("misEmpleos");
 	}
 	
-}
+	@GetMapping("/solicitudes")
+	public String getSolicitudes(Model model, Authentication aut){
+		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
+		model.addAttribute("solicitudes", iOfertasService.getSolicitudesEmp(empleador.getId()));
+		return ("solicitudes");
+	}
+	
+	@GetMapping("/aceptarSoli/{id}")
+	public ModelAndView getAceptarSoli (@PathVariable(value="id")long id){
+		
+		//busca la solicitud
+		Solicitud soli = iOfertasService.getBuscarSolicitud(id);
+		//cambiar la solicitud a aceptada y actualizar las vacantes
+		soli.setEstado("Aceptado");
+		iOfertasService.getActualizarVacantes(soli.getOferta().getId());
+		
+		if(iOfertasService.getActualizarSolicitud(soli)) {
+			LOGGER.info("se acepto la solicitud");
+		}
+		
+		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
+		
+			return mAv;
+		}
+	@GetMapping("/rechazarSoli/{id}")
+	public ModelAndView getRechazarSoli (@PathVariable(value="id")long id){
+		
+		//busca la solicitud
+		Solicitud soli = iOfertasService.getBuscarSolicitud(id);
+		//cambiar la solicitud a aceptada y actualizar las vacantes
+		soli.setEstado("Rechazado");
+		
+		if(iOfertasService.getActualizarSolicitud(soli)) {
+			LOGGER.info("se acepto la solicitud");
+		}
+		
+		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
+		
+			return mAv;
+		}	
+
+	}
+

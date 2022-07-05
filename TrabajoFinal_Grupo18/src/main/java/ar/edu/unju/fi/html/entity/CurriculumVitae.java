@@ -1,12 +1,16 @@
 package ar.edu.unju.fi.html.entity;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -60,7 +64,10 @@ private String nombre;
         //relacion uno a uno con ciudadano. 
 @OneToOne(mappedBy = "cv" , fetch = FetchType.LAZY)
 private Ciudadano ciudadano;
-       
+ 
+@OneToMany(mappedBy="cv", cascade = CascadeType.ALL)
+private List<Solicitud> solicitud;
+
         // --- constructores --- 
 
 public CurriculumVitae() {
@@ -140,5 +147,14 @@ public Ciudadano getCiudadano() {
 public void setCiudadano(Ciudadano ciudadano) {
 	this.ciudadano = ciudadano;
 }
+
+public List<Solicitud> getSolicitud() {
+	return solicitud;
+}
+
+public void setSolicitud(List<Solicitud> solicitud) {
+	this.solicitud = solicitud;
+}
+
 
 }
