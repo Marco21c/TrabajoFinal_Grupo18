@@ -12,4 +12,5 @@ public interface ICursoService {
    public List<Curso> getMisCursos(Ciudadano ciudadano);
    public Curso buscarCurso(long id);
    public boolean verificarCursos(long id, Ciudadano ciudadano) throws Exception;
+   public List<Curso> getMisCursos(long id);
 }

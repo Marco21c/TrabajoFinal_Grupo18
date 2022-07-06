@@ -14,10 +14,10 @@ public interface IEmpleadorService {
 	
 
 	public boolean agregarEmpleador(Empleador empleador);
-	public List<Curso> getMisCursos(String username);
 	public Empleador buscarEmpleador(String username);
 	public List<CurriculumVitae> getListarCvs();
 	public List<CurriculumVitae> getCvsxProvincia(String provincia);
 	public List<CurriculumVitae> getCvsxPalabra(String palabra);
+	
 	
 }

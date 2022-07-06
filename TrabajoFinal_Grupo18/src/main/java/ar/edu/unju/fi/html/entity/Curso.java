@@ -13,9 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
        //Tabla cursos
@@ -28,28 +25,27 @@ public class Curso {
    @Column(name="ID_CURS")
    private long id;
    
-	   //validaciones para el nombre del curso
-   @NotEmpty(message="El campo nombre del curso no debe estar vacio.")	
-   @Size(min=4,message="El nombre debe tener al menos 4 caracteres.")
+	  
    @Column(name="NOMBRE_CURS")
    private String nombre;
        
-       //validaciones para la categoria
-   @NotEmpty(message="El campo categoria no debe estar vacio.")	
+    
    @Column(name="CATEG_CURS")
    private String categoria;
    
-       //formato y validacion para la fecha de inicio
-   @Column(name="FECHAINC_CURS") @NotNull(message="Debe elegir una fecha para el inicio del curso.")
-   @Future(message="Debe ser una fecha posterior a la actual.")
+ 
+   @Column(name="FECHAINC_CURS")
+   @Future(message="Debe ser fecha posterior.")
    @DateTimeFormat(pattern= "yyyy-MM-dd")
    private LocalDate fechaInic;
    
-       //validaciones para el dictador
-   @NotNull(message="Debe ingresar el nombre de su empresa.")
+
+   
    @Column(name="DICTADOR_CURS")
    private String dictador;
    
+   @Column(name= "ESTADO_CURS")
+   private boolean estado;
        //--- Mapeos --- 
    
        //relacion muchos a muchos con ciudadanos
@@ -60,6 +56,8 @@ public class Curso {
        //se crea una columna para la clave foranea id de empleador
    @JoinColumn(name= "ID_EMP")
    private Empleador empleador;
+   
+ 
    
       // --- constructores ---
    public Curso() {
@@ -127,6 +125,14 @@ public String getDictador() {
 
 public void setDictador(String dictador) {
 	this.dictador = dictador;
+}
+
+public boolean isEstado() {
+	return estado;
+}
+
+public void setEstado(boolean estado) {
+	this.estado = estado;
 }
    
    

@@ -49,15 +49,20 @@ public class CursoController {
 	   public ModelAndView getGuardarCurso(@Validated @ModelAttribute("curso") Curso curso , BindingResult bindingResult, Authentication aut ) {
 		   if(bindingResult.hasErrors()) {
 			   LOGGER.error("No se cumplen las validaciones.");
-			   ModelAndView mav =  new ModelAndView("nuevoCurso");
+			   ModelAndView mav =  new ModelAndView("redirect:/empleador/nuevoCurso");
 			   mav.addObject("curso", curso);
 		   }
 		   ModelAndView mav =  new ModelAndView("redirect:/empleador/misCursos");
+		   try {
+		   curso.setEstado(true);
 		   curso.setEmpleador(empleadorService.buscarEmpleador(aut.getName()));
 		   if(cursoService.getAgregarCurso(curso)) {
 			   LOGGER.info("Se agrego nuevo curso.");
 		   }
-		   
+		   }
+		   catch(Exception e) {
+			 mav.addObject("error",e.getMessage());    
+		   }
 		   return mav;
 	   }
 	   

@@ -26,6 +26,7 @@ import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.entity.Solicitud;
+import ar.edu.unju.fi.html.service.ICursoService;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
@@ -38,7 +39,9 @@ public class EmpleadorController {
 	@Autowired
     @Qualifier("OfertaLaboralServiceImp")
 	private IOfertaLaboralService iOfertasService;
-	
+	@Autowired
+    @Qualifier("CursoServiceImp")
+	private ICursoService cursoService;  
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
 	@GetMapping("/nuevo")
@@ -70,12 +73,20 @@ public class EmpleadorController {
 	}
 	@GetMapping("/misCursos")
 	public String getMisCursos(Model model, Authentication aut) {
-	  
-		model.addAttribute("cursos", iEmpleadorService.getMisCursos(aut.getName()));
+		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
+		model.addAttribute("cursos", cursoService.getMisCursos(empleador.getId()));
 		
 		return("misCursos");
 	}
-	
+	@GetMapping("/eliminarCurso/{id}")
+	public String eliminarCurso(Model model, @PathVariable(name="id") long id) throws Exception {
+		Curso curso = cursoService.buscarCurso(id);
+		
+		curso.setEstado(false);
+		cursoService.getAgregarCurso(curso);
+		return ("redirect:/empleador/misCursos");
+	}
+
 	
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
@@ -121,7 +132,7 @@ public class EmpleadorController {
 		}
 	
 	@GetMapping("/editarEmpleo/{id}")
-	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
+	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") long id) throws Exception {
 		LOGGER.error("error");
 		OfertaLaboral ofertaEncontrado = iOfertasService.encontrarOferta(id);
 		model.addAttribute("editarEmpleo", ofertaEncontrado);

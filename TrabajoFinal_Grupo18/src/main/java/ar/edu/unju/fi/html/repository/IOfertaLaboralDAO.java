@@ -9,10 +9,10 @@ import ar.edu.unju.fi.html.entity.OfertaLaboral;
 public interface IOfertaLaboralDAO extends JpaRepository<OfertaLaboral, Long>{
 
    public List<OfertaLaboral> findAllByEmpleadorId(long empleador);
-   
+   public List<OfertaLaboral> findAllByDisponible(boolean disponible);
    public List<OfertaLaboral> findAllByEmpleadorIdAndDisponible( long empleador, boolean disponible);
    
-   public List<OfertaLaboral> findAllByEmpleadorProvincia(String provincia);
+   public List<OfertaLaboral> findAllByEmpleadorProvinciaAndDisponible(String provincia,boolean disponible);
    
-   public List<OfertaLaboral> findAllByFechaCreacion(LocalDate fecha);
+   public List<OfertaLaboral> findAllByFechaCreacionAndDisponible(LocalDate fecha,boolean disponible);
 }

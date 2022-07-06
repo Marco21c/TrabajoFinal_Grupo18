@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
+import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.repository.ICursoDAO;
 import ar.edu.unju.fi.html.service.ICursoService;
 
@@ -41,7 +42,7 @@ ICursoDAO icursoDAO;
 	public List<Curso> getListaCursos() {
 		// TODO Auto-generated method stub
 		
-		return icursoDAO.findAll();
+		return icursoDAO.findAllByEstado(true);
 	}
 
 
@@ -69,5 +70,10 @@ ICursoDAO icursoDAO;
 		}
 		
 		return false;
+	}
+	@Override
+	public List<Curso> getMisCursos(long id) {
+		
+		return icursoDAO.findByEmpleadorIdAndEstado(id, true);
 	}
 }

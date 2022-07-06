@@ -8,7 +8,7 @@
 </head>
 <body>
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
-    <div th:if="${param.error}" class="alert alert-danger" role="alert"> Aun no tiene ningun curso.</div>
+    <div th:if="${param.error}" class="alert alert-danger" role="alert"> Ocurrio errores en la validacion. Asegurese de ingresar una fecha posterior.</div>
     <div class="row justify-content-center">
     <div class="col-md-10 ">
      <div class="centraar">
@@ -33,7 +33,7 @@
       <td th:text="${#temporals.format(c.fechaInic,'dd/MM/yyyy')}"></td>
       <td th:text="${c.dictador}"></td>
       <td>
-          <a id="editarCurso" type="button" class="btn btn-info">Eliminar</a>
+         <a th:href="@{/empleador/eliminarCurso/}+${c.id}" id="elim" type="button" class="btn btn-danger">Eliminar</a>
       </td>
      </tr>
      </table>
