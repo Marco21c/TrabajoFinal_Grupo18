@@ -117,26 +117,26 @@ public class EmpleadorController {
 	
 	@GetMapping("/editarEmpleo/{id}")
 	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
+		LOGGER.error("error");
 		OfertaLaboral ofertaEncontrado = iOfertasService.encontrarOferta(id);
-		model.addAttribute("crearOferta", ofertaEncontrado);
-		return ("crearOferta");
+		model.addAttribute("editarEmpleo", ofertaEncontrado);
+		return ("editarEmpleoForm");
 	}
 	
 	@PostMapping("/editarEmpleo")
-	public String postEditarEmpleo(@Validated @ModelAttribute("crearOferta") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model) {
+	public ModelAndView postEditarEmpleo(@Validated @ModelAttribute("editarEmpleo") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model) {
 	if(result.hasErrors()) {
-		model.addAttribute("crearOferta", ofertalaboral);
+		
+		model.addAttribute("editarEmpleo", ofertalaboral);
+		
+	}
+	LOGGER.info("Se guardó ofertalaboral "+ofertalaboral.getId());
+	if(iOfertasService.guardarOferta(ofertalaboral)) {
+		LOGGER.info("Se guardó ofertalaboral ");
+	}
 	
-	} 	else {
-			try {
-				iOfertasService.modificarEmpleo(ofertalaboral);
-				model.addAttribute("crearOferta", ofertalaboral);
-				}catch (Exception e) {
-					model.addAttribute("formOfertaErrorMessage", e.getMessage());
-					model.addAttribute("crearOferta", ofertalaboral);
-				}
-		}
-	return "crearOferta";
+	ModelAndView modelAndView = new ModelAndView("redirect:/empleador/misEmpleos");
+	return modelAndView;
 	}
 	
 	@GetMapping("/misEmpleos")

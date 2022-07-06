@@ -10,8 +10,15 @@
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
 <div class="container">
 	<div class="row justify-content-center mt-5 pt-5">
-	  <h2>CREAR OFERTA</h2>
-	   <form th:action="@{/empleador/guardarEmpleo}" method="post" th:object="${ofertaLaboral}" class="row g-3">
+	  <h2>EDITAR OFERTA</h2>
+	   <form th:action="@{/empleador/editarEmpleo}" method="post" th:object="${editarEmpleo}" class="row g-3">
+		  
+		  <div class="col-md-6">
+		  	<input type="hidden" th:field="*{id}"/>
+		    <label for="ID" class="form-label">ID</label>
+		    <input th:field="*{id}" type="text" class="form-control" id="id" disabled="disabled">
+		    <div class=text-danger th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+		  </div>
 		  
 		  <div class="col-md-6">
 		    <label for="cantVacantesID" class="form-label">CANTIDAD DE VACANTES</label>
