@@ -22,14 +22,14 @@ ICursoDAO icursoDAO;
 
    @Override
    public Curso getCurso() {
-	// TODO Auto-generated method stub
+	//metodo que crea nuevo curso
 	return new Curso();
    }
 
 
 	@Override
 	public boolean getAgregarCurso(Curso curso) {
-		// TODO Auto-generated method stub
+		// metodo para agregar curso
 	
 		if(icursoDAO.save(curso)!=null) {
 			return true;
@@ -40,7 +40,7 @@ ICursoDAO icursoDAO;
 
 	@Override
 	public List<Curso> getListaCursos() {
-		// TODO Auto-generated method stub
+		// metodo para mostrar la lista de cursos vigente
 		
 		return icursoDAO.findAllByEstado(true);
 	}
@@ -55,7 +55,7 @@ ICursoDAO icursoDAO;
 
 	@Override
 	public Curso buscarCurso(long id) {
-		// TODO Auto-generated method stub
+		// metodo para buscar curso mediante el ID
 		Optional<Curso> curso =  icursoDAO.findById(id); 
 		return curso.get();
 	}

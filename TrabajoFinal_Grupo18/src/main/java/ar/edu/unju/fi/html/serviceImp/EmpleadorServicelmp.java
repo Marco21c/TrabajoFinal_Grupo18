@@ -38,7 +38,7 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 	
 
 	public boolean agregarEmpleador(Empleador empleador) {
-		// TODO Auto-generated method stub
+		// metodo que agrega registra nuevo empleador
 		String contra = empleador.getUsuario().getContraseña();
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		empleador.getUsuario().setContraseña(bCryptPasswordEncoder.encode(contra));
@@ -54,25 +54,25 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 
 	@Override
 	public Empleador buscarEmpleador(String username) {
-		// TODO Auto-generated method stub
+		// metodo que busca empleador por su nombre
 		
 		return iEmpleadorDAO.findByUsuarioUsername(Long.parseLong(username));
 	}
 
 	@Override
 	public List<CurriculumVitae> getListarCvs() {
-		// TODO Auto-generated method stub
+		// metodo que trae una lista de curriculum vitae
 		return iCvDAO.findAll();
 	}
     
 	@Override
 	public List<CurriculumVitae> getCvsxProvincia(String provincia){
-		
+		//busqueda de postulante por provincia
 		return iCvDAO.findAllByCiudadanoProvincia(provincia);
 	}
 	@Override
 	public List<CurriculumVitae> getCvsxPalabra(String palabra){
-		
+		//busqueda de postulante por palabra clave
 		return iCvDAO.findAll(palabra);
 	}
 	

@@ -42,12 +42,14 @@ public class EmpleadorController {
 	private ICursoService cursoService;  
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
+	//redirecciona a html para registrar un nuevo Empleador
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
 		model.addAttribute("empleador", iEmpleadorService.getEmpleador());
 		return("registroEmpleador");
 	}	
 	
+	//se guarda al Empleador registrado
 	@PostMapping("/postEmpleador")
 	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -69,11 +71,13 @@ public class EmpleadorController {
 		
 		}
 	
-
+	//llamada pagina empleador una vez realizado el registro o inicio de sesion como empleador
 	@GetMapping("/inicioEmpleador")
 	public String getIniEmpleador(Model model) {
 		return("pagEmpleador");
 	}
+	
+	//llamada a pagina para mostrar los cursos vigente creado por el empleador
 	@GetMapping("/misCursos")
 	public String getMisCursos(Model model, Authentication aut) {
 		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
@@ -81,6 +85,8 @@ public class EmpleadorController {
 		
 		return("misCursos");
 	}
+	
+	//metodo para eliminar curso logicamente 
 	@GetMapping("/eliminarCurso/{id}")
 	public String eliminarCurso(Model model, @PathVariable(name="id") long id) throws Exception {
 		Curso curso = cursoService.buscarCurso(id);
@@ -90,32 +96,36 @@ public class EmpleadorController {
 		return ("redirect:/empleador/misCursos");
 	}
 
-	
+	//llamada a la pagina de perfiles laborales
 	@GetMapping("/perfiles")
 	public String getverPerfiles(Model model) {
 		model.addAttribute("listaCvs", iEmpleadorService.getListarCvs());
 		return("verPerfiles");
 	}
 	
-	
+	//filtrar por provincia los perfiles de los ciudadanos
 	@GetMapping("/filtrarxProvincia")
 	public String getverPerfilesProvincia(@Param("provincia")String provincia, Model model) {
 		model.addAttribute("listaCvs", iEmpleadorService.getCvsxProvincia(provincia));
 		return("verPerfiles");
 	}
 	
+	//filtrar por palabra clave para la busqueda de perfiles ciudadanos
 	@GetMapping("/filtrarxPalabra")
 	public String getverPerfilesPalabra(@Param("palabra")String palabra, Model model) {
 		model.addAttribute("listaCvs", iEmpleadorService.getCvsxPalabra(palabra));
 		return("verPerfiles");
 	}
 	
+	//llamada a pagina para crear una oferta laboral
 	@GetMapping("/crearEmpleo")
 	public String getCrearOferta(Model model, Authentication at) {
 		
 		model.addAttribute("ofertaLaboral",iOfertasService.getOfertaLaboral());
 		return ("crearOferta");
 	}
+	
+	//se guarda registro de nuevo empleo generado por el empleador
 	@PostMapping("/guardarEmpleo")
 	public ModelAndView guardarEmpleo(@Validated @ModelAttribute("ofertaLaboral") OfertaLaboral ol, BindingResult bindingResult,  Authentication at){
 		if(bindingResult.hasErrors()) {
@@ -134,6 +144,7 @@ public class EmpleadorController {
 		return modelAndView ;
 		}
 	
+	//redirecciona pagina para editar empleo
 	@GetMapping("/editarEmpleo/{id}")
 	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") long id) throws Exception {
 		LOGGER.error("error");
@@ -142,6 +153,7 @@ public class EmpleadorController {
 		return ("editarEmpleoForm");
 	}
 	
+	//guarda la edicion del empleo registrado con fecha actual 
 	@PostMapping("/editarEmpleo")
 	public ModelAndView postEditarEmpleo(@Validated @ModelAttribute("editarEmpleo") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model, Authentication aut) {
 	if(result.hasErrors()) {
@@ -161,6 +173,7 @@ public class EmpleadorController {
 	return modelAndView;
 	}
 	
+	//muestra lista de empleo
 	@GetMapping("/misEmpleos")
 	public String getMisEmpleos(Model model, Authentication aut) {
 	    
@@ -170,7 +183,7 @@ public class EmpleadorController {
 		return("misEmpleos");
 	}
 	
-
+	//metodo asignado al boton eliminar, que borra logicamente la oferta laboral
 	@GetMapping("/eliminarEmpleo/{id}")
 	public String eliminarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
 		OfertaLaboral oferta = iOfertasService.encontrarOferta(id);
@@ -179,13 +192,14 @@ public class EmpleadorController {
 		return ("redirect:/empleador/misEmpleos");
 	}
 
-
+	//llamada a pagina solicitudes para verificar los postulantes a las oferta realizadas
 	@GetMapping("/solicitudes")
 	public String getSolicitudes(Model model, Authentication aut){
 		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
 		model.addAttribute("solicitudes", iOfertasService.getSolicitudesEmp(empleador.getId()));
 		return ("solicitudes");
 	}
+	
 	
 	@GetMapping("/aceptarSoli/{id}")
 	public ModelAndView getAceptarSoli (@PathVariable(value="id")long id){
@@ -222,6 +236,7 @@ public class EmpleadorController {
 			return mAv;
 		}	
         
+	//redirecciona pagina para ver el curriculum del ciudadano postulante al empleo 
 	@GetMapping("/verCv")
 	public ModelAndView verCv(@RequestParam(name ="id") long id) {
 		ModelAndView mAv = new ModelAndView("cvSolicitud");

@@ -81,7 +81,7 @@ public class CiudadanoController {
         }
 			
 		}
-	
+	//llamada a pagina inicio ciudadano una vez registrado e inicio sesion
 	@GetMapping("/inicioCiudadano")
 	public String getIniCiudadano(Model model) {
 		return("pagCiudadano");
@@ -98,12 +98,14 @@ public class CiudadanoController {
 		   return ("redirect:/ciudadano/crearCurriculum");
 	   }
 	}
-	//LLamada a pagina para crear un currilum vitae
+	//LLamada a pagina para crear un curriculum vitae
 	@GetMapping("/crearCurriculum")
 	public String getCrearCV(Model model,Authentication at) {		
 	    model.addAttribute("curriculum", new CurriculumVitae());
 		return("crearCv");
 	}
+	
+	//llamada a pagina para modificar curriculum vitae
 	@PostMapping("/modificar")
 	public ModelAndView modificarCV(@Validated @ModelAttribute("curriculum") CurriculumVitae cv,  BindingResult bindingResult, Authentication at) {
 		if(bindingResult.hasErrors()) {
@@ -134,6 +136,7 @@ public class CiudadanoController {
 		return("verOfertas");
 	}
 	
+	//filtrar por fecha a las oferta laborales
 	@GetMapping("/filtrarxFecha")
 	public String getverxFecha(@Param("fecha")String fecha, Model model) {
 		
@@ -142,6 +145,7 @@ public class CiudadanoController {
 		return("verOfertas");
 	}
 	
+	//llama pagina postulante para el ciudadano con el ID para aplicar metodo de busqueda y postularse a una oferta laboral
 	@GetMapping("/postularse/{id}")
 	public ModelAndView getPostularse (@PathVariable(value="id")long id,Authentication aut) throws Exception {
 		
@@ -164,7 +168,7 @@ public class CiudadanoController {
 
 	}
 	
-	
+	//LLamada a pagina que muestra las postulaciones de los ciudadano
 	@GetMapping("/misPostulaciones")
 	public String getPostulaciones(Model model,Authentication aut) {	
 		
@@ -178,6 +182,7 @@ public class CiudadanoController {
 		}
 	}
 	
+	//LLamada a pagina que muestra los empleo vigente
 	@GetMapping("/empleo")
 	public ModelAndView verCv(@RequestParam(name ="id") long id) {
 		ModelAndView mAv = new ModelAndView("ofertaparaCiudadano");

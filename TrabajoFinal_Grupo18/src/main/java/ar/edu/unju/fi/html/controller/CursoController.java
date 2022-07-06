@@ -38,6 +38,7 @@ public class CursoController {
 	
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
+		//llamada a la pagina para crear nuevo curso
 	   @GetMapping("/nuevo")
 	   public String getCurso(Model model) {
 		   
@@ -45,6 +46,8 @@ public class CursoController {
 		 
 		   return("nuevoCurso");
 	   }
+	   
+	   //registra curso generado por el empleador
 	   @PostMapping("/guardarCurso")
 	   public ModelAndView getGuardarCurso(@Validated @ModelAttribute("curso") Curso curso , BindingResult bindingResult, Authentication aut ) {
 		   if(bindingResult.hasErrors()) {

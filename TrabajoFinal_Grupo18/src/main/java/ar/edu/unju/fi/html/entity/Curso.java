@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
        //Tabla cursos
@@ -25,11 +26,11 @@ public class Curso {
    @Column(name="ID_CURS")
    private long id;
    
-	  
+   @NotEmpty(message="El campo nombre del curso no debe estar vacio.")  
    @Column(name="NOMBRE_CURS")
    private String nombre;
        
-    
+   @NotEmpty(message="El campo categoria no debe estar vacio.")
    @Column(name="CATEG_CURS")
    private String categoria;
    
@@ -40,7 +41,7 @@ public class Curso {
    private LocalDate fechaInic;
    
 
-   
+   @NotEmpty(message="El campo dictador no debe estar vacio.")
    @Column(name="DICTADOR_CURS")
    private String dictador;
    
