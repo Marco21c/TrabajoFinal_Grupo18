@@ -10,6 +10,8 @@ public interface IOfertaLaboralDAO extends JpaRepository<OfertaLaboral, Long>{
 
    public List<OfertaLaboral> findAllByEmpleadorId(long empleador);
    
+   public List<OfertaLaboral> findAllByEmpleadorIdAndDisponible( long empleador, boolean disponible);
+   
    public List<OfertaLaboral> findAllByEmpleadorProvincia(String provincia);
    
    public List<OfertaLaboral> findAllByFechaCreacion(LocalDate fecha);

@@ -12,11 +12,15 @@ import ar.edu.unju.fi.html.entity.Solicitud;
 public interface IOfertaLaboralService {
 	
 	public OfertaLaboral getOfertaLaboral();
-	public boolean guardarOferta(OfertaLaboral ofertalaboral);	
+	public boolean guardarOferta(OfertaLaboral ofertalaboral);
+	public void eliminarEmpleo(long id);
 	public List<OfertaLaboral> listarOfertas();
 	public List<OfertaLaboral> misOfertasLaborales(long id);
 	public List<OfertaLaboral> filtradoxProvincia(String Provincia);
 	public OfertaLaboral getBuscarEmpleo(long id);
+
+	public void getNuevaSolicitud(Ciudadano ciudadano, OfertaLaboral oferta);
+	public OfertaLaboral encontrarOferta(Long id) throws Exception;
 	public Solicitud getSolicitud();
 	public List<Solicitud> getListaSolicitudesCiu(long id);
 	public void getNuevaSolicitud(CurriculumVitae cv, OfertaLaboral oferta);
@@ -25,6 +29,7 @@ public interface IOfertaLaboralService {
 	public void getActualizarVacantes(long idOferta);
 	public boolean getActualizarSolicitud(Solicitud soli);
 	public CurriculumVitae getBuscarCv(long id);
+
 	public List<OfertaLaboral> filtradoxFecha(LocalDate fecha);
 
 	}

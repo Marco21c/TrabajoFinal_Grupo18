@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<meta charset="utf-8">
+<title>Inicio Sesion</title>
+</head>
+<body>
+ <header th:replace="/layouts/header::header"></header> 
+  <h1> </h1>
+   <div th:if="${param.error}" class="alert alert-danger" role="alert"> Combinacion de Usuario y Contraseña invalida.</div>
+   <div  th:if="${param.logout}" class="alert alert-success" role="alert"> Gracias por usar nuestros servicios. Hasta Pronto..!!</div>
+   
+  <div class="container">
+   <div class="row justify-content-center mt-5 pt-5">
+    <div class="col-md-6">
+     
+     <h2> Iniciar Sesion </h2>
+     <h3 class="centraar"> El mejor sitio para tus empleos!!</h3>
+     
+     <form th:object="${usuario}" th:action="@{/inicio/login}" method="post">
+     <div class="mb-4">
+      <label for="dniId" class="form-label">Dni o Cuit</label>
+       <input type="number" class="form-control" id="dniId" placeholder="Ingrese username" name="username">
+     </div>
+     <div class="mb-4">
+      <label for="contraseñaId" class="form-label">CONTRASEÑA</label>
+       <input type="password" class="form-control" id="contraseñaId" placeholder="Ingrese contraseña" name="contraseña">
+     </div>
+     <div class="col-12 centraar">
+      <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+      <a th:href="@{/inicio/menu}" class="btn btn-dark" role="button">Cancelar</a>
+     </div> 
+     </form>
+     
+     <div class=centraar>
+     <p> No tenes una cuenta? Registrate aqui abajo:</p>
+     <div class="dropdown centraar">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+    Registrarse
+    </button>
+    
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+        <li><a class="dropdown-item" th:href="@{/ciudadano/nuevo}">Ciudadano</a></li>
+        <li><a class="dropdown-item" th:href="@{/empleador/nuevo}">Empleador</a></li>
+      </ul>
+      
+     </div>
+     </div>
+    </div>
+   </div> 
+  </div>
+   
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>
