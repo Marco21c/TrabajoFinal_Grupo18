@@ -55,7 +55,7 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	@Override
 	public List<OfertaLaboral> misOfertasLaborales(long id) {
 		// TODO Auto-generated method stub
-		return ofertaDaoImp.findAllByEmpleadorId(id);
+		return ofertaDaoImp.findAllByEmpleadorIdAndDisponible(id, true);
 	}
     
 	@Override
@@ -119,11 +119,30 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		
 		return false;
 	}
+
+
+	
+
+	@Override
+	public void eliminarEmpleo(long id) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public OfertaLaboral encontrarOferta(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		return ofertaDaoImp.findById(id).orElseThrow(()-> new Exception("La oferta no existe"));
+		
+	}
+
     @Override
     public CurriculumVitae getBuscarCv(long id) {
     	 
     	Optional<CurriculumVitae> cvEncontrado = cvDAOImp.findById(id);
     	  return cvEncontrado.get();
     }
+
 }
 

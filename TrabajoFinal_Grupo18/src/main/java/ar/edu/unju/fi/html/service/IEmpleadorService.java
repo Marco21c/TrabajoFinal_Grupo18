@@ -19,4 +19,5 @@ public interface IEmpleadorService {
 	public List<CurriculumVitae> getListarCvs();
 	public List<CurriculumVitae> getCvsxProvincia(String provincia);
 	public List<CurriculumVitae> getCvsxPalabra(String palabra);
+	
 }
