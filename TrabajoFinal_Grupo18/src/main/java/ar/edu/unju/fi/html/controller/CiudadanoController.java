@@ -39,12 +39,13 @@ public class CiudadanoController {
 	private IOfertaLaboralService iOfertasService;
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
+	//redirecciona a html para registrar un nuevo ciudadano
 	@GetMapping("/nuevo")
 	public String getNuevoCiudadano(Model model) {	
 		model.addAttribute("ciudadano", iCiudadanoService.getCiudadano());
 		return("registroCiudadano");
 	}	
-	
+	//se guarda al ciudadano registrado
 	@PostMapping("/postCiudadano")
 	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -53,12 +54,12 @@ public class CiudadanoController {
 			modelAndview.addObject("ciudadano", ciu);
 			return modelAndview;
 		}
-
+        try {
 		//control para validar que solo se registren usuarios mayores de edad
 		if(ciu.calcularEdad(ciu.getFechaNac()) < 18) {
 			ModelAndView modelAndView = new ModelAndView("registroCiudadano");
 			modelAndView.addObject("ciudadano", ciu);
-			LOGGER.info("Se guardó un nuevo ciudadano.");
+			LOGGER.info("Ciudadano menor de edad");
 			return modelAndView ;
 		}
 		//falta el control para que los usuarios no se repitan.
@@ -66,14 +67,19 @@ public class CiudadanoController {
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
 
-
+		
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
 
 		}
-
 		return modelAndView;
 		}
+        }catch(Exception e) {
+    		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/nuevo");
+            modelAndView.addObject("error", e.getMessage());
+            return modelAndView;
+        }
+			
 		}
 	
 	@GetMapping("/inicioCiudadano")

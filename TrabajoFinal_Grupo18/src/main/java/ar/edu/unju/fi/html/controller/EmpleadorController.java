@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
@@ -58,12 +56,17 @@ public class EmpleadorController {
 			modelAndview.addObject("empleador", emp);
 			return modelAndview;
 		}
+		try {
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
 		if(iEmpleadorService.agregarEmpleador(emp)){
 		 LOGGER.info("Se guardó un nuevo empleador.");
 		}
-		
 		return modelAndView ;
+		}catch(Exception e) {
+			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
+			return modelAndview ;
+		}
+		
 		}
 	
 
