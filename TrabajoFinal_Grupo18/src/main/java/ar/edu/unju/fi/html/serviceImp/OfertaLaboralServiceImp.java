@@ -50,7 +50,7 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	@Override
 	public List<OfertaLaboral> misOfertasLaborales(long id) {
 		// TODO Auto-generated method stub
-		return ofertaDaoImp.findAllByEmpleadorId(id);
+		return ofertaDaoImp.findAllByEmpleadorIdAndDisponible(id, true);
 	}
     
 	@Override
@@ -96,6 +96,7 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	@Override
 	public void eliminarEmpleo(long id) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 

@@ -124,13 +124,15 @@ public class EmpleadorController {
 	}
 	
 	@PostMapping("/editarEmpleo")
-	public ModelAndView postEditarEmpleo(@Validated @ModelAttribute("editarEmpleo") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model) {
+	public ModelAndView postEditarEmpleo(@Validated @ModelAttribute("editarEmpleo") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model, Authentication aut) {
 	if(result.hasErrors()) {
 		
 		model.addAttribute("editarEmpleo", ofertalaboral);
 		
 	}
 	LOGGER.info("Se guardó ofertalaboral "+ofertalaboral.getId());
+	Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
+	ofertalaboral.setEmpleador(empleador);
 	if(iOfertasService.guardarOferta(ofertalaboral)) {
 		LOGGER.info("Se guardó ofertalaboral ");
 	}
@@ -148,4 +150,11 @@ public class EmpleadorController {
 		return("misEmpleos");
 	}
 	
+	@GetMapping("/eliminarEmpleo/{id}")
+	public String eliminarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
+		OfertaLaboral oferta = iOfertasService.encontrarOferta(id);
+		oferta.setDisponible(false);
+		iOfertasService.guardarOferta(oferta);
+		return ("redirect:/empleador/misEmpleos");
+	}
 }
