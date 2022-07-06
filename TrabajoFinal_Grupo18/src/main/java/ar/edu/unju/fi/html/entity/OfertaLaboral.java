@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -60,10 +61,8 @@ private boolean disponible;
 @JoinColumn(name ="DATOSEMP_ID")
 private Empleador empleador;
 
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID_SOLI")
-@Valid //Notacion para permitir las validaciones 
-private Solicitud solicitud;
+@OneToMany(mappedBy="oferta", cascade = CascadeType.ALL)
+private List<Solicitud> solicitud;
 
 public OfertaLaboral() {
 	
@@ -159,8 +158,13 @@ public void setEmpleador(Empleador empleador) {
 	this.empleador = empleador;
 }
 
+public List<Solicitud> getSolicitud() {
+	return solicitud;
+}
 
-
+public void setSolicitud(List<Solicitud> solicitud) {
+	this.solicitud = solicitud;
+}
 
 
 }

@@ -4,13 +4,19 @@
         <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
 		<meta charset="utf-8">
-         <title>OFERTAS LABORALES</title>
+         <title>CREAR EMPLEO</title>
 </head>
 <body>
    <header th:replace="/layouts/headerEmp::headerEmp"></header> 
-<div class="container">
-	<div class="row justify-content-center mt-5 pt-5">
-	  <h2>CREAR OFERTA</h2>
+   <div class="container">
+      <div class="container centraar">
+     
+       <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+         <h1> Nuevo Empleo </h1>
+        </div>
+     </div>
+	<div class="row justify-content-center mt-3 pt-3">
+	  
 	   <form th:action="@{/empleador/guardarEmpleo}" method="post" th:object="${ofertaLaboral}" class="row g-3">
 		  
 		  <div class="col-md-6">
@@ -28,14 +34,14 @@
 		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="resumenID" placeholder="describa puesto de trabajo">
 		    <div class=text-danger th:if="${#fields.hasErrors('resumenPuesto')}" th:errors="*{resumenPuesto}"></div>
 		  </div>
-		  <div class="col-md-4 position-relative">
+		  <div class="col-md-6 position-relative">
 		    <label for="DispHoraria" class="form-label">DISPONIBILIDAD HORARIA</label>
 		    <select th:field=*{dispHoraria} class="form-select" id="DispHoraria" >
 		      <option value="full time">FULL TIME</option>
 		      <option value="part time"> PART TIME</option>
 		    </select>
 		  </div>
-		  <div class="col-6">
+		  <div class="col-md-6">
 		    <label for="tareasID" class="form-label">PRINCIPALES TAREAS</label>
 		    <input th:field="*{princTareas}" type="text" class="form-control" id="tareasID" placeholder="describa las tarea a realizar">
 		    <div class=text-danger th:if="${#fields.hasErrors('princTareas')}" th:errors="*{PrincTareas}"></div>
@@ -60,7 +66,7 @@
 		    <input th:field="*{beneficios}" type="text" class="form-control" id="beneficioID">
 		    <div class=text-danger th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div>
 		  </div>
-		  <div class="col-md-4 position-relative">
+		  <div class="col-md-6 position-relative">
 
 		    <label for="DisponibleID" class="form-label">DISPONIBLE</label>
 		    <select th:field=*{disponible} class="form-select" id="DisponibleID" >

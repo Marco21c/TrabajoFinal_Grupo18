@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.Empleador;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
+import ar.edu.unju.fi.html.entity.Solicitud;
 import ar.edu.unju.fi.html.service.IEmpleadorService;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
 
@@ -150,6 +152,7 @@ public class EmpleadorController {
 		return("misEmpleos");
 	}
 	
+
 	@GetMapping("/eliminarEmpleo/{id}")
 	public String eliminarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
 		OfertaLaboral oferta = iOfertasService.encontrarOferta(id);
@@ -158,3 +161,57 @@ public class EmpleadorController {
 		return ("redirect:/empleador/misEmpleos");
 	}
 }
+
+	@GetMapping("/solicitudes")
+	public String getSolicitudes(Model model, Authentication aut){
+		Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
+		model.addAttribute("solicitudes", iOfertasService.getSolicitudesEmp(empleador.getId()));
+		return ("solicitudes");
+	}
+	
+	@GetMapping("/aceptarSoli/{id}")
+	public ModelAndView getAceptarSoli (@PathVariable(value="id")long id){
+		
+		//busca la solicitud
+		Solicitud soli = iOfertasService.getBuscarSolicitud(id);
+		//cambiar la solicitud a aceptada y actualizar las vacantes
+		soli.setEstado("Aceptado");
+		if(soli.getOferta().getCantVacantes()>0) {
+		iOfertasService.getActualizarVacantes(soli.getOferta().getId());
+		
+		if(iOfertasService.getActualizarSolicitud(soli)) {
+			LOGGER.info("se acepto la solicitud");
+		}
+		}
+		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
+		
+			return mAv;
+		}
+	@GetMapping("/rechazarSoli/{id}")
+	public ModelAndView getRechazarSoli (@PathVariable(value="id")long id){
+		
+		//busca la solicitud
+		Solicitud soli = iOfertasService.getBuscarSolicitud(id);
+		//cambiar la solicitud a aceptada y actualizar las vacantes
+		soli.setEstado("Rechazado");
+		
+		if(iOfertasService.getActualizarSolicitud(soli)) {
+			LOGGER.info("se rechazo la solicitud");
+		}
+		
+		ModelAndView mAv = new ModelAndView("redirect:/empleador/solicitudes");
+		
+			return mAv;
+		}	
+        
+	@GetMapping("/verCv")
+	public ModelAndView verCv(@RequestParam(name ="id") long id) {
+		ModelAndView mAv = new ModelAndView("cvSolicitud");
+         
+	   	   mAv.addObject("cv", iOfertasService.getBuscarCv(id)); 
+		 
+		return mAv;
+	}
+	
+	}
+

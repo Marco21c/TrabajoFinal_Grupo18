@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -84,11 +86,8 @@ private Usuario usuario;
 @ManyToMany(fetch= FetchType.EAGER)
 @JoinTable(name="ciudadanos_cursos", joinColumns = @JoinColumn(name="ciudadano_id"),inverseJoinColumns = @JoinColumn(name="cursos_id"))
 private List<Curso> cursos;
-   
-@OneToOne(cascade = {CascadeType.ALL})
-@JoinColumn(name="ID_SOLI")
-@Valid //Notacion para permitir las validaciones
-private Solicitud solicitud;
+
+
 
      // --- constructores ---
 public Ciudadano() {
@@ -191,5 +190,6 @@ public void setCursos(List<Curso> cursos) {
 	  int edad = transcurrido.getYears(); 
 	return edad;
   }
+
 
 }

@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+<title>Solicitudes a Empleos</title>
+</head>
+<body>
+  <header th:replace="/layouts/headerEmp::headerEmp"></header>
+   
+    <div class="row justify-content-center">
+    <div class="col-md-11 ">
+    <div class="container centraar">
+    <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+        <h1> Solicitudes</h1>
+    </div>
+    </div>
+    <table class="table table-success table-striped">
+     <tr>
+  					<th > Nombre y Apellido </th>
+  					<th> Contacto</th> 
+  					<th >Postulado para </th>
+  					<th> Vacantes </th>
+  					<th> Fecha </th>
+  					<th >Estado</th>
+  					<th> Cv</th>
+  					<th> Opciones </th>
+     </tr>
+     <tr th:each="ls:${solicitudes}">
+                <td th:text="${ls.cv.nombre}"></td>
+                <td th:text="${ls.cv.contacto}"></td>
+                <td th:text="${ls.oferta.puestoReq}"></td>
+                <td th:text="${ls.oferta.cantVacantes}"></td> 
+                <td th:text="${ls.fecha}"></td>
+                <td th:text="${ls.estado}"></td>
+                <td >
+                                      <a th:href="@{/empleador/verCv?id={id}(id=${ls.cv.id})}" id="cv" type="button" class="btn btn-link">Ver Cv</a>         
+                 </td>
+                <td> 
+                      <a th:href="@{/empleador/aceptarSoli/}+${ls.id}" id="aceptarSoli" type="button" class="btn btn-primary">Aceptar</a>         
+                      <a th:href="@{/empleador/rechazarSoli/}+${ls.id}" id="rechazarSoli" type="button" class="btn btn-danger">Rechazar</a>         
+                
+                </td>
+      </tr>               
+     </table>
+    </div>
+    </div>
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>
