@@ -138,6 +138,7 @@ public class EmpleadorController {
 	LOGGER.info("Se guardó ofertalaboral "+ofertalaboral.getId());
 	Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
 	ofertalaboral.setEmpleador(empleador);
+	ofertalaboral.setFechaCreacion(LocalDate.now());
 	if(iOfertasService.guardarOferta(ofertalaboral)) {
 		LOGGER.info("Se guardó ofertalaboral ");
 	}
