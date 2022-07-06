@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,6 +114,30 @@ public class EmpleadorController {
 		}
 		return modelAndView ;
 		}
+	
+	@GetMapping("/editarEmpleo/{id}")
+	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") Long id) throws Exception {
+		OfertaLaboral ofertaEncontrado = iOfertasService.encontrarOferta(id);
+		model.addAttribute("crearOferta", ofertaEncontrado);
+		return ("crearOferta");
+	}
+	
+	@PostMapping("/editarEmpleo")
+	public String postEditarEmpleo(@Validated @ModelAttribute("crearOferta") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model) {
+	if(result.hasErrors()) {
+		model.addAttribute("crearOferta", ofertalaboral);
+	
+	} 	else {
+			try {
+				iOfertasService.modificarEmpleo(ofertalaboral);
+				model.addAttribute("crearOferta", ofertalaboral);
+				}catch (Exception e) {
+					model.addAttribute("formOfertaErrorMessage", e.getMessage());
+					model.addAttribute("crearOferta", ofertalaboral);
+				}
+		}
+	return "crearOferta";
+	}
 	
 	@GetMapping("/misEmpleos")
 	public String getMisEmpleos(Model model, Authentication aut) {

@@ -71,5 +71,39 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		
 		
 	}
+
+	@Override
+	public OfertaLaboral modificarEmpleo(OfertaLaboral ofertalaboral) throws Exception{
+		// TODO Auto-generated method stub
+		OfertaLaboral ofertaGuardar = encontrarOferta(ofertalaboral.getId());
+		mapearOferta(ofertalaboral, ofertaGuardar);
+		return ofertaDaoImp.save(ofertaGuardar);
+	}
+	
+	public void mapearOferta(OfertaLaboral desde, OfertaLaboral hacia) {
+		hacia.setCantVacantes(desde.getCantVacantes());
+		hacia.setPuestoReq(hacia.getPuestoReq());
+		hacia.setResumenPuesto(hacia.getResumenPuesto());
+		hacia.setDispHoraria(desde.getDispHoraria());
+		hacia.setPrincTareas(desde.getPrincTareas());
+		hacia.setJornada(desde.getJornada());
+		hacia.setRequisitos(desde.getRequisitos());
+		hacia.setSalario(desde.getSalario());
+		hacia.setBeneficios(desde.getBeneficios());
+		hacia.setDisponible(desde.isDisponible());
+	}
+
+	@Override
+	public void eliminarEmpleo(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public OfertaLaboral encontrarOferta(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		return ofertaDaoImp.findById(id).orElseThrow(()-> new Exception("La oferta no existe"));
+		
+	}
 }
 

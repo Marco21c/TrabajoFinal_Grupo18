@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>INICIO</title>
+</head>
+<body>
+   <header th:replace="/layouts/header::header"></header> 
+
+ <h1> EMPLEOS Y OFERTAS LABORALES </h1>
+<div class= "centraar">
+<img th:src="@{/images/imagen.webp}" alt="imagen" height="250px">
+</div> 
+ <section>
+  
+   <p>Bienvenido a nuestro sitio web!!! <br> 
+    El mejor portal para conseguir nuevas oportunidades en el mundo laboral,<br> con las mejores ofertas para el empleo que buscas. Tambien enfocado en grandes y pequeñas empresas <br> que
+    estan en busqueda de perfiles laborales. <br> Elija un modo para iniciar sesion aqui abajo:  </p> 
+  </section>
+  <section>
+    <div class="d-grid gap-2 col-4 mx-auto">
+     <a th:href="@{/inicio/login}" class="btn btn-primary" type="button" > 
+     Iniciar Sesion</a>
+      <div class="dropdown centraar">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+    Registrarse
+    </button>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+        <li><a class="dropdown-item" th:href="@{/ciudadano/nuevo}">Ciudadano</a></li>
+        <li><a class="dropdown-item" th:href="@{/empleador/nuevo}">Empleador</a></li>
+      </ul>
+     </div>
+    </div>
+  </section>
+
+  <footer th:replace="/layouts/footer::footer"></footer>
+ 
+</body>
+</html>
