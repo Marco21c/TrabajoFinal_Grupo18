@@ -63,7 +63,11 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		
 		return ofertaDaoImp.findAllByEmpleadorProvincia(Provincia);
 	}
-
+    @Override
+	public List<OfertaLaboral> filtradoxFecha(LocalDate fecha){
+    	
+    	return ofertaDaoImp.findAllByFechaCreacion(fecha);
+    }
 	@Override
 	public OfertaLaboral getBuscarEmpleo(long id) {
 		// TODO Auto-generated method stub
@@ -75,7 +79,6 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		
 		return new Solicitud();
 	}
-	
 	
 	
 	@Override

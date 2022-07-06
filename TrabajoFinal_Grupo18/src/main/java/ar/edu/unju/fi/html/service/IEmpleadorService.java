@@ -12,7 +12,7 @@ public interface IEmpleadorService {
 	public Empleador getEmpleador();
 
 	
-	public void guardarEmpleador(Empleador empleador);
+
 	public boolean agregarEmpleador(Empleador empleador);
 	public List<Curso> getMisCursos(String username);
 	public Empleador buscarEmpleador(String username);

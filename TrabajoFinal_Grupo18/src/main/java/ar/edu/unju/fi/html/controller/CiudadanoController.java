@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.html.controller;
 
+import java.time.LocalDate;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.CurriculumVitae;
@@ -125,6 +128,14 @@ public class CiudadanoController {
 		return("verOfertas");
 	}
 	
+	@GetMapping("/filtrarxFecha")
+	public String getverxFecha(@Param("fecha")String fecha, Model model) {
+		
+		LocalDate fechaParsiada = LocalDate.parse(fecha);
+		model.addAttribute("ofertas",iOfertasService.filtradoxFecha(fechaParsiada));
+		return("verOfertas");
+	}
+	
 	@GetMapping("/postularse/{id}")
 	public ModelAndView getPostularse (@PathVariable(value="id")long id,Authentication aut) throws Exception {
 		
@@ -161,7 +172,14 @@ public class CiudadanoController {
 		}
 	}
 	
-	
+	@GetMapping("/empleo")
+	public ModelAndView verCv(@RequestParam(name ="id") long id) {
+		ModelAndView mAv = new ModelAndView("ofertaparaCiudadano");
+         
+	   	   mAv.addObject("oferta",iOfertasService.getBuscarEmpleo(id)); 
+		 
+		return mAv;
+	}
 }
 
 

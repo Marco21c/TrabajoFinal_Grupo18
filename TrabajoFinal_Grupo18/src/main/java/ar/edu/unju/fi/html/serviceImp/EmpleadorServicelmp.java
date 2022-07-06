@@ -35,13 +35,7 @@ public class EmpleadorServicelmp implements IEmpleadorService {
 		return new Empleador();
 	}
 
-	@Override
-
-	public void guardarEmpleador(Empleador empleador) {
-		iEmpleadorDAO.save(empleador);
-		
-	}
-
+	
 
 	public boolean agregarEmpleador(Empleador empleador) {
 		// TODO Auto-generated method stub

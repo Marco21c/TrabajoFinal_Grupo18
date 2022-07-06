@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.html.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,6 +57,8 @@ private long salario;
 private String beneficios;
 @Column(name ="DISPONIBLE", nullable=false)
 private boolean disponible;
+@Column(name ="FECHA_CREACION", nullable=false)
+private LocalDate fechaCreacion;
 
 @ManyToOne(fetch =FetchType.LAZY)
 @JoinColumn(name ="DATOSEMP_ID")
@@ -164,6 +167,14 @@ public List<Solicitud> getSolicitud() {
 
 public void setSolicitud(List<Solicitud> solicitud) {
 	this.solicitud = solicitud;
+}
+
+public LocalDate getFechaCreacion() {
+	return fechaCreacion;
+}
+
+public void setFechaCreacion(LocalDate fechaCreacion) {
+	this.fechaCreacion = fechaCreacion;
 }
 
 

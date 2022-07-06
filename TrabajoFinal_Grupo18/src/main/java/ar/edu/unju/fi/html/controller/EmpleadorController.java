@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.html.controller;
 
+import java.time.LocalDate;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +109,7 @@ public class EmpleadorController {
 			modelAndview.addObject("ofertaLaboral",ol);
 			return modelAndview;
 		}
+		ol.setFechaCreacion(LocalDate.now());
 		ModelAndView modelAndView = new ModelAndView("redirect:/empleador/misEmpleos");
 		ol.setEmpleador(iEmpleadorService.buscarEmpleador(at.getName()));
 		

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.html.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
@@ -24,4 +25,6 @@ public interface IOfertaLaboralService {
 	public void getActualizarVacantes(long idOferta);
 	public boolean getActualizarSolicitud(Solicitud soli);
 	public CurriculumVitae getBuscarCv(long id);
+	public List<OfertaLaboral> filtradoxFecha(LocalDate fecha);
+
 	}
