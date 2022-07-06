@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.html.entity.Ciudadano;
@@ -165,6 +166,15 @@ public class EmpleadorController {
 		
 			return mAv;
 		}	
-
+        
+	@GetMapping("/verCv")
+	public ModelAndView verCv(@RequestParam(name ="id") long id) {
+		ModelAndView mAv = new ModelAndView("cvSolicitud");
+         
+	   	   mAv.addObject("cv", iOfertasService.getBuscarCv(id)); 
+		 
+		return mAv;
+	}
+	
 	}
 

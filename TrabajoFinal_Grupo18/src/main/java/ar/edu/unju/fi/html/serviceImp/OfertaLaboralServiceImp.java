@@ -12,6 +12,7 @@ import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.CurriculumVitae;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.entity.Solicitud;
+import ar.edu.unju.fi.html.repository.ICurriculumDAO;
 import ar.edu.unju.fi.html.repository.IEmpleadorDAO;
 import ar.edu.unju.fi.html.repository.IOfertaLaboralDAO;
 import ar.edu.unju.fi.html.repository.ISolicitudDAO;
@@ -26,7 +27,8 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	IEmpleadorDAO empleadorDAOImp;
 	@Autowired
     ISolicitudDAO solicitudDAOImp;
-	
+	@Autowired
+	ICurriculumDAO cvDAOImp;
 	@Override
 	public boolean guardarOferta(OfertaLaboral ofertalaboral) {
 		if(ofertaDaoImp.save(ofertalaboral)!=null) {
@@ -117,5 +119,11 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		
 		return false;
 	}
+    @Override
+    public CurriculumVitae getBuscarCv(long id) {
+    	 
+    	Optional<CurriculumVitae> cvEncontrado = cvDAOImp.findById(id);
+    	  return cvEncontrado.get();
+    }
 }
 
