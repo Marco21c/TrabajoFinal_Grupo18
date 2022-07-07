@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.html.entity.Ciudadano;
 import ar.edu.unju.fi.html.entity.CurriculumVitae;
-import ar.edu.unju.fi.html.entity.Curso;
 import ar.edu.unju.fi.html.entity.OfertaLaboral;
 import ar.edu.unju.fi.html.service.ICiudadanoService;
 import ar.edu.unju.fi.html.service.IOfertaLaboralService;
@@ -41,13 +40,15 @@ public class CiudadanoController {
 	
 	//redirecciona a html para registrar un nuevo ciudadano
 	@GetMapping("/nuevo")
-	public String getNuevoCiudadano(Model model) {	
+	public String getNuevoCiudadano(Model model) {
+		//se utiliza un servicio para crear un nuevo Ciudadano
 		model.addAttribute("ciudadano", iCiudadanoService.getCiudadano());
 		return("registroCiudadano");
 	}	
 	//se guarda al ciudadano registrado
 	@PostMapping("/postCiudadano")
 	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciu, BindingResult bindingResult){
+		//Control de error de validaciones
 		if(bindingResult.hasErrors()) {
 			LOGGER.error("No se cumplen las reglas de validación");
 			ModelAndView modelAndview = new ModelAndView("registroCiudadano");
@@ -62,18 +63,15 @@ public class CiudadanoController {
 			LOGGER.info("Ciudadano menor de edad");
 			return modelAndView ;
 		}
-		//falta el control para que los usuarios no se repitan.
 		else {
-
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
-
-		
 		if(iCiudadanoService.getGuardarCiudadano(ciu)) {
 			LOGGER.info("Se guardó un nuevo ciudadano.");
 
 		}
 		return modelAndView;
 		}
+		//en caso de error por clave primaria repetida u otro se redirecciona nuevamente al registro 
         }catch(Exception e) {
     		ModelAndView modelAndView = new ModelAndView("redirect:/ciudadano/nuevo");
             modelAndView.addObject("error", e.getMessage());
@@ -81,6 +79,7 @@ public class CiudadanoController {
         }
 			
 		}
+	
 	//llamada a pagina inicio ciudadano una vez registrado e inicio sesion
 	@GetMapping("/inicioCiudadano")
 	public String getIniCiudadano(Model model) {
@@ -89,8 +88,10 @@ public class CiudadanoController {
 	//LLamada a pagina para ver un currilum vitae
 	@GetMapping("/verCurriculum")
 	public String getVerCV(Model model,Authentication at) {
+		//se busca al ciudadano autenticado
 		Ciudadano ciu = iCiudadanoService.getBuscarCiudadano(at.getName());
-	   if(ciu.getCv()!=null) {
+	    //control por si el cv es nulo lo redirecciona a crear un cv
+		if(ciu.getCv()!=null) {
 		model.addAttribute("cv", ciu.getCv());
 		return("verCV");
 		}
@@ -108,28 +109,30 @@ public class CiudadanoController {
 	//llamada a pagina para modificar curriculum vitae
 	@PostMapping("/modificar")
 	public ModelAndView modificarCV(@Validated @ModelAttribute("curriculum") CurriculumVitae cv,  BindingResult bindingResult, Authentication at) {
+		//control de error de validaciones
 		if(bindingResult.hasErrors()) {
 			LOGGER.info("Ocurrio un error en la validacion de "+ cv);
 			ModelAndView mav = new ModelAndView("crearCV");
 			mav.addObject("curriculum", cv);
 			return mav;
 		}
-		 LOGGER.info("Se modifico el cv"); 
+		//se busca y modifica el cv de un ciudadano, luego redirecciona a ver cv
 		 Ciudadano ciu = iCiudadanoService.getBuscarCiudadano(at.getName());
 		 ciu.setCv(cv);
 		 iCiudadanoService.getGuardarCiudadano(ciu);
+		 LOGGER.info("Se modifico el cv"); 
 		 ModelAndView mav = new ModelAndView("redirect:/ciudadano/verCurriculum"); 
 		return mav;
 	}
 	
-	//LLamada a pagina que muestra las ofertas laborales
+	//LLamada a pagina que muestra las ofertas laborales al Ciudadano
 	@GetMapping("/verOfertasLaborales")
 	public String getverOfertas(Model model) {
 		model.addAttribute("ofertas", iOfertasService.listarOfertas());
 		return("verOfertas");
     }
 	
-	//filtrar por provincia a las ofertas laborales
+	//filtrar por provincia a las ofertas laborales 
 	@GetMapping("/filtrarxProvincia")
 	public String getverPerfilesProvincia(@Param("provincia")String provincia, Model model) {
 		model.addAttribute("ofertas", iOfertasService.filtradoxProvincia(provincia));
@@ -144,8 +147,16 @@ public class CiudadanoController {
 		model.addAttribute("ofertas",iOfertasService.filtradoxFecha(fechaParsiada));
 		return("verOfertas");
 	}
+	//LLamada a pagina que muestra el empleo seleccionado
+		@GetMapping("/empleo")
+		public ModelAndView verCv(@RequestParam(name ="id") long id) {
+			ModelAndView mAv = new ModelAndView("ofertaparaCiudadano");
+		   	   mAv.addObject("oferta",iOfertasService.getBuscarEmpleo(id)); 
+			 
+			return mAv;
+		}
 	
-	//llama pagina postulante para el ciudadano con el ID para aplicar metodo de busqueda y postularse a una oferta laboral
+	//funcion del boton postularse donde se crea una nueva solicitud pendiente sobre el empleo  
 	@GetMapping("/postularse/{id}")
 	public ModelAndView getPostularse (@PathVariable(value="id")long id,Authentication aut) throws Exception {
 		
@@ -168,11 +179,12 @@ public class CiudadanoController {
 
 	}
 	
-	//LLamada a pagina que muestra las postulaciones de los ciudadano
+	//LLamada a pagina que muestra las postulaciones del ciudadano
 	@GetMapping("/misPostulaciones")
 	public String getPostulaciones(Model model,Authentication aut) {	
 		
 		Ciudadano ciudadano = iCiudadanoService.getBuscarCiudadano(aut.getName());
+		//si el cv aun no se creo lo redirecciona a crear uno
 		if(ciudadano.getCv()!=null) {
 		model.addAttribute("listaSolicitudes", iOfertasService.getListaSolicitudesCiu(ciudadano.getCv().getId()));
 		return("estadoEmpleos");
@@ -182,15 +194,6 @@ public class CiudadanoController {
 		}
 	}
 	
-	//LLamada a pagina que muestra los empleo vigente
-	@GetMapping("/empleo")
-	public ModelAndView verCv(@RequestParam(name ="id") long id) {
-		ModelAndView mAv = new ModelAndView("ofertaparaCiudadano");
-         
-	   	   mAv.addObject("oferta",iOfertasService.getBuscarEmpleo(id)); 
-		 
-		return mAv;
-	}
-}
+}	
 
 

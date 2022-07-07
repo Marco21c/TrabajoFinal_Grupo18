@@ -38,7 +38,7 @@ public class CursoController {
 	
 	private static final Log LOGGER = LogFactory.getLog(CiudadanoController.class);
 	
-		//llamada a la pagina para crear nuevo curso
+		//llamada a la pagina para crear nuevo curso por el empleado
 	   @GetMapping("/nuevo")
 	   public String getCurso(Model model) {
 		   
@@ -57,26 +57,21 @@ public class CursoController {
 		   }
 		   ModelAndView mav =  new ModelAndView("redirect:/empleador/misCursos");
 		   try {
+			//si no hay errores setea el estado y le agrega un empleador a el curso para luego guardarlo    
 		   curso.setEstado(true);
 		   curso.setEmpleador(empleadorService.buscarEmpleador(aut.getName()));
 		   if(cursoService.getAgregarCurso(curso)) {
 			   LOGGER.info("Se agrego nuevo curso.");
 		   }
-		   }
+		   } //control de error 
 		   catch(Exception e) {
 			 mav.addObject("error",e.getMessage());    
 		   }
 		   return mav;
 	   }
 	   
-	   
-	//LLamada a pagina para inscribirse a un curso
-		@GetMapping("/listaCursos")
-		public String getInscripCurso(Model model) {
-			model.addAttribute("cursos", cursoService.getListaCursos());
-			return("inscripCurso");
-		}
-		
+	
+		//proceso de inscribirse a un curso para ciudadano
 		@GetMapping("/inscripCurso/{id}")
 		public ModelAndView getInscribirseaCurso (@PathVariable(value="id")long id,Authentication aut) throws Exception {
 			
@@ -92,14 +87,22 @@ public class CursoController {
 		    	LOGGER.info("El usuario ya esta inscripto a ese curso");}
 		    }
 		    catch(Exception e){
-		    iCiudadanoService.getAgregarCurso(ciudadano , curs);
+		       //si el ciudadano aun no se encuentra inscripto a un curso se permite realizar la inscripcion 
+		    	iCiudadanoService.getAgregarCurso(ciudadano , curs);
 		    }
 			return mAv;
 		}
 		
+		   
+		//LLamada a pagina para inscribirse a un curso para ciudadano
+			@GetMapping("/listaCursos")
+			public String getInscripCurso(Model model) {
+				model.addAttribute("cursos", cursoService.getListaCursos());
+				return("inscripCurso");
+			}
+		//llama a los cursos a los que el ciudadano esta inscripto
 		@GetMapping("/cursosInscripciones")
 		public String getMisCurso(Model model,Authentication aut) {
-	        
 			Ciudadano ciu = iCiudadanoService.getBuscarCiudadano(aut.getName());
 			model.addAttribute("listaCursos",cursoService.getMisCursos(ciu));
 			

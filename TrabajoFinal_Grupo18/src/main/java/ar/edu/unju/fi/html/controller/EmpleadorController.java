@@ -52,6 +52,7 @@ public class EmpleadorController {
 	//se guarda al Empleador registrado
 	@PostMapping("/postEmpleador")
 	public ModelAndView guardarEmpleador(@Validated @ModelAttribute("empleador") Empleador emp, BindingResult bindingResult){
+		//control de validaciones
 		if(bindingResult.hasErrors()) {
 			LOGGER.error("No se cumplen las reglas de validación");
 			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
@@ -59,12 +60,13 @@ public class EmpleadorController {
 			return modelAndview;
 		}
 		try {
+			 //si no hay errores se guarda el empleador
 		ModelAndView modelAndView = new ModelAndView("redirect:/inicio/login");
 		if(iEmpleadorService.agregarEmpleador(emp)){
 		 LOGGER.info("Se guardó un nuevo empleador.");
 		}
 		return modelAndView ;
-		}catch(Exception e) {
+		}catch(Exception e) { //controla los errores de clave primaria repetida y otros errores
 			ModelAndView modelAndview = new ModelAndView("registroEmpleador");
 			return modelAndview ;
 		}
@@ -90,7 +92,7 @@ public class EmpleadorController {
 	@GetMapping("/eliminarCurso/{id}")
 	public String eliminarCurso(Model model, @PathVariable(name="id") long id) throws Exception {
 		Curso curso = cursoService.buscarCurso(id);
-		
+        //seteo del estado a falso 
 		curso.setEstado(false);
 		cursoService.getAgregarCurso(curso);
 		return ("redirect:/empleador/misCursos");
@@ -110,7 +112,7 @@ public class EmpleadorController {
 		return("verPerfiles");
 	}
 	
-	//filtrar por palabra clave para la busqueda de perfiles ciudadanos
+	//filtrar por palabra clave para la busqueda de perfiles de los ciudadanos
 	@GetMapping("/filtrarxPalabra")
 	public String getverPerfilesPalabra(@Param("palabra")String palabra, Model model) {
 		model.addAttribute("listaCvs", iEmpleadorService.getCvsxPalabra(palabra));
@@ -128,26 +130,27 @@ public class EmpleadorController {
 	//se guarda registro de nuevo empleo generado por el empleador
 	@PostMapping("/guardarEmpleo")
 	public ModelAndView guardarEmpleo(@Validated @ModelAttribute("ofertaLaboral") OfertaLaboral ol, BindingResult bindingResult,  Authentication at){
+		//control de errores de validacion
 		if(bindingResult.hasErrors()) {
 			LOGGER.error("No se cumplen las reglas de validación");
 			ModelAndView modelAndview = new ModelAndView("crearOferta");
 			modelAndview.addObject("ofertaLaboral",ol);
 			return modelAndview;
 		}
-		ol.setFechaCreacion(LocalDate.now());
 		ModelAndView modelAndView = new ModelAndView("redirect:/empleador/misEmpleos");
+		//seteo del empleador logueado y de la fecha actual wque representa la fecha de creacion de la oferta
 		ol.setEmpleador(iEmpleadorService.buscarEmpleador(at.getName()));
-		
+		ol.setFechaCreacion(LocalDate.now());		
 		if(iOfertasService.guardarOferta(ol)) {
 		 LOGGER.info("Se guardó una oferta laboral.");
 		}
 		return modelAndView ;
 		}
 	
-	//redirecciona pagina para editar empleo
+	//opcion de edicion para un empleo
 	@GetMapping("/editarEmpleo/{id}")
 	public String obtenerFormularioEditarEmpleo(Model model, @PathVariable(name="id") long id) throws Exception {
-		LOGGER.error("error");
+		// se busca una oferta y se la manda al formulario para la edicion
 		OfertaLaboral ofertaEncontrado = iOfertasService.encontrarOferta(id);
 		model.addAttribute("editarEmpleo", ofertaEncontrado);
 		return ("editarEmpleoForm");
@@ -156,24 +159,27 @@ public class EmpleadorController {
 	//guarda la edicion del empleo registrado con fecha actual 
 	@PostMapping("/editarEmpleo")
 	public ModelAndView postEditarEmpleo(@Validated @ModelAttribute("editarEmpleo") OfertaLaboral ofertalaboral, BindingResult result, ModelMap model, Authentication aut) {
-	if(result.hasErrors()) {
-		
+	//control de error de validacion
+		if(result.hasErrors()) {
 		model.addAttribute("editarEmpleo", ofertalaboral);
+		ModelAndView modelAndView = new ModelAndView("editarEmpleoForm");
+		return modelAndView;
 		
 	}
-	LOGGER.info("Se guardó ofertalaboral "+ofertalaboral.getId());
+	//se busca al empleador y se setea la fecha de creacion y al empleador a la oferta
 	Empleador empleador = iEmpleadorService.buscarEmpleador(aut.getName());
 	ofertalaboral.setEmpleador(empleador);
 	ofertalaboral.setFechaCreacion(LocalDate.now());
+	LOGGER.info("Se guardó ofertalaboral "+ofertalaboral.getId());
+	//se guarda la oferta
 	if(iOfertasService.guardarOferta(ofertalaboral)) {
 		LOGGER.info("Se guardó ofertalaboral ");
 	}
-	
 	ModelAndView modelAndView = new ModelAndView("redirect:/empleador/misEmpleos");
 	return modelAndView;
 	}
 	
-	//muestra lista de empleo
+	//muestra la lista de empleos pertenecientes al empleador 
 	@GetMapping("/misEmpleos")
 	public String getMisEmpleos(Model model, Authentication aut) {
 	    
@@ -200,7 +206,7 @@ public class EmpleadorController {
 		return ("solicitudes");
 	}
 	
-	
+	//accion del boton aceptar una solicitud
 	@GetMapping("/aceptarSoli/{id}")
 	public ModelAndView getAceptarSoli (@PathVariable(value="id")long id){
 		
@@ -219,6 +225,7 @@ public class EmpleadorController {
 		
 			return mAv;
 		}
+	//accion del boton rechazar una solicitud
 	@GetMapping("/rechazarSoli/{id}")
 	public ModelAndView getRechazarSoli (@PathVariable(value="id")long id){
 		
