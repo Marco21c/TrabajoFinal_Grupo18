@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>INICIO DEL CIUDADANO</title>
+</head>
+<body>
+   <header th:replace="/layouts/headerCiu::headerCiu"></header> 
+
+    
+    <div class="container centraar">
+    <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+        <h1> BIENVENIDO/A </h1>
+    </div>   
+   </div>
+     <div class="container centraar">
+    <h5  class="card-text"> Gracias por su registro. En este sitio podra encontrar el empleo que esta buscando.<br>
+     Antes de postularse a un empleo, debera crear su cv para que los empleadores puedan ver su perfil.</h5>
+    </div>
+  <section>
+   <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+   <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/empleo.jpg}" class="card-img-top" alt="empleo" height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Buscar Empleo</h5>
+         <p class="card-text">Los mejores oportunidades en el mundo laboral estan aqui.</p>
+        <a href="#" class="btn btn-dark">Ver Empleos</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/imagen.webp}" class="card-img-top" alt="dd" height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Crear CV</h5>
+         <p class="card-text">Antes de postularte a un empleo, debes crear tu curriculum vitae.</p>
+        <a href="#" class="btn btn-secondary">Crear Cv</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+     <div class="card" style="width: 18rem;">
+      <img th:src="@{/images/imagen3.webp}" class="card-img-top" alt="..." height="180px">
+      <div class="card-body">
+        <h5 class="card-title">Capacitacion</h5>
+         <p class="card-text"> Aqui podras encontrar los mejores cursos para seguir tu capacitacion.</p>
+        <a href="#" class="btn btn-primary">Ver Cursos</a>
+      </div>
+    </div>  
+    </div>
+    </div> 
+  </section>
+
+  <footer th:replace="/layouts/footer::footer"></footer>
+ 
+</body>
+</html>

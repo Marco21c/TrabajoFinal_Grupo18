@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+    <title>EMPLEOS</title>
+</head>
+<body>
+  <header th:replace="/layouts/headerCiu::headerCiu"></header>
+   
+       <div class="container centraar">
+    <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+        <h1> Ofertas Laborales</h1>
+    </div>
+    </div>
+  <div class=" container centraar">
+  <div class="row justify-content-center mt-3 pt-3">  
+  
+    <section>
+   <div class="row row-cols-2 row-cols-md-3 g-6">
+  
+    <div class="card" style="width: 23rem;">
+      <div class="card-body">
+            
+        <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+         <h3> F I L T R A R </h3>
+        </div>
+
+  <form class="form-inline col-12" th:action="@{/ciudadano/filtrarxProvincia}" >
+  <div class="form-group mb-2">
+    <label for="provincia" class="form-label">Filtrar por provincia: </label>
+  </div>  
+    <div class="form-group mx-sm3 mb-2">
+     <input type="text" name="provincia" class="form-control" id="provincia" th:value="${provincia}" placeholder="Ingrese una provincia." required> 
+    </div>
+    <input type="submit" class="btn btn-secondary mb-2" value="FILTRAR">
+     &nbsp;&nbsp;
+   </form>
+  
+   <form class="form-inline col-12" th:action="@{/ciudadano/filtrarxFecha}" >
+  <div class="form-group mb-2">
+    <label for="fecha" class="form-label">Filtrar por Fecha: </label>
+  </div>  
+    <div class="form-group mx-sm3 mb-2">
+     <input type="date" name="fecha" class="form-control" id="fecha" th:value="${fecha}" placeholder="Ingrese una fecha." required> 
+    </div>
+    <input type="submit" class="btn btn-secondary mb-2" value="FILTRAR">
+     &nbsp;&nbsp;
+   </form>
+   
+      </div>
+      <div class="card-footer">
+         <a th:href="@{/ciudadano/verOfertasLaborales}" class="btn btn-primary" role="button">Mostrar Todos</a>
+      </div> 
+    </div>
+        
+        
+  <div th:each="o:${ofertas}" class="col">         
+   <div class="card" style="width: 23rem;">
+      <img th:src="@{/images/empleo1.png}" class="card-img-top" alt="empleo" height="200px">
+      <div class="card-body">
+        <h5 th:text="${o.puestoReq}" class="card-title"></h5>
+                <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Resumen del Puesto : <a  th:text= "${o.resumenPuesto}"> </a></div>
+         <div class="card-footer">
+         <a th:href="@{/ciudadano/empleo?id={id}(id=${o.id})}" id="oferta" type="button" class="btn btn-dark">Ver Empleo</a>
+         </div>    
+      </div>
+    </div>
+  </div>
+
+</div>
+     
+   </section>
+   
+   </div>
+    </div>
+   
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>

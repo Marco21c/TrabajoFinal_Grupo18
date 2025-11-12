@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>Crear Curriculum Vitae</title>
+</head>
+<body>
+   <header th:replace="/layouts/headerCiu::headerCiu"></header> 
+<div class="container">
+    <div class="container centraar">
+    <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+        <h1> Mi Curriculum Vitae</h1>
+    </div>
+    </div>
+  
+<div class="row justify-content-center mt-3 pt-3">
+
+  
+   <form th:action="@{/ciudadano/modificar}" method="post" th:object="${curriculum}" class="row g-3">
+  
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Contacto </label>
+    <input th:field="*{contacto}" type="text" class="form-control" id="inputEmail4" placeholder="Ingrese gmail o telefono.">
+      <div class=text-danger th:if="${#fields.hasErrors('contacto')}" th:errors="*{contacto}"></div>  
+  </div>
+  <div class="col-md-6">
+    <label for="inputExp4" class="form-label">Experiencia Laboral</label>
+    <input th:field="*{expLaboral}" type="text" class="form-control" id="inputExp4" placeholder="Ingrese experiencia laboral">
+          <div class=text-danger th:if="${#fields.hasErrors('expLaboral')}" th:errors="*{expLaboral}"></div>  
+  </div>
+  <div class="col-6">
+    <label for="inputEdu" class="form-label">Educacion</label>
+    <input th:field="*{educacion}" type="text" class="form-control" id="inputW¡Edu" placeholder="Ingrese educacion">
+                    <div class=text-danger th:if="${#fields.hasErrors('educacion')}" th:errors="*{educacion}"></div>  
+  </div>
+  <div class="col-6">
+    <label for="inputIdiomas2" class="form-label">idiomas</label>
+    <input th:field="*{idiomas}" type="text" class="form-control" id="inputIdiomas2" placeholder="Ingrese idiomas">
+                   <div class=text-danger th:if="${#fields.hasErrors('idiomas')}" th:errors="*{idiomas}"></div>  
+  </div>
+  <div class="col-md-6">
+    <label for="inputZip" class="form-label">Informacion complementaria</label>
+    <input th:field="*{infoComplementaria}" type="text" class="form-control" id="inputZip" placeholder="Ingrese informacion complementaria.">
+                   <div class=text-danger th:if="${#fields.hasErrors('infoComplementaria')}" th:errors="*{infoComplementaria}"></div>  
+  </div>
+  <div class="col-md-6">
+    <label for="inputZip" class="form-label">Nombre y Apellido</label>
+    <input th:field="*{nombre}" type="text" class="form-control" id="inputZip" placeholder="Ingrese nombre y apellido completo.">
+                   <div class=text-danger th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>  
+  </div>
+  <div class="col-md-6">
+   <label for="inputIdiomas2" class="form-label">Conocimientos informaticos:</label>
+    <div class="form-check form-check">
+  <input th:field="*{conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" th:value="Basico">
+  <label class="form-check-label" for="inlineRadio1">Basico</label>
+  
+</div>
+<div class="form-check form-check">
+  <input  th:field="*{conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" th:value="Intermedio">
+  <label class="form-check-label" for="inlineRadio2">Intermedio</label>
+</div>
+<div class="form-check form-check">
+  <input  th:field="*{conocimientoInfo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" th:value="Avanzado">
+  <label class="form-check-label" for="inlineRadio3">Avanzado </label>
+</div>
+                <div class=text-danger th:if="${#fields.hasErrors('conocimientoInfo')}" th:errors="*{conocimientoInfo}"></div>  
+</div>
+   
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  </div>
+</form>
+   
+</div>
+</div>
+   
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>

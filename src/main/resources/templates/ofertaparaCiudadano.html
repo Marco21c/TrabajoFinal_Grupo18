@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>OFERTA</title>
+</head>
+<body>
+   <header th:replace="/layouts/headerCiu::headerCiu"></header> 
+     
+      <div class="row justify-content-center centraar">
+    <div class="col-md-7 ">
+       
+        <div>
+        <h1 th:text= "${oferta.puestoReq}"></h1>
+        </div>
+      
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Vacantes : <a th:text= "${oferta.cantVacantes}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Resumen Puesto : <a  th:text= "${oferta.resumenPuesto}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Principales Tareas : <a  th:text= "${oferta.princTareas}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Disponibilidad Horaria : <a  th:text= "${oferta.dispHoraria}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Jornada : <a  th:text= "${oferta.jornada}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Requisitos : <a  th:text= "${oferta.requisitos}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Salario : $<a  th:text= "${oferta.salario}"> </a></div>
+       <div class="shadow-lg p-3 mb-5 bg-body rounded text-dark bg-opacity-25"> Beneficios : <a  th:text= "${oferta.beneficios}"> </a></div>
+       
+       <a th:href="@{/ciudadano/postularse/}+${oferta.id}" class="btn btn-secondary" role="button">Postularse</a>
+       <a th:href="@{/ciudadano/verOfertasLaborales}" class="btn btn-primary" role="button">Volver</a>
+       </div>
+       </div>
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>

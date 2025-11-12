@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>CREAR EMPLEO</title>
+</head>
+<body>
+   <header th:replace="/layouts/headerEmp::headerEmp"></header> 
+   <div class="container">
+      <div class="container centraar">
+     
+       <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+         <h1> Nuevo Empleo </h1>
+        </div>
+     </div>
+	<div class="row justify-content-center mt-3 pt-3">
+	  
+	   <form th:action="@{/empleador/guardarEmpleo}" method="post" th:object="${ofertaLaboral}" class="row g-3">
+		  
+		  <div class="col-md-6">
+		    <label for="cantVacantesID" class="form-label">CANTIDAD DE VACANTES</label>
+		    <input th:field="*{cantVacantes}" type="text" class="form-control" id="cantVacantes">
+		    <div class=text-danger th:if="${#fields.hasErrors('cantVacantes')}" th:errors="*{cantVacantes}"></div>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="puestoID" class="form-label">PUESTO REQUERIDO</label>
+		    <input th:field="*{puestoReq}" type="text" class="form-control" id="puestoID">
+		    <div class=text-danger th:if="${#fields.hasErrors('puestoReq')}" th:errors="*{puestoReq}"></div>
+		  </div>
+		  <div class="col-6">
+		    <label for="resumenID" class="form-label">RESUMEN DE PUESTO</label>
+		    <input th:field="*{resumenPuesto}" type="text" class="form-control" id="resumenID" placeholder="describa puesto de trabajo">
+		    <div class=text-danger th:if="${#fields.hasErrors('resumenPuesto')}" th:errors="*{resumenPuesto}"></div>
+		  </div>
+		  <div class="col-md-6 position-relative">
+		    <label for="DispHoraria" class="form-label">DISPONIBILIDAD HORARIA</label>
+		    <select th:field=*{dispHoraria} class="form-select" id="DispHoraria" >
+		      <option value="full time">FULL TIME</option>
+		      <option value="part time"> PART TIME</option>
+		    </select>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="tareasID" class="form-label">PRINCIPALES TAREAS</label>
+		    <input th:field="*{princTareas}" type="text" class="form-control" id="tareasID" placeholder="describa las tarea a realizar">
+		    <div class=text-danger th:if="${#fields.hasErrors('princTareas')}" th:errors="*{PrincTareas}"></div>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="jornadaID" class="form-label">JORNADA</label>
+		    <input th:field="*{jornada}" type="text" class="form-control" id="jornadaID">
+		    <div class=text-danger th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}"></div>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="requisitosID" class="form-label">REQUISITOS</label>
+		    <input th:field="*{requisitos}" type="text" class="form-control" id="requisitosID">
+		    <div class=text-danger th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}"></div>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="salarioID" class="form-label">SALARIO</label>
+		    <input th:field="*{salario}" type="text" class="form-control" id="salarioID">
+		    <div class=text-danger th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div>
+		  </div>
+		   <div class="col-md-6">
+		    <label for="beneficioID" class="form-label">BENEFICIO</label>
+		    <input th:field="*{beneficios}" type="text" class="form-control" id="beneficioID">
+		    <div class=text-danger th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div>
+		  </div>
+		  <div class="col-md-6 position-relative">
+
+		    <label for="DisponibleID" class="form-label">DISPONIBLE</label>
+		    <select th:field=*{disponible} class="form-select" id="DisponibleID" >
+		      <option value=true >SI</option>
+		      <option value=false >NO</option>
+		    </select>
+		  </div>
+
+		  
+		  <div class="col-12">
+		    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+		  </div>
+		</form>
+	</div>
+</div>
+   
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>

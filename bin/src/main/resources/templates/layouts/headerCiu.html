@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+  <header th:fragment="headerCiu">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" >
+      <img th:src="@{/images/imagen4.jpg}" alt="logo" width="50" height="34" class="d-inline-block align-text-top">
+      NEW SITE 
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+       <a class="nav-link" th:href="@{/ciudadano/inicioCiudadano}">Inicio</a>
+        <a class="nav-link active" aria-current="page" th:href="@{/ciudadano/crearCurriculum}">Mi CV</a>
+        <a class="nav-link"  th:href="@{/ciudadano/verCurriculum}">Ver CV</a>
+        <a class="nav-link " th:href="@{/ciudadano/verOfertasLaborales}">Ver Empleos</a>
+        <a class="nav-link " th:href="@{/curso/listaCursos}">Inscribirse a un curso</a>
+        <a class="nav-link " th:href="@{/curso/cursosInscripciones}">Mis cursos</a>
+        <form th:action="@{/logout}" method="post" class="nav justify-content-end">
+					<button class="btn btn-outline-dark" type="submit" value="Salir">
+						Cerrar Sesion
+					</button>
+	    </form>
+      </div>
+     </div>
+    </div>
+   </nav>
+  
+  </header>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<meta charset="utf-8">
+<title>NUEVO CURSO</title>
+</head>
+<body>
+ <header th:replace="/layouts/headerEmp::headerEmp"></header> 
+ 
+<div class="container">
+      <div class= "container centraar">
+        <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+         <h1> Curso de Capacitación </h1>
+        </div>
+        </div>
+<div class="row justify-content-center mt-5 pt-5">
+<div class="col-md-10 ">
+
+ 
+
+ <form class="row g-3 " autocomplete="off" th:action="@{/curso/guardarCurso}" th:object="${curso}" method="post">
+  <div class="col-md-6 position-relative">
+    <label for="idNombre" class="form-label">Nombre del curso: </label>
+    <input th:field=*{nombre} type="text" class="form-control" id="idNombre" placeholder="Ingrese nombre del curso" required>
+    <div class=text-danger th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div> 
+     
+  </div>
+  <div class="col-md-6 position-relative">
+    <label for="CategoriaId" class="form-label">Categoria: </label>
+    <input th:field=*{categoria} type="text" class="form-control" id="CategoriaId" placeholder="Ingrese categoria" required> 
+    <div class=text-danger th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div> 
+  </div>
+  
+  <div class="col-md-6 position-relative">
+    <label for="fechaIncId" class="form-label">Fecha de Inicio: </label>
+    <input th:field=*{fechaInic} type="date" class="form-control" id="fechaIncId" placeholder="Ingrese fecha de inicio " required>
+    <div class=text-danger th:if="${#fields.hasErrors('fechaInic')}" th:errors="*{fechaInic}"></div> 
+  </div>
+  
+  <div class="col-md-6 position-relative">
+    <label for="dictadorId" class="form-label">Dictado por: </label>
+    <input th:field=*{dictador} type="text" class="form-control" id="dictadorId" placeholder="Ingrese el nombre de su empresa." required>
+    <div class=text-danger th:if="${#fields.hasErrors('dictador')}" th:errors="*{dictador}"></div> 
+  </div>
+  
+  <div class="col-md-6 position-relative">
+    <button class="btn btn-dark" type="submit" >Guardar</button>
+    
+  </div>
+ </form>
+</div>
+</div> 
+</div>
+
+  <footer th:replace="/layouts/footer::footer"></footer>  
+</body>
+</html>

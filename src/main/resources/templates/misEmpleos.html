@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>	
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>	
+		<meta charset="utf-8">
+         <title>MIS EMPLEOS</title>
+</head>
+<body>
+   <header th:replace="/layouts/headerEmp::headerEmp"></header> 
+   <div class="row justify-content-center">
+             
+   
+    <div class="col-md-12 ">
+   <div class="container centraar">
+    <div class="shadow-lg p-1 mb-4 bg-body rounded text-dark bg-opacity-25">
+        <h1> Mis Ofertas </h1>
+    </div>
+    </div>
+        <div class="container centraar">
+      <a th:href="@{/empleador/solicitudes}" id="eeempleo" type="button" class="btn btn-dark">VER SOLICITUDES</a> 
+     <a th:href="@{/empleador/crearEmpleo}" id="empleo" type="button" class="btn btn-secondary">NUEVO EMPLEO</a> 
+     </div>
+     <table class="table table-success table-striped centraar">
+     <tr>
+  					<th >CANTIDAD VACANTES</th>
+  					<th >PUESTO REQUERIDOS</th>
+  					<th >RESUMEN PUESTO</th>
+  					<th >DISPONIBILIDAD HORARIA</th>
+  					<th >PRINCIPALES TAREAS</th>
+  					<th >JORNADA</th>
+  					<th >REQUISITOS</th>
+  					<th >SALARIO</th>
+  					<th >BENEFICIOS</th>
+  					<th> FECHA DE PUBLICACION</th>
+  					<th >DISPONIBLE</th>
+  					<th> OPCIONES</th>
+     </tr>
+     <tr th:each="o:${ofertas}">
+                     <td th:text="${o.cantVacantes}"></td> 
+					 <td th:text="${o.puestoReq}"></td>
+					 <td th:text="${o.resumenPuesto}"></td>
+					 <td th:text="${o.dispHoraria}"></td>
+					 <td th:text="${o.princTareas}"></td>
+					 <td th:text="${o.jornada}"></td>
+					 <td th:text="${o.requisitos}"></td>
+					 <td th:text="${o.salario}"></td>
+					 <td th:text="${o.beneficios}"></td>
+					 <td th:text="${o.fechaCreacion}"> </td>
+					 <td><span th:if="${o.disponible == true }" th:text="'Si'"> </span>
+					  <span th:if="${o.disponible == false }" th:text="'No'"></span></td>
+					 <td> 
+
+					   <a th:href="@{/empleador/editarEmpleo/}+${o.id}" id="edit" type="button" class="btn btn-dark">Editar</a>
+					   <a th:href="@{/empleador/eliminarEmpleo/}+${o.id}" id="elim" type="button" class="btn btn-danger">Eliminar</a>
+
+					  </td>
+ 				</tr>
+     </table>
+    </div>
+    </div>
+            
+            
+
+   <footer th:replace="/layouts/footer::footer"></footer>
+</body>
+</html>
